@@ -1,0 +1,52 @@
+module cache_l1_2way (
+    input clk,
+    input reset,
+    input [15:0] addr,
+    output reg hit
+);
+
+    // Extração de partes do endereço
+    wire [13:0] tag = addr[15:2];   // 14 bits de tag
+    wire        index = addr[2];   // 1 bit de índice (2 conjuntos)
+    wire        offset = addr[1];  // 1 bit de offset (2 bytes por bloco)
+
+    // Estrutura da cache: 2 conjuntos, 2 vias
+    reg [13:0] tag_array[1:0][1:0];    // [set][way] = tag
+    reg        valid_bit[1:0][1:0];    // [set][way] = válido
+
+    integer i, j;
+
+    // Inicialização/reset
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            for (i = 0; i < 2; i = i + 1) begin
+                for (j = 0; j < 2; j = j + 1) begin
+                    tag_array[i][j] <= 14'b0;
+                    valid_bit[i][j] <= 1'b0;
+                end
+            end
+            hit <= 0;
+        end else begin
+            // Verifica se algum dos dois blocos no conjunto corresponde
+            if (valid_bit[index][0] && tag_array[index][0] == tag) begin
+                hit <= 1;
+            end else if (valid_bit[index][1] && tag_array[index][1] == tag) begin
+                hit <= 1;
+            end else begin
+                // MISS: carregamos o novo bloco em uma via livre ou sobrescrevemos a via 0
+                hit <= 0;
+                if (!valid_bit[index][0]) begin
+                    tag_array[index][0] <= tag;
+                    valid_bit[index][0] <= 1;
+                end else if (!valid_bit[index][1]) begin
+                    tag_array[index][1] <= tag;
+                    valid_bit[index][1] <= 1;
+                end else begin
+                    // Substituição simples: sobrescreve via 0 (sem LRU)
+                    tag_array[index][0] <= tag;
+                    valid_bit[index][0] <= 1;
+                end
+            end
+        end
+    end
+endmodule
