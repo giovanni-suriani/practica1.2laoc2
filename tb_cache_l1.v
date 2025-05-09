@@ -1,4 +1,4 @@
-module tb_cache_l1_2way;
+module tb_cache_l1;
 
   reg clk, reset, wren;
   reg [6:0] addr;
@@ -35,23 +35,23 @@ module tb_cache_l1_2way;
 
     // 1. Escreve no endereço 0b0001010 (tag=00010, index=1, offset=0)
     #10;
-    addr = 7'b0001010;
+    addr = 7'b0000001;
     data = 16'hABCD;
     wren = 1;
     #10;
     wren = 0;
-    $display("[ESCRITA] Endereco: %b, Dado escrito: %h, Dado hit: %h", addr, data, q);
+    $display("[ESCRITA] Endereco: %b, Dado escrito: %h, HIT: %h", addr, data, hit);
 
     // 2. Leitura no mesmo endereço (espera HIT)
     #10;
-    addr = 7'b0001010;
+    addr = 7'b0000001;
     wren = 0;
     #10;
     $display("[LEITURA-HIT] Endereco: %b, Dado lido: %h, HIT: %b", addr, q, hit);
 
     // 3. Leitura de endereço diferente (espera MISS)
     #10;
-    addr = 7'b0010010; // tag diferente, mesmo index
+    addr = 7'b0010011; // tag diferente, mesmo index
     #10;
     $display("[LEITURA-MISS] Endereco: %b, Dado lido: %h, HIT: %b", addr, q, hit);
 
@@ -76,3 +76,5 @@ module tb_cache_l1_2way;
   end
 
 endmodule
+
+/* vlog cache_l1_2way.v tb_cache_l1.v; vsim -c work.tb_cache_l1 -do "run -all; quit" */
