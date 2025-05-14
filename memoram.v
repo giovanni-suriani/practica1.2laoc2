@@ -99,7 +99,7 @@ module memoram (
 		altsyncram_component.widthad_a = 6,
 		altsyncram_component.width_a = 16,
 		altsyncram_component.width_byteena_a = 1, 
-		altsyncram_component.init_file = "memoria_pratica1.mif";
+		altsyncram_component.init_file = "pratica1_2.mif";
 
 
 endmodule

@@ -1,0 +1,14 @@
+# Ignorar tudo
+*
+
+# Mas não ignorar pastas (necessário para que os arquivos dentro possam ser incluídos)
+!*/
+
+# Não ignorar arquivos .txt e .v
+!.gitignore
+!README.md
+!Makefile
+!*.txt
+!*.do
+!*.mif
+!*.v

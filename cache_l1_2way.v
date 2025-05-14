@@ -9,7 +9,7 @@ module cache_l1_2way (input clk,
   // L1 : 4 blocos, blocos por conjunto, write_through
   // L2 : 8 blocos, totalmente associativa
   // principal:
-
+ 
 
   // Extracao de partes do endereco
   wire [4:0]  tag    = addr[6:2];   // 5 bits de tag

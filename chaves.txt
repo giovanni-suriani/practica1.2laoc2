@@ -1,0 +1,4 @@
+sw[0] = clock
+sw[1] = wren
+sw[6:2] = address_full (endereco a escrever)
+SW[16:7] = data (dado para escrever)
