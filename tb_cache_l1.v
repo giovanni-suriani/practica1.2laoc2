@@ -1,3 +1,4 @@
+`timescale 1ps / 1ps
 module tb_cache_l1;
 
   reg clk, reset, wren;
@@ -77,4 +78,7 @@ module tb_cache_l1;
 
 endmodule
 
-/* vlog cache_l1_2way.v tb_cache_l1.v; vsim -c work.tb_cache_l1 -do "run -all; quit" */
+/* vlog cache_l1_2way.v tb_cache_l1.v; vsim -c work.tb_cache_l1 -do "run -all; quit" 
+vsim -do vlogrun.do
+vsim work.tb_cache_l1
+*/
