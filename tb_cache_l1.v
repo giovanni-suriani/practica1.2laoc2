@@ -78,7 +78,9 @@ module tb_cache_l1;
 
 endmodule
 
-/* vlog cache_l1_2way.v tb_cache_l1.v; vsim -c work.tb_cache_l1 -do "run -all; quit" 
+/*
+vlog -work altera /home/gi/altera/13.0sp1/modelsim_ase/altera/verilog/src/altera_mf.v
+vlog cache_l1_2way.v tb_cache_l1.v; vsim -c work.tb_cache_l1 -do "run -all; quit" 
 vsim -do vlogrun.do
 vsim work.tb_cache_l1
 */

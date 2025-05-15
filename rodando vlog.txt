@@ -1,0 +1,10 @@
+vlib work
+vlib altera
+vlog -work altera /home/gi/altera/13.0sp1/modelsim_ase/altera/verilog/src/altera_mf.v # cria uma pasta altera
+vlog hierarquia_memoria.v memoram.v tb_hierarquia_memoria.v
+vsim -L altera tb_hierarquia_memoria 
+ou
+vsim -c -L altera work.tb_hierarquia_memoria -do "run -all; quit"
+vsim -c -L altera work.hierarquia_memoria -do "run -all; quit"
+
+simulamemoria

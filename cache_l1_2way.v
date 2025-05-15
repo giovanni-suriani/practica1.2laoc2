@@ -1,6 +1,6 @@
 module cache_l1_2way (input clk,
                         input reset,
-                        input [6:0] addr,     // enderecos de 7bits (5 bits)(1bit)(1bit)
+b                        input [6:0] addr,     // enderecos de 7bits (5 bits)(1bit)(1bit)
                         input 	wren,        // 0 = leitura, 1 = escrita
                         input [15:0] data,    // palavra de entrada
                         output reg hit,

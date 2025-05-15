@@ -1,8 +1,8 @@
-`timescale 1ns / 1ps
+`timescale 1ps / 1ps
 
 module tb_hierarquia_memoria;
 
-    // Sinais de entrada
+    // Entradas
     reg clock;
     reg reset;
     reg [15:0] address;
@@ -10,29 +10,13 @@ module tb_hierarquia_memoria;
     reg read;
     reg write;
 
-    // Sinais de saída
-`timescale 1ns / 1ps
-
-module tb_hierarquia_memoria;
-
-    // Sinais de entrada
-    reg clock;
-    reg reset;
-    reg [15:0] address;
-    reg [15:0] write_data;
-    reg read;
-    reg write;
-
-    // Sinais de saída
+    // Saídas
     wire [15:0] read_data;
     wire hit_L1;
     wire hit_L2;
 
-    // Clock da memória interna
-    // (internamente manipulado pelo DUT)
-
-    // Instanciando o DUT
-    hierarquia_memoria dut (
+    // Instancia o módulo de hierarquia de memória
+    hierarquia_memoria uut ( // unit under test
         .clock(clock),
         .reset(reset),
         .address(address),
@@ -44,24 +28,41 @@ module tb_hierarquia_memoria;
         .hit_L2(hit_L2)
     );
 
-    // Geração de clock
-    always #5 clock = ~clock;
+    // Geração do clock
+    always begin
+        #50 clock = ~clock; // Gera um clock de 100 ps
+    end
 
+    // Estímulos do testbench
     initial begin
-        // Inicializa sinais
+        // Inicializa o clock e os sinais
         clock = 0;
-        reset = 1;
+        reset = 0;
+        address = 16'd0;
+        write_data = 16'b0;
         read = 0;
         write = 0;
-        address = 0;
-        write_data = 0;
 
-        // Aplica reset
-        #10 reset = 0;
+        $display("=== INICIANDO SIMULACAO ===");
 
-        // Espera um pouco
-        #10;
+        // Resetando o sistema
+        #100;
+        reset = 1;
+        $display("[%0t] Reset ativado", $time);
+        #100;
+        reset = 0;
+        $display("[%0t] Reset desativado", $time);
 
-        // 1) Escreve na memória no endereço 10
-        address = 16'd10;
-        write_data = 16'h_
+
+        // Teste 1: Leitura da L1
+        address = 16'b1;
+        read = 1;
+        $display("[%0t] Lendo da L1: Addr = %h", $time, address);
+        #50;
+        $display("[%0t] Read = %h | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+        read = 0;
+
+        // $finish;
+    end
+
+endmodule

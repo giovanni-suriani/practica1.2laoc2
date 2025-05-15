@@ -1,5 +1,5 @@
 // ImplementaÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o de hierarquia de memÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³ria com cache L1, cache L2 e memÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³ria principal
-`timescale 1ns / 1ps
+`timescale 1ps / 1ps
 
 module hierarquia_memoria(
     input clock,
@@ -136,7 +136,6 @@ module hierarquia_memoria(
                      #12 mem_clock = 1'b0; // Desativa o clock da memoria
                      #12 mem_clock = 1'b1; // Ativa o clock da memoria 
                       //#1 mem_clock = 1'b1; // Ativa o clock da memoria
-                     
                       #1 read_data <= wire_read_data;
                     end
                     if (write) begin
@@ -152,3 +151,14 @@ module hierarquia_memoria(
         end
     end
 endmodule
+
+/* 
+vlib work
+vlib altera
+
+vlog -work altera /home/gi/altera/13.0sp1/modelsim_ase/altera/verilog/src/altera_mf.v
+
+vlog hierarquia_memoria.v memoram.v tb_hierarquia_memoria.v
+
+vsim -L altera tb_hierarquia_memoria
+ */
