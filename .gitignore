@@ -12,3 +12,6 @@
 !*.do
 !*.mif
 !*.v
+
+# Nao ignorar pasta .vscode e seus arquivos
+!.vscode/*
