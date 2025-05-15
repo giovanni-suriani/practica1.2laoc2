@@ -19,11 +19,11 @@ module hierarquia_memoria(
     // MemÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³ria principal com 64 palavras de 16 bits
 
     // Estrutura da cache L1 (associativa por conjunto de 2 vias)
-    reg [15:0] L1_data[3:0][1:0]; // Dados
-    reg [15:0] L1_tag[3:0][1:0]; // Tags
-    reg L1_valid[3:0][1:0]; // Bits de validade
-    reg L1_dirty[3:0][1:0]; // Bits "Dirty"
-    reg L1_lru[3:0]; // Bit LRU para cada conjunto
+    reg [15:0] L1_data [3:0][1:0]; // Dados
+    reg [15:0] L1_tag  [3:0][1:0]; // Tags
+    reg        L1_valid[3:0][1:0]; // Bits de validade
+    reg        L1_dirty[3:0][1:0]; // Bits "Dirty"
+    reg        L1_lru  [3:0]; // Bit LRU para cada conjunto
 
     // Estrutura da cache L2 (totalmente associativa)
     reg [15:0] L2_data[7:0]; // Dados
@@ -137,6 +137,9 @@ module hierarquia_memoria(
                      #12 mem_clock = 1'b1; // Ativa o clock da memoria 
                       //#1 mem_clock = 1'b1; // Ativa o clock da memoria
                       #1 read_data <= wire_read_data;
+                    // Coloca os dados na L1 e L2
+                    
+
                     end
                     if (write) begin
                       // Fazer WB

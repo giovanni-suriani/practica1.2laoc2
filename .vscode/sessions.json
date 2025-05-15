@@ -1,0 +1,28 @@
+{
+  "schema": "https://cdn.statically.io/gh/nguyenngoclongdev/cdn/main/schema/v10/terminal-keeper.json",
+  "theme": "tribe",
+  "active": "saved-session",
+  "activateOnStartup": false,
+  "keepExistingTerminals": false,
+  "sessions": {
+    "NAO CLIQUE AQUI, clique no >": [
+      {
+        "name": "Abrir Pasta Do OTM2",
+        "autoExecuteCommands": true,
+        "icon": "symbol-function",
+        "color": "terminal.ansiCyan",
+        "commands": [
+          "alias runscript='vsim -c -do linux_vlog_terminal_hierarquia.do'"
+        ]
+      }
+    ],
+    "saved-session": [
+      {
+        "name": "connect",
+        "commands": [
+          "gestaoPi"
+        ]
+      }
+    ]
+  }
+}
