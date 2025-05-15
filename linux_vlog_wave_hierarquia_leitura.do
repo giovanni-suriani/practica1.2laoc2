@@ -7,7 +7,7 @@
 
 
 # Compila os arquivos Verilog necessários vlog hierarquia_memoria.v memoram.v tb_hierarquia_memoria.v 
-vlog hierarquia_memoria.v tb_hierarquia_memoria.v 
+vlog hierarquia_memoria.v tb_hierarquia_memoria_leitura.v 
 #vsim -t 1ps work.tb_hierarquia_memoria
 vsim -L altera work.tb_hierarquia_memoria 
 
@@ -30,16 +30,18 @@ add wave -label "mem_clock" sim:/tb_hierarquia_memoria/uut/mem_clock
 add wave -label "L1_data" sim:/tb_hierarquia_memoria/uut/L1_data
 add wave -label "L1_tag" sim:/tb_hierarquia_memoria/uut/L1_tag
 add wave -label "L1_valid" sim:/tb_hierarquia_memoria/uut/L1_valid  
-add wave -label "L1_dirty" sim:/tb_hierarquia_memoria/uut/L1_dirty
 add wave -label "L1_lru" sim:/tb_hierarquia_memoria/uut/L1_lru
+add wave -label "index_L1" sim:/tb_hierarquia_memoria/uut/index_L1
 
 # Executa a simulacao
-run 1000ps
+run 10000ps
 
 # Abre o waveform e ajusta exibição
-radix -binary
+radix -unsigned
 view wave
-WaveRestoreZoom 0ps 600ps
+WaveRestoreZoom 1000ps 1800ps
+configure wave -timelineunits ps
 
 
-# Para rodar killmodelsim;vsim -do linux_vlog_terminal_hierarquia.do 
+
+# Para rodar killmodelsim;vsim -do linux_vlog_wave_hierarquia_leitura.do 

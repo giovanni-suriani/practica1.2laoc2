@@ -1,6 +1,5 @@
 # Ignorar tudo
 *
-
 # Mas não ignorar pastas (necessário para que os arquivos dentro possam ser incluídos)
 !*/
 
@@ -13,5 +12,6 @@
 !*.mif
 !*.v
 
+cache_l1_2way.v
 # Nao ignorar pasta .vscode e seus arquivos
 !.vscode/*
