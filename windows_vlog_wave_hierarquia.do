@@ -36,3 +36,4 @@ view wave
 WaveRestoreZoom 0ps 600ps
 
 
+# Para rodar vsim -do linux_vlog_terminal_hierarquia.do 
