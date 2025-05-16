@@ -58,61 +58,99 @@ module tb_hierarquia_memoria_escrita;
       $display("disclaimer: so no conjunto 0 ainda");
       #100;
 
-      // Teste 1: Escrita da L1 na posicao 1  -> verifica a L2, pega do arquivo.mif
+      // Teste 1: Escrita da L1 no endereco 1  -> verifica a L2, pega do arquivo.mif
       situacao_L2;
       address = 6'b0000_01;
       write = 1;
-      write_data = 16'b0000_0000_0000_0010; // Escreve 2 na posicao 1 da L1 e L2
-      $display("[%0t] ---- Teste 1: Escrita da L1, write_miss na posicao 1, deve escrever na L2 e nao escrever na principal ----", $time);
+      write_data = 16'b0000_0000_0000_0010;
+      // Escreve 2 no endereco 1 da L1 e L2
+      $display("[%0t] ---- Teste 1: Escrita da L1, write_miss no endereco 1, deve escrever na L2 e nao escrever na principal ----", $time);
       $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
       #100;
       $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("[%0t] Esperado do .mif = 2 | hit_L1 = 0 | hit_L2 = 0", $time);
       $display("");
-      
 
-      // Teste 2: Escrita da L1 na posicao 1  -> verifica a L2, pega do arquivo.mif
+
+      // Teste 2: Escrita da L1 no endereco 1  -> verifica a L2, pega do arquivo.mif
       #100;
       address = 6'b0000_01;
       write = 1;
-      write_data = 16'b0000_0000_0000_010; // Escreve 1 na posicao 2 da L1 e L2
-      $display("[%0t] ---- Teste 2: Escrita da L1, write_hit na posicao 1, deve dar write_hit ----", $time);
+      write_data = 16'b0000_0000_0000_010;
+      // Escreve 1 no endereco 2 da L1 e L2
+      $display("[%0t] ---- Teste 2: Escrita da L1, write_hit no endereco 1, deve dar write_hit ----", $time);
       $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
       #100;
       $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("[%0t] Esperado do .mif = 2 | hit_L1 = 1| hit_L2 = 0", $time);
       $display("");
+      situacao_L2;
 
-      // Teste 3: Escrita da L1 na posicao 3  -> verifica a L2, pega do arquivo.mif
+      // Teste 3: Escrita da L1 no endereco 3  -> verifica a L2, pega do arquivo.mif
       #100;
       address = 6'b0000_11;
       write = 1;
-      write_data = 16'b0000_0000_0000_0100; // Escreve 4 na posicao 3 da L1 e L2
-      $display("[%0t] ---- Teste 3: Escrita da L1, write_miss na posicao 3, deve escrever na L2 e nao escrever na principal ----", $time);
+      write_data = 16'b0000_0000_0000_0100;
+      // Escreve 4 no endereco 3 da L1 e L2
+      $display("[%0t] ---- Teste 3: Escrita da L1, write_miss no endereco 3, deve escrever na L2 e nao escrever na principal ----", $time);
       $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
       #100;
       $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("[%0t] Esperado do .mif = 4 | hit_L1 = 0 | hit_L2 = 0", $time);
-      situacao_L1;
+      // situacao_L1;
+      situacao_L2;
+
+      /* // FAKETeste 3: Escrita da L1 no endereco 3  -> verifica a L2, pega do arquivo.mif
+      #400;
+      address = 6'b0000_11;
+      write = 1;
+      write_data = 16'b0000_0000_0000_0100;
+      // Escreve 4 no endereco 3 da L1 e L2
+      $display("[%0t] ---- Teste 3: Escrita da L1, write_miss no endereco 3, deve escrever na L2 e nao escrever na principal ----", $time);
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 4 | hit_L1 = 0 | hit_L2 = 0", $time);
+      // situacao_L1;
+      situacao_L2;
+ */
+
+
 
       // Teste 4: Preenchendo a cache L1 e L2 com escritas  -> verifica a L2, pega do arquivo.mif
       //  L1[0][0]
       #100;
       address = 6'b0100_10; // 18
       write = 1;
-      write_data = 16'b0000_0000_0000_0100; // Escreve 4 na posicao 3 da L1 e L2
-      $display("[%0t] ---- Teste 4: Preenchendo L1, write_miss na posicao 3, deve escrever na L2  ----", $time);
+      write_data = 16'b0000_0000_0001_0011;
+      // Escreve 19 no endereco 18 da L1 e L2
+      //  L1[0][0]
+      $display("[%0t] ---- Teste 4: Preenchendo L1, write_miss no endereco 18, deve escrever na L2  ----", $time);
       $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
       #100;
       $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
-      $display("[%0t] Esperado do .mif = 4 | hit_L1 = 0 | hit_L2 = 0", $time);
-      situacao_L1;
-      // situacao_L2;
+      $display("[%0t] Esperado do .mif = 19 | hit_L1 = 0 | hit_L2 = 0", $time);
+      situacao_L2;
+     
+
+      /* 
+      address = 6'b0110_10; // 26
+      write = 1;
+      write_data = 16'b0000_0000_0001_1011;
+      // Escreve 27 no endereco 26 da L1 e L2
+      //  L1[0][1]
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 27 | hit_L1 = 0 | hit_L2 = 0", $time);
+      // situacao_L1;
+      situacao_L2; */
+    $finish;
 
 
 
 
-      
+
 
 
 
@@ -223,15 +261,15 @@ module tb_hierarquia_memoria_escrita;
       $display("[%0t] ---- Situacao da cache L2 ----", $time);
       $display("[%0t]           Endereco | Tag  | Dirty | V  | LRU |  Data  ", $time);
       // $display("[%0t] 0        | %d   | %d  |  %d  |%d  ", $time, uut.L2_tag[0], uut.L2_valid[0], uut.L2_lru[0] ,uut.L2_data[0]);
-      for (i = 0; i < 7; i = i + 1) // declare antes o i
+      for (i = 0; i < 8; i = i + 1) // declare antes o i
         begin
-          $display("[%0t]       %d  | %d   |    %d  | %d  | %d   | %d  ", $time, i, uut.L2_tag[i], uut.L2_dirty[i] ,uut.L2_valid[i], 
-          uut.L2_lru[i] ,uut.L2_data[i]);
+          $display("[%0t]       %d  | %d   |    %d  | %d  | %d   | %d  ", $time, i, uut.L2_tag[i], uut.L2_dirty[i] ,uut.L2_valid[i],
+                   uut.L2_lru[i] ,uut.L2_data[i]);
         end
 
     end
   endtask
 
-  
+
 
 endmodule

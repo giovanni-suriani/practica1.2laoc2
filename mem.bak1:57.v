@@ -52,14 +52,12 @@ module hierarquia_memoria(input clock,
 
 
   // Variaveis auxiliares para L2
-  integer new_bit_valid;
   integer write_made;
   integer biggest_lru_l2_idx;
   integer dummy;
 
   always @(posedge clock or posedge reset)
     begin
-      new_bit_valid = 0; // Variavel para verificar se foi feita escrita em posicao previamente invalida
       write_made = 0; // Variavel para verificar se foi feita escrita
       // read_data = wire_read_data;
       if (reset)
@@ -110,7 +108,7 @@ module hierarquia_memoria(input clock,
                           // Coloca na primeira linha livre da L2
                           L2_data[i]  <= write_data;
                           L2_tag[i]   <= address;
-                          L2_valid[i] = 1;
+                          L2_valid[i] <= 1;
                           L2_dirty[i] <= 1; // Marca como dirty
                           read_data   <= write_data; // Retorna o dado escrito
                           $display("//////////linha 114 vou atualizar LRU da L2 seu cachorro, i = %0d////////////", i);
@@ -142,12 +140,12 @@ module hierarquia_memoria(input clock,
                 end
               if (write)
                 begin
-                  $display("TO te lascando aqui");
                   L1_data[index_L1][1]  = write_data;
                   // Escreve na L2
                   for (i = 0; i < 8; i = i + 1)
                     begin
-                      if (!write_made && L2_tag[i] == address) // Checa se a linha esta livre, NAO USE ~
+                      if (!write_made && L2_valid[i] == 0) // Checa se a linha esta livre, NAO USE ~
+
                         begin
                           // Coloca na primeira linha livre da L2
                           L2_data[i]  <= write_data;
@@ -183,7 +181,6 @@ module hierarquia_memoria(input clock,
                   L1_lru[index_L1][1] <= 1; // Atualiza LRU
                 end
               // escrita na L2 Implementar WB ainda
-              new_bit_valid = 1; // Marca que foi feita a escrita em posicao invalida
               for (i = 0; i < 8; i = i + 1)
                 begin
                   // $display("entrei em L1_valid[index_L1][0] == 0 && write");
@@ -218,7 +215,6 @@ module hierarquia_memoria(input clock,
                   L1_lru[index_L1][0] <= 1; // Atualiza LRU
                 end
               // escrita na L2 Implementar WB ainda
-              new_bit_valid = 1; // Marca que foi feita a escrita em posicao invalida
               for (i = 0; i < 8; i = i + 1)
                 begin
                   if (!write_made && L2_valid[i] == 0) // Checa se a linha esta livre
@@ -242,7 +238,6 @@ module hierarquia_memoria(input clock,
             begin
               if (L1_lru[index_L1][0] == 1)
                 begin
-                  /* To */
                   L1_data[index_L1][0]  <= write_data;
                   L1_tag[index_L1][0]   <= tag;
                   L1_valid[index_L1][0] <= 1;
@@ -395,19 +390,17 @@ module hierarquia_memoria(input clock,
                     begin
                       // Fazer WB
                       $display("entrei em !hit_L2");
-                      // wren = 1'b1; // Escreve na memoria
-                      // // dois ciclos para escrever
-                      // mem_clock = 1'b0; // Desativa o clock da memoria
-                      // mem_clock = 1'b1; // Ativa o clock da memoria
-                      // read_data <= wire_read_data;
+                      wren = 1'b1; // Escreve na memoria
+                      // dois ciclos para escrever
+                      mem_clock = 1'b0; // Desativa o clock da memoria
+                      mem_clock = 1'b1; // Ativa o clock da memoria
+                      read_data <= wire_read_data;
                     end
                 end
             end
         end
     end
 
-/* 
-  lixo talvez util
   function integer valids_on_l2;
     input dummy_input;
     integer i_index, current_valids;
@@ -421,69 +414,50 @@ module hierarquia_memoria(input clock,
             end
           // $display("valids_on_l2 = %d", valids_on_l2);
         end
-        if (new_bit_valid)
-          begin
-            valids_on_l2 = current_valids; // Se foi feita escrita em posicao invalida, incrementa o numero de valids
-          end
-        else 
-          begin
-          valids_on_l2 = current_valids - 1; // Retorna o numero de valids na L2
-          end
+        valids_on_l2 = current_valids; // Retorna o numero de valids na L2
     end
   endfunction
 
- */
-
   function integer needs_to_update_l2;
-    //  Verifica se precisa atualizar a LRU da L2, olhando se apareceu bit valido novo
+    //  Verifica se precisa atualizar a LRU da L2, olhando para quantos bits validos tem
+    // ex: 1 bit valido, maior valor de LRU eh 0, entao nao precisa atualizar
     input dummy_input;
     integer i_index, valid_bits_on_l2;
     begin
-      if (new_bit_valid) 
-        begin
-          needs_to_update_l2 = 1; // Se foi feita escrita em posicao invalida, precisa atualizar a LRU
-        end
-      else
-        begin
-          needs_to_update_l2 = 0; // Se nao foi feita escrita em posicao invalida, nao precisa atualizar a LRU
-        end
-      /* valid_bits_on_l2 = valids_on_l2(0);
+      valid_bits_on_l2 = valids_on_l2(0);
       needs_to_update_l2 = 1; // Inicializa a variavel
       for (i_index = 0; i_index < 8; i_index = i_index + 1)
         begin
-          if (L2_lru[i_index]== valid_bits_on_l2)
+          // $display("L2_lru[%0d] = %d, valid_bits_on_l2 = %d", i_index, L2_lru[i_index], valid_bits_on_l2);
+          if (L2_lru[i_index]== valid_bits_on_l2 - 1)
             begin
-              // $display("%0t L2_lru[%0d] = %1d, valid_bits_on_l2 = %1d", $time,i_index, L2_lru[i_index], valid_bits_on_l2);
               needs_to_update_l2 = 0;
             end
         end
-        $display("%0t valid_bits_on_l2 = %1d", $time, valid_bits_on_l2);
-        $display("%0t needs_to_update_l2 = %1d", $time, needs_to_update_l2); */
     end
   endfunction
 
   task atualiza_lru_l2;
     //  Atualiza a lru do conjunto
     input integer most_recent_index;
-    integer i_index, need_update, biggest_lru_l2_idx;
+    integer i_index, need_update;
     begin
-      biggest_lru_l2_idx = biggest_lru_l2_index(0); // Pega o maior LRU da L2
       need_update = needs_to_update_l2(0);
-      if (need_update || L2_lru[biggest_lru_l2_idx] == 7)
+      if (need_update)
         begin
           for (i_index = 0; i_index < 8 ; i_index = i_index + 1)
             begin
               if (most_recent_index == i_index)
                 begin
-                  // $display("%1t Posicao resetada LRU da L2, most_recent_index = %1d i = %1d, L2_lru[i] = %d, L2_valid[i] = %d",$time,most_recent_index, i_index, L2_lru[i_index], L2_valid[i_index]);
+                  // $display("Posicao resetada LRU da L2, most_recent_index = %1d i = %1d, L2_lru[i] = %d, L2_valid[i] = %d",most_recent_index, i_index, L2_lru[i_index], L2_valid[i_index]);
                   L2_lru[i_index] <= 0;
                 end
               else
                 begin
-                  if (L2_valid[i_index] == 1)
+                  if (L2_valid[i] == 1)
                     begin
-                      // $display("%1t Posicao incrementada LRU da L2, most_recent_index = %1d i = %1d, L2_lru[i] = %d, L2_valid[i] = %d",$time, most_recent_index, i_index, L2_lru[i_index], L2_valid[i_index]);
-                      L2_lru[i_index] <= L2_lru[i_index] + 1;
+                      // $display("Posicao incrementada LRU da L2, most_recent_index = %1d i = %1d, L2_lru[i] = %d, L2_valid[i] = %d",most_recent_index, i_index, L2_lru[i_index], L2_valid[i_index]);
+                      L2_lru[i] <= L2_lru[i] + 1;
                     end
                 end
             end
