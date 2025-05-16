@@ -103,6 +103,7 @@ module tb_hierarquia_memoria_leitura;
         $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
         $display("[%0t] Esperado do .mif = 2 | hit_L1 = 0 | hit_L2 = 1", $time);
         situacao_L1;
+        situacao_L2;
 
         
     end
@@ -237,6 +238,20 @@ module tb_hierarquia_memoria_leitura;
             $display("[%0t]                   | 15   | 1  |  0  | 31  ", $time) ;
             $display("[%0t] ---- Fim da situacao da cache L1 ----", $time);
         end
+    endtask
+
+    task situacao_L2 ;
+    integer i;
+    begin
+      $display("[%0t] ---- Situacao da cache L2 ----", $time);
+      $display("[%0t]           Endereco | Tag  | Dirty | V  | LRU |  Data  ", $time);
+      // $display("[%0t] 0        | %d   | %d  |  %d  |%d  ", $time, uut.L2_tag[0], uut.L2_valid[0], uut.L2_lru[0] ,uut.L2_data[0]);
+      for (i = 0; i < 8; i = i + 1) // declare antes o i
+        begin
+          $display("[%0t]       %d  | %d   |    %d  | %d  | %d   | %d  ", $time, i, uut.L2_tag[i], uut.L2_dirty[i] ,uut.L2_valid[i],
+                   uut.L2_lru[i] ,uut.L2_data[i]);
+        end
+    end
     endtask
 
 endmodule

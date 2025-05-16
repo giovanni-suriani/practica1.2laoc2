@@ -72,12 +72,14 @@ module hierarquia_memoria(input clock,
               L1_valid[i][1] <= 0;
               L1_lru[i][0]      <= 0;
               L1_lru[i][1]      <= 0;
+				  hit_L1				<= 0;
             end
           for (i = 0; i < 8; i = i + 1)
             begin
               L2_valid[i] <= 0;
               L2_dirty[i] <= 0;
               L2_lru[i]   <= 0;
+				  hit_L2				<= 0;
             end
         end
       else
@@ -121,7 +123,7 @@ module hierarquia_memoria(input clock,
                           L2_valid[i] = 1;
                           L2_dirty[i] <= 1; // Marca como dirty
                           read_data   <= write_data; // Retorna o dado escrito
-                          $display("//////////linha 114 vou atualizar LRU da L2 seu cachorro, i = %0d////////////", i);
+                          // $display("//////////linha 114 vou atualizar LRU da L2 seu cachorro, i = %0d////////////", i);
                           atualiza_lru_l2(i);
                           write_made = 1; // Marca que foi feita a escrita no mesmo delta_cycle
                         end
@@ -694,9 +696,12 @@ module hierarquia_memoria(input clock,
       valid_bits_on_l2 = valids_on_l2(0);
       // Verifica se todos os bits validos foram preenchidos
       $display("valid_bits_on_l2 = %d", valid_bits_on_l2);
+		if (valid_bits_on_l2 > 7) begin
+			valid_bits_on_l2 = 7;  // Sanitize valor maximo
+		end
       if (need_update_new_bit) //|| L2_lru[biggest_lru_l2_idx] == 7)
         begin
-          for (i_index = 0; i_index < valid_bits_on_l2 ; i_index = i_index + 1)
+          for (i_index = 0; i_index < 8 ; i_index = i_index + 1)
             begin
               if (most_recent_index == i_index)
                 begin

@@ -476,6 +476,10 @@ set_location_assignment PIN_V24 -to GPIO_1[32]
 set_location_assignment PIN_V23 -to GPIO_1[33]
 set_location_assignment PIN_W25 -to GPIO_1[34]
 set_location_assignment PIN_W23 -to GPIO_1[35]
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name VERILOG_FILE tb_hierarquia_memoria_leitura.v
+set_global_assignment -name VERILOG_FILE tb_hierarquia_memoria_escrita.v
 set_global_assignment -name VERILOG_FILE cache_l1_2way.v
 set_global_assignment -name VERILOG_FILE tb.v
 set_global_assignment -name VERILOG_FILE memoria_pratica1.v
@@ -484,6 +488,18 @@ set_global_assignment -name VERILOG_FILE display.v
 set_global_assignment -name VERILOG_FILE pratica1_2.v
 set_global_assignment -name MIF_FILE pratica1_2.mif
 set_global_assignment -name CDF_FILE ../pratica1_Giovanni_Thales/output_files/Chain6.cdf
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH tb_hierarquia_memoria_escrita -section_id eda_simulation
+set_global_assignment -name EDA_TEST_BENCH_NAME tb_hierarquia_memoria_leitura -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id tb_hierarquia_memoria_leitura
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME tb_hierarquia_memoria_leitura -section_id tb_hierarquia_memoria_leitura
+set_global_assignment -name EDA_TEST_BENCH_FILE tb_hierarquia_memoria_leitura.v -section_id tb_hierarquia_memoria_leitura
+set_global_assignment -name EDA_TEST_BENCH_FILE hierarquia_memoria.v -section_id tb_hierarquia_memoria_leitura
+set_global_assignment -name EDA_TEST_BENCH_NAME tb_hierarquia_memoria_escrita -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id tb_hierarquia_memoria_escrita
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME tb_hierarquia_memoria_escrita -section_id tb_hierarquia_memoria_escrita
+set_global_assignment -name EDA_TEST_BENCH_FILE hierarquia_memoria.v -section_id tb_hierarquia_memoria_escrita
+set_global_assignment -name EDA_TEST_BENCH_FILE tb_hierarquia_memoria_escrita.v -section_id tb_hierarquia_memoria_escrita
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

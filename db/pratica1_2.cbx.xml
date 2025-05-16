@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="pratica1_2">
+		<CBX_INST_ENTRY INSTANCE_NAME="|pratica1_2|hierarquia_memoria:mem|memoram:main_memory|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_hbe1.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

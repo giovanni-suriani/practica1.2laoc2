@@ -108,9 +108,18 @@ Display D2(
     .HEX(HEX2)
 );
 
-assign LEDG[0] = hit_L1;
-assign LEDG[1] = hit_L2;
+assign LEDG[1] = hit_L1;
+assign LEDG[2] = hit_L2;
 assign LEDR[17] = reset;
+
+Display D6(
+    .result(hit_L1),
+    .HEX(HEX6)
+);
+Display D7(
+    .result(hit_l2),
+    .HEX(HEX7)
+);
 
 /*
 Display D3(

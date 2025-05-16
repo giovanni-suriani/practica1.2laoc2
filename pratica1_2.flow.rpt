@@ -1,5 +1,5 @@
 Flow report for pratica1_2
-Thu May 08 21:59:52 2025
+Fri May 16 12:43:17 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,20 +40,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Thu May 08 21:59:50 2025           ;
+; Flow Status                        ; Successful - Fri May 16 12:43:17 2025           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; pratica1_2                                      ;
 ; Top-level Entity Name              ; pratica1_2                                      ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C35F672C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 7 / 33,216 ( < 1 % )                            ;
-;     Total combinational functions  ; 7 / 33,216 ( < 1 % )                            ;
-;     Dedicated logic registers      ; 0 / 33,216 ( 0 % )                              ;
-; Total registers                    ; 0                                               ;
-; Total pins                         ; 92 / 475 ( 19 % )                               ;
+; Total logic elements               ; 2,133 / 33,216 ( 6 % )                          ;
+;     Total combinational functions  ; 2,112 / 33,216 ( 6 % )                          ;
+;     Dedicated logic registers      ; 110 / 33,216 ( < 1 % )                          ;
+; Total registers                    ; 110                                             ;
+; Total pins                         ; 100 / 475 ( 21 % )                              ;
 ; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 0 / 483,840 ( 0 % )                             ;
+; Total memory bits                  ; 8 / 483,840 ( < 1 % )                           ;
 ; Embedded Multiplier 9-bit elements ; 0 / 70 ( 0 % )                                  ;
 ; Total PLLs                         ; 0 / 4 ( 0 % )                                   ;
 +------------------------------------+-------------------------------------------------+
@@ -64,26 +64,40 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/08/2025 21:59:42 ;
+; Start date & time ; 05/16/2025 12:42:37 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; pratica1_2          ;
 +-------------------+---------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                       ;
-+-------------------------------------+---------------------------------------+---------------+-------------+------------+
-; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id ;
-+-------------------------------------+---------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 14071518780557.174675238202656        ; --            ; --          ; --         ;
-; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --         ;
-; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --         ;
-; PARTITION_COLOR                     ; 2147039                               ; --            ; --          ; Top        ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                 ; --            ; --          ; Top        ;
-; PARTITION_NETLIST_TYPE              ; SOURCE                                ; --            ; --          ; Top        ;
-; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                   ; --            ; --          ; --         ;
-; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ; --            ; --          ; --         ;
-+-------------------------------------+---------------------------------------+---------------+-------------+------------+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                           ;
++--------------------------------------+---------------------------------------+---------------+-------------+-------------------------------+
+; Assignment Name                      ; Value                                 ; Default Value ; Entity Name ; Section Id                    ;
++--------------------------------------+---------------------------------------+---------------+-------------+-------------------------------+
+; COMPILER_SIGNATURE_ID                ; 14071518780557.174741015700624        ; --            ; --          ; --                            ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                    ; --            ; --          ; tb_hierarquia_memoria_leitura ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                    ; --            ; --          ; tb_hierarquia_memoria_escrita ;
+; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; tb_hierarquia_memoria_escrita         ; --            ; --          ; eda_simulation                ;
+; EDA_OUTPUT_DATA_FORMAT               ; Vhdl                                  ; --            ; --          ; eda_simulation                ;
+; EDA_SIMULATION_TOOL                  ; ModelSim-Altera (VHDL)                ; <None>        ; --          ; --                            ;
+; EDA_TEST_BENCH_ENABLE_STATUS         ; TEST_BENCH_MODE                       ; --            ; --          ; eda_simulation                ;
+; EDA_TEST_BENCH_FILE                  ; tb_hierarquia_memoria_leitura.v       ; --            ; --          ; tb_hierarquia_memoria_leitura ;
+; EDA_TEST_BENCH_FILE                  ; hierarquia_memoria.v                  ; --            ; --          ; tb_hierarquia_memoria_leitura ;
+; EDA_TEST_BENCH_FILE                  ; hierarquia_memoria.v                  ; --            ; --          ; tb_hierarquia_memoria_escrita ;
+; EDA_TEST_BENCH_FILE                  ; tb_hierarquia_memoria_escrita.v       ; --            ; --          ; tb_hierarquia_memoria_escrita ;
+; EDA_TEST_BENCH_MODULE_NAME           ; tb_hierarquia_memoria_leitura         ; --            ; --          ; tb_hierarquia_memoria_leitura ;
+; EDA_TEST_BENCH_MODULE_NAME           ; tb_hierarquia_memoria_escrita         ; --            ; --          ; tb_hierarquia_memoria_escrita ;
+; EDA_TEST_BENCH_NAME                  ; tb_hierarquia_memoria_leitura         ; --            ; --          ; eda_simulation                ;
+; EDA_TEST_BENCH_NAME                  ; tb_hierarquia_memoria_escrita         ; --            ; --          ; eda_simulation                ;
+; MAX_CORE_JUNCTION_TEMP               ; 85                                    ; --            ; --          ; --                            ;
+; MIN_CORE_JUNCTION_TEMP               ; 0                                     ; --            ; --          ; --                            ;
+; PARTITION_COLOR                      ; 2147039                               ; --            ; --          ; Top                           ;
+; PARTITION_FITTER_PRESERVATION_LEVEL  ; PLACEMENT_AND_ROUTING                 ; --            ; --          ; Top                           ;
+; PARTITION_NETLIST_TYPE               ; SOURCE                                ; --            ; --          ; Top                           ;
+; POWER_BOARD_THERMAL_MODEL            ; None (CONSERVATIVE)                   ; --            ; --          ; --                            ;
+; POWER_PRESET_COOLING_SOLUTION        ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ; --            ; --          ; --                            ;
++--------------------------------------+---------------------------------------+---------------+-------------+-------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------+
@@ -91,11 +105,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:01     ; 1.0                     ; 4594 MB             ; 00:00:00                           ;
-; Fitter                    ; 00:00:05     ; 1.0                     ; 4875 MB             ; 00:00:03                           ;
-; Assembler                 ; 00:00:01     ; 1.0                     ; 4567 MB             ; 00:00:01                           ;
-; TimeQuest Timing Analyzer ; 00:00:01     ; 1.0                     ; 4538 MB             ; 00:00:00                           ;
-; Total                     ; 00:00:08     ; --                      ; --                  ; 00:00:04                           ;
+; Analysis & Synthesis      ; 00:00:21     ; 1.0                     ; 4641 MB             ; 00:00:21                           ;
+; Fitter                    ; 00:00:12     ; 1.0                     ; 4903 MB             ; 00:00:12                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 4578 MB             ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:01     ; 1.0                     ; 4566 MB             ; 00:00:01                           ;
+; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4549 MB             ; 00:00:01                           ;
+; Total                     ; 00:00:37     ; --                      ; --                  ; 00:00:37                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -108,6 +123,7 @@ applicable agreement for further details.
 ; Fitter                    ; GigolaPC         ; Windows 7 ; 6.2        ; x86_64         ;
 ; Assembler                 ; GigolaPC         ; Windows 7 ; 6.2        ; x86_64         ;
 ; TimeQuest Timing Analyzer ; GigolaPC         ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; GigolaPC         ; Windows 7 ; 6.2        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
@@ -118,6 +134,7 @@ quartus_map --read_settings_files=on --write_settings_files=off pratica1_2 -c pr
 quartus_fit --read_settings_files=off --write_settings_files=off pratica1_2 -c pratica1_2
 quartus_asm --read_settings_files=off --write_settings_files=off pratica1_2 -c pratica1_2
 quartus_sta pratica1_2 -c pratica1_2
+quartus_eda --read_settings_files=off --write_settings_files=off pratica1_2 -c pratica1_2
 
 
 

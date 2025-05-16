@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for pratica1_2
-Thu May 08 21:59:52 2025
+Fri May 16 12:43:16 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -16,23 +16,42 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   8. Slow Model Recovery Summary
   9. Slow Model Removal Summary
  10. Slow Model Minimum Pulse Width Summary
- 11. Propagation Delay
- 12. Minimum Propagation Delay
- 13. Fast Model Setup Summary
- 14. Fast Model Hold Summary
- 15. Fast Model Recovery Summary
- 16. Fast Model Removal Summary
- 17. Fast Model Minimum Pulse Width Summary
+ 11. Slow Model Setup: 'SW[0]'
+ 12. Slow Model Hold: 'SW[0]'
+ 13. Slow Model Minimum Pulse Width: 'SW[0]'
+ 14. Setup Times
+ 15. Hold Times
+ 16. Clock to Output Times
+ 17. Minimum Clock to Output Times
  18. Propagation Delay
  19. Minimum Propagation Delay
- 20. Multicorner Timing Analysis Summary
- 21. Progagation Delay
- 22. Minimum Progagation Delay
- 23. Clock Transfers
- 24. Report TCCS
- 25. Report RSKM
- 26. Unconstrained Paths
- 27. TimeQuest Timing Analyzer Messages
+ 20. Fast Model Setup Summary
+ 21. Fast Model Hold Summary
+ 22. Fast Model Recovery Summary
+ 23. Fast Model Removal Summary
+ 24. Fast Model Minimum Pulse Width Summary
+ 25. Fast Model Setup: 'SW[0]'
+ 26. Fast Model Hold: 'SW[0]'
+ 27. Fast Model Minimum Pulse Width: 'SW[0]'
+ 28. Setup Times
+ 29. Hold Times
+ 30. Clock to Output Times
+ 31. Minimum Clock to Output Times
+ 32. Propagation Delay
+ 33. Minimum Propagation Delay
+ 34. Multicorner Timing Analysis Summary
+ 35. Setup Times
+ 36. Hold Times
+ 37. Clock to Output Times
+ 38. Minimum Clock to Output Times
+ 39. Progagation Delay
+ 40. Minimum Progagation Delay
+ 41. Setup Transfers
+ 42. Hold Transfers
+ 43. Report TCCS
+ 44. Report RSKM
+ 45. Unconstrained Paths
+ 46. TimeQuest Timing Analyzer Messages
 
 
 
@@ -79,28 +98,41 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-----------
-; Clocks ;
-----------
-No clocks to report.
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                            ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-----------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets   ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-----------+
+; SW[0]      ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { SW[0] } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-----------+
 
 
----------------------------
-; Slow Model Fmax Summary ;
----------------------------
-No paths to report.
++-------------------------------------------------+
+; Slow Model Fmax Summary                         ;
++-----------+-----------------+------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
++-----------+-----------------+------------+------+
+; 50.65 MHz ; 50.65 MHz       ; SW[0]      ;      ;
++-----------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
-----------------------------
-; Slow Model Setup Summary ;
-----------------------------
-No paths to report.
++---------------------------------+
+; Slow Model Setup Summary        ;
++-------+---------+---------------+
+; Clock ; Slack   ; End Point TNS ;
++-------+---------+---------------+
+; SW[0] ; -18.745 ; -1093.607     ;
++-------+---------+---------------+
 
 
----------------------------
-; Slow Model Hold Summary ;
----------------------------
-No paths to report.
++-------------------------------+
+; Slow Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; SW[0] ; 0.391 ; 0.000         ;
++-------+-------+---------------+
 
 
 -------------------------------
@@ -115,10 +147,425 @@ No paths to report.
 No paths to report.
 
 
-------------------------------------------
++----------------------------------------+
 ; Slow Model Minimum Pulse Width Summary ;
-------------------------------------------
-No paths to report.
++-------+--------+-----------------------+
+; Clock ; Slack  ; End Point TNS         ;
++-------+--------+-----------------------+
+; SW[0] ; -1.380 ; -111.380              ;
++-------+--------+-----------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Setup: 'SW[0]'                                                                                                                                 ;
++---------+-------------------------------------+-------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack   ; From Node                           ; To Node                             ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++---------+-------------------------------------+-------------------------------------+--------------+-------------+--------------+------------+------------+
+; -18.745 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.781     ;
+; -18.745 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.781     ;
+; -18.745 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.781     ;
+; -18.706 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 19.736     ;
+; -18.706 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 19.736     ;
+; -18.706 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 19.736     ;
+; -18.692 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.726     ;
+; -18.692 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.726     ;
+; -18.692 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.726     ;
+; -18.665 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.699     ;
+; -18.665 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.699     ;
+; -18.665 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.699     ;
+; -18.662 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.696     ;
+; -18.662 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.696     ;
+; -18.662 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.696     ;
+; -18.612 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.648     ;
+; -18.612 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.648     ;
+; -18.612 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.648     ;
+; -18.424 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 19.453     ;
+; -18.424 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 19.453     ;
+; -18.424 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 19.453     ;
+; -18.404 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 19.442     ;
+; -18.402 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 19.440     ;
+; -18.390 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 19.419     ;
+; -18.390 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 19.419     ;
+; -18.390 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 19.419     ;
+; -18.365 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.401     ;
+; -18.365 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.401     ;
+; -18.365 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.401     ;
+; -18.365 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.004     ; 19.397     ;
+; -18.363 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.004     ; 19.395     ;
+; -18.351 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.387     ;
+; -18.350 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 19.380     ;
+; -18.350 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 19.380     ;
+; -18.350 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 19.380     ;
+; -18.349 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.385     ;
+; -18.324 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.360     ;
+; -18.322 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.358     ;
+; -18.321 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.357     ;
+; -18.319 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.355     ;
+; -18.271 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 19.309     ;
+; -18.269 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 19.307     ;
+; -18.133 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 19.175     ;
+; -18.133 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 19.175     ;
+; -18.133 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 19.171     ;
+; -18.094 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.130     ;
+; -18.094 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.130     ;
+; -18.094 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.004     ; 19.126     ;
+; -18.083 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 19.114     ;
+; -18.081 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 19.112     ;
+; -18.080 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.004      ; 19.120     ;
+; -18.080 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.004      ; 19.120     ;
+; -18.080 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.116     ;
+; -18.053 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.004      ; 19.093     ;
+; -18.053 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.004      ; 19.093     ;
+; -18.053 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.089     ;
+; -18.052 ; hierarquia_memoria:mem|L2_lru[1][2] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.086     ;
+; -18.052 ; hierarquia_memoria:mem|L2_lru[1][2] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.086     ;
+; -18.052 ; hierarquia_memoria:mem|L2_lru[1][2] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 19.086     ;
+; -18.050 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.004      ; 19.090     ;
+; -18.050 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.004      ; 19.090     ;
+; -18.050 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 19.086     ;
+; -18.049 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 19.080     ;
+; -18.047 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 19.078     ;
+; -18.024 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 19.062     ;
+; -18.022 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 19.060     ;
+; -18.009 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.004     ; 19.041     ;
+; -18.007 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.004     ; 19.039     ;
+; -18.000 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 19.042     ;
+; -18.000 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 19.042     ;
+; -18.000 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 19.038     ;
+; -17.994 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 19.032     ;
+; -17.985 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.017      ; 19.038     ;
+; -17.972 ; hierarquia_memoria:mem|L2_lru[3][2] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 19.001     ;
+; -17.972 ; hierarquia_memoria:mem|L2_lru[3][2] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 19.001     ;
+; -17.972 ; hierarquia_memoria:mem|L2_lru[3][2] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 19.001     ;
+; -17.955 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.004     ; 18.987     ;
+; -17.946 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.011      ; 18.993     ;
+; -17.941 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 18.977     ;
+; -17.932 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.015      ; 18.983     ;
+; -17.914 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 18.950     ;
+; -17.911 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 18.947     ;
+; -17.905 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.015      ; 18.956     ;
+; -17.902 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.015      ; 18.953     ;
+; -17.861 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 18.899     ;
+; -17.852 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.017      ; 18.905     ;
+; -17.832 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|read_data[3] ; SW[0]        ; SW[0]       ; 1.000        ; 0.021      ; 18.889     ;
+; -17.812 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 18.847     ;
+; -17.812 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 18.847     ;
+; -17.812 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 18.843     ;
+; -17.793 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|read_data[3] ; SW[0]        ; SW[0]       ; 1.000        ; 0.015      ; 18.844     ;
+; -17.779 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|read_data[3] ; SW[0]        ; SW[0]       ; 1.000        ; 0.019      ; 18.834     ;
+; -17.778 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 18.813     ;
+; -17.778 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 18.813     ;
+; -17.778 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 18.809     ;
+; -17.753 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 18.795     ;
+; -17.753 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 18.795     ;
+; -17.753 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.002      ; 18.791     ;
+; -17.752 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|read_data[3] ; SW[0]        ; SW[0]       ; 1.000        ; 0.019      ; 18.807     ;
+; -17.749 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|read_data[3] ; SW[0]        ; SW[0]       ; 1.000        ; 0.019      ; 18.804     ;
++---------+-------------------------------------+-------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Hold: 'SW[0]'                                                                                                                                        ;
++-------+-----------------------------------------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                               ; To Node                                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------------------------------------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.391 ; hierarquia_memoria:mem|L2_tag[2][0]     ; hierarquia_memoria:mem|L2_tag[2][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_tag[6][0]     ; hierarquia_memoria:mem|L2_tag[6][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_tag[7][0]     ; hierarquia_memoria:mem|L2_tag[7][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_tag[1][0]     ; hierarquia_memoria:mem|L2_tag[1][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_valid[2]      ; hierarquia_memoria:mem|L2_valid[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L1_valid[1][1]   ; hierarquia_memoria:mem|L1_valid[1][1]   ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L1_lru[0][0]     ; hierarquia_memoria:mem|L1_lru[0][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L1_valid[0][0]   ; hierarquia_memoria:mem|L1_valid[0][0]   ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L1_valid[1][0]   ; hierarquia_memoria:mem|L1_valid[1][0]   ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L1_valid[0][1]   ; hierarquia_memoria:mem|L1_valid[0][1]   ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[4][0]     ; hierarquia_memoria:mem|L2_lru[4][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[4][1]     ; hierarquia_memoria:mem|L2_lru[4][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[5][2]     ; hierarquia_memoria:mem|L2_lru[5][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[5][1]     ; hierarquia_memoria:mem|L2_lru[5][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[3][0]     ; hierarquia_memoria:mem|L2_lru[3][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[3][1]     ; hierarquia_memoria:mem|L2_lru[3][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[1][0]     ; hierarquia_memoria:mem|L2_lru[1][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[1][1]     ; hierarquia_memoria:mem|L2_lru[1][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[0][2]     ; hierarquia_memoria:mem|L2_lru[0][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[2][0]     ; hierarquia_memoria:mem|L2_lru[2][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[2][2]     ; hierarquia_memoria:mem|L2_lru[2][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[6][0]     ; hierarquia_memoria:mem|L2_lru[6][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[7][1]     ; hierarquia_memoria:mem|L2_lru[7][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[2][1]     ; hierarquia_memoria:mem|L2_lru[2][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[1][2]     ; hierarquia_memoria:mem|L2_lru[1][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[5][0]     ; hierarquia_memoria:mem|L2_lru[5][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[4][2]     ; hierarquia_memoria:mem|L2_lru[4][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[0][0]     ; hierarquia_memoria:mem|L2_lru[0][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[6][1]     ; hierarquia_memoria:mem|L2_lru[6][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[6][2]     ; hierarquia_memoria:mem|L2_lru[6][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[3][2]     ; hierarquia_memoria:mem|L2_lru[3][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[7][2]     ; hierarquia_memoria:mem|L2_lru[7][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[0][1]     ; hierarquia_memoria:mem|L2_lru[0][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_dirty[4]      ; hierarquia_memoria:mem|L2_dirty[4]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_dirty[5]      ; hierarquia_memoria:mem|L2_dirty[5]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_dirty[0]      ; hierarquia_memoria:mem|L2_dirty[0]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_dirty[1]      ; hierarquia_memoria:mem|L2_dirty[1]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_dirty[2]      ; hierarquia_memoria:mem|L2_dirty[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; hierarquia_memoria:mem|L2_dirty[3]      ; hierarquia_memoria:mem|L2_dirty[3]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.549 ; hierarquia_memoria:mem|L1_valid[1][0]   ; hierarquia_memoria:mem|L1_lru[1][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.815      ;
+; 0.723 ; hierarquia_memoria:mem|L2_lru[7][0]     ; hierarquia_memoria:mem|L2_lru[7][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.989      ;
+; 0.799 ; hierarquia_memoria:mem|L2_lru[2][0]     ; hierarquia_memoria:mem|L2_lru[2][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.065      ;
+; 0.799 ; hierarquia_memoria:mem|L2_lru[3][1]     ; hierarquia_memoria:mem|L2_lru[3][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.065      ;
+; 0.808 ; hierarquia_memoria:mem|L2_lru[5][0]     ; hierarquia_memoria:mem|L2_lru[5][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.074      ;
+; 0.809 ; hierarquia_memoria:mem|L2_lru[5][0]     ; hierarquia_memoria:mem|L2_lru[5][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.075      ;
+; 0.827 ; hierarquia_memoria:mem|L2_lru[4][0]     ; hierarquia_memoria:mem|L2_lru[4][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.093      ;
+; 0.828 ; hierarquia_memoria:mem|L2_lru[0][1]     ; hierarquia_memoria:mem|L2_lru[0][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.094      ;
+; 0.832 ; hierarquia_memoria:mem|L2_lru[6][0]     ; hierarquia_memoria:mem|L2_lru[6][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.098      ;
+; 0.833 ; hierarquia_memoria:mem|L2_lru[7][0]     ; hierarquia_memoria:mem|L2_lru[7][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.099      ;
+; 0.833 ; hierarquia_memoria:mem|L2_lru[4][0]     ; hierarquia_memoria:mem|L2_lru[4][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.099      ;
+; 0.834 ; hierarquia_memoria:mem|L2_lru[5][1]     ; hierarquia_memoria:mem|L2_lru[5][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.100      ;
+; 0.836 ; hierarquia_memoria:mem|L2_lru[6][0]     ; hierarquia_memoria:mem|L2_lru[6][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.102      ;
+; 0.836 ; hierarquia_memoria:mem|L2_valid[5]      ; hierarquia_memoria:mem|L2_dirty[5]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.102      ;
+; 0.837 ; hierarquia_memoria:mem|L2_lru[3][0]     ; hierarquia_memoria:mem|L2_lru[3][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.103      ;
+; 0.843 ; hierarquia_memoria:mem|L2_lru[3][0]     ; hierarquia_memoria:mem|L2_lru[3][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.109      ;
+; 1.001 ; hierarquia_memoria:mem|L2_lru[7][1]     ; hierarquia_memoria:mem|L2_lru[7][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.267      ;
+; 1.033 ; hierarquia_memoria:mem|L2_lru[1][1]     ; hierarquia_memoria:mem|L2_lru[1][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.299      ;
+; 1.036 ; hierarquia_memoria:mem|L2_dirty[7]      ; hierarquia_memoria:mem|L2_dirty[7]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.302      ;
+; 1.065 ; hierarquia_memoria:mem|L2_lru[4][1]     ; hierarquia_memoria:mem|L2_lru[4][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.331      ;
+; 1.106 ; hierarquia_memoria:mem|L1_data[1][0][3] ; hierarquia_memoria:mem|read_data[3]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.002     ; 1.370      ;
+; 1.121 ; hierarquia_memoria:mem|L1_lru[0][1]     ; hierarquia_memoria:mem|L1_lru[0][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.387      ;
+; 1.171 ; hierarquia_memoria:mem|L2_valid[7]      ; hierarquia_memoria:mem|L2_dirty[7]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.437      ;
+; 1.189 ; hierarquia_memoria:mem|L2_valid[0]      ; hierarquia_memoria:mem|L2_tag[0][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.455      ;
+; 1.205 ; hierarquia_memoria:mem|L2_lru[6][1]     ; hierarquia_memoria:mem|L2_lru[6][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.471      ;
+; 1.210 ; hierarquia_memoria:mem|L2_dirty[6]      ; hierarquia_memoria:mem|L2_dirty[6]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.476      ;
+; 1.216 ; hierarquia_memoria:mem|L1_data[1][1][0] ; hierarquia_memoria:mem|read_data[0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.482      ;
+; 1.311 ; hierarquia_memoria:mem|L2_valid[6]      ; hierarquia_memoria:mem|L2_valid[6]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.577      ;
+; 1.324 ; hierarquia_memoria:mem|L1_valid[0][1]   ; hierarquia_memoria:mem|L1_lru[0][1]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.001     ; 1.589      ;
+; 1.329 ; hierarquia_memoria:mem|L2_valid[4]      ; hierarquia_memoria:mem|L2_dirty[4]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.004      ; 1.599      ;
+; 1.333 ; hierarquia_memoria:mem|L2_valid[2]      ; hierarquia_memoria:mem|L2_dirty[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.004      ; 1.603      ;
+; 1.348 ; hierarquia_memoria:mem|L2_lru[2][0]     ; hierarquia_memoria:mem|L2_lru[2][1]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.004     ; 1.610      ;
+; 1.373 ; hierarquia_memoria:mem|L1_data[1][1][2] ; hierarquia_memoria:mem|read_data[2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.004      ; 1.643      ;
+; 1.389 ; hierarquia_memoria:mem|L2_data[3][2]    ; hierarquia_memoria:mem|L1_data[1][0][2] ; SW[0]        ; SW[0]       ; 0.000        ; 0.021      ; 1.676      ;
+; 1.418 ; hierarquia_memoria:mem|L2_data[3][1]    ; hierarquia_memoria:mem|L1_data[0][0][1] ; SW[0]        ; SW[0]       ; 0.000        ; 0.002      ; 1.686      ;
+; 1.418 ; hierarquia_memoria:mem|L2_valid[5]      ; hierarquia_memoria:mem|L2_dirty[6]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.003      ; 1.687      ;
+; 1.419 ; hierarquia_memoria:mem|L2_tag[1][0]     ; hierarquia_memoria:mem|L2_valid[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.685      ;
+; 1.455 ; hierarquia_memoria:mem|L2_lru[1][0]     ; hierarquia_memoria:mem|L2_lru[1][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.721      ;
+; 1.459 ; hierarquia_memoria:mem|L2_lru[1][0]     ; hierarquia_memoria:mem|L2_lru[1][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.725      ;
+; 1.485 ; hierarquia_memoria:mem|L1_data[1][0][1] ; hierarquia_memoria:mem|read_data[1]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.006     ; 1.745      ;
+; 1.502 ; hierarquia_memoria:mem|L1_valid[0][1]   ; hierarquia_memoria:mem|L1_lru[1][1]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.021     ; 1.747      ;
+; 1.511 ; hierarquia_memoria:mem|L2_valid[1]      ; hierarquia_memoria:mem|L2_dirty[1]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.004      ; 1.781      ;
+; 1.520 ; hierarquia_memoria:mem|L2_data[3][2]    ; hierarquia_memoria:mem|L1_data[0][0][2] ; SW[0]        ; SW[0]       ; 0.000        ; 0.002      ; 1.788      ;
+; 1.531 ; hierarquia_memoria:mem|L1_data[0][0][3] ; hierarquia_memoria:mem|read_data[3]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.017      ; 1.814      ;
+; 1.533 ; hierarquia_memoria:mem|L1_lru[1][1]     ; hierarquia_memoria:mem|L1_lru[1][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.799      ;
+; 1.535 ; hierarquia_memoria:mem|L2_tag[2][0]     ; hierarquia_memoria:mem|L2_valid[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.801      ;
+; 1.538 ; hierarquia_memoria:mem|L1_lru[1][0]     ; hierarquia_memoria:mem|L1_lru[1][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.804      ;
+; 1.563 ; hierarquia_memoria:mem|L2_data[3][0]    ; hierarquia_memoria:mem|L1_data[0][0][0] ; SW[0]        ; SW[0]       ; 0.000        ; 0.002      ; 1.831      ;
+; 1.570 ; hierarquia_memoria:mem|L2_valid[3]      ; hierarquia_memoria:mem|L2_valid[3]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.836      ;
+; 1.579 ; hierarquia_memoria:mem|L2_data[3][3]    ; hierarquia_memoria:mem|L1_data[0][0][3] ; SW[0]        ; SW[0]       ; 0.000        ; 0.002      ; 1.847      ;
+; 1.596 ; hierarquia_memoria:mem|L1_data[1][1][1] ; hierarquia_memoria:mem|read_data[1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.862      ;
+; 1.604 ; hierarquia_memoria:mem|L2_valid[0]      ; hierarquia_memoria:mem|L2_valid[1]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.870      ;
+; 1.621 ; hierarquia_memoria:mem|L1_valid[1][1]   ; hierarquia_memoria:mem|L1_lru[0][1]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.001     ; 1.886      ;
+; 1.640 ; hierarquia_memoria:mem|L1_data[1][0][2] ; hierarquia_memoria:mem|read_data[2]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.002     ; 1.904      ;
+; 1.689 ; hierarquia_memoria:mem|L2_tag[0][0]     ; hierarquia_memoria:mem|L2_valid[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.955      ;
+; 1.701 ; hierarquia_memoria:mem|L2_data[3][1]    ; hierarquia_memoria:mem|L1_data[1][0][1] ; SW[0]        ; SW[0]       ; 0.000        ; 0.021      ; 1.988      ;
+; 1.722 ; hierarquia_memoria:mem|L2_valid[7]      ; hierarquia_memoria:mem|L2_valid[7]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 1.988      ;
+; 1.743 ; hierarquia_memoria:mem|L2_data[3][0]    ; hierarquia_memoria:mem|L1_data[1][0][0] ; SW[0]        ; SW[0]       ; 0.000        ; 0.021      ; 2.030      ;
+; 1.760 ; hierarquia_memoria:mem|L2_valid[5]      ; hierarquia_memoria:mem|L2_valid[5]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 2.026      ;
+; 1.761 ; hierarquia_memoria:mem|L1_valid[1][0]   ; hierarquia_memoria:mem|L1_lru[0][0]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.021     ; 2.006      ;
+; 1.762 ; hierarquia_memoria:mem|L1_data[0][0][1] ; hierarquia_memoria:mem|read_data[1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.013      ; 2.041      ;
++-------+-----------------------------------------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Minimum Pulse Width: 'SW[0]'                                                                                  ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                  ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; SW[0] ; Rise       ; SW[0]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][1] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][1] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][2] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][2] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][3] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][3] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][1] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][1] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][2] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][2] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][3] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][3] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][1] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][1] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][2] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][2] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][3] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][3] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][1] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][1] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][2] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][2] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][3] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][3] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[0][0]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[0][0]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[0][1]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[0][1]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[1][0]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[1][0]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[1][1]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[1][1]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[0][0]   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[0][0]   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[0][1]   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[0][1]   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[1][0]   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[1][0]   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[1][1]   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[1][1]   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[6][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[6][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[6][1]    ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+
+
++-------------------------------------------------------------------------+
+; Setup Times                                                             ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; SW[*]     ; SW[0]      ; 18.610 ; 18.610 ; Rise       ; SW[0]           ;
+;  SW[1]    ; SW[0]      ; 11.592 ; 11.592 ; Rise       ; SW[0]           ;
+;  SW[2]    ; SW[0]      ; 18.610 ; 18.610 ; Rise       ; SW[0]           ;
+;  SW[7]    ; SW[0]      ; 1.650  ; 1.650  ; Rise       ; SW[0]           ;
+;  SW[8]    ; SW[0]      ; 1.895  ; 1.895  ; Rise       ; SW[0]           ;
+;  SW[9]    ; SW[0]      ; 2.273  ; 2.273  ; Rise       ; SW[0]           ;
+;  SW[10]   ; SW[0]      ; 1.916  ; 1.916  ; Rise       ; SW[0]           ;
+;  SW[17]   ; SW[0]      ; 7.484  ; 7.484  ; Rise       ; SW[0]           ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; SW[*]     ; SW[0]      ; 0.248  ; 0.248  ; Rise       ; SW[0]           ;
+;  SW[1]    ; SW[0]      ; 0.248  ; 0.248  ; Rise       ; SW[0]           ;
+;  SW[2]    ; SW[0]      ; 0.031  ; 0.031  ; Rise       ; SW[0]           ;
+;  SW[7]    ; SW[0]      ; 0.126  ; 0.126  ; Rise       ; SW[0]           ;
+;  SW[8]    ; SW[0]      ; -0.161 ; -0.161 ; Rise       ; SW[0]           ;
+;  SW[9]    ; SW[0]      ; -0.316 ; -0.316 ; Rise       ; SW[0]           ;
+;  SW[10]   ; SW[0]      ; 0.084  ; 0.084  ; Rise       ; SW[0]           ;
+;  SW[17]   ; SW[0]      ; -4.542 ; -4.542 ; Rise       ; SW[0]           ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-----------------------------------------------------------------------+
+; Clock to Output Times                                                 ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; HEX0[*]   ; SW[0]      ; 9.315 ; 9.315 ; Rise       ; SW[0]           ;
+;  HEX0[0]  ; SW[0]      ; 9.315 ; 9.315 ; Rise       ; SW[0]           ;
+;  HEX0[1]  ; SW[0]      ; 9.291 ; 9.291 ; Rise       ; SW[0]           ;
+;  HEX0[2]  ; SW[0]      ; 9.278 ; 9.278 ; Rise       ; SW[0]           ;
+;  HEX0[3]  ; SW[0]      ; 9.066 ; 9.066 ; Rise       ; SW[0]           ;
+;  HEX0[4]  ; SW[0]      ; 9.075 ; 9.075 ; Rise       ; SW[0]           ;
+;  HEX0[5]  ; SW[0]      ; 9.054 ; 9.054 ; Rise       ; SW[0]           ;
+;  HEX0[6]  ; SW[0]      ; 9.055 ; 9.055 ; Rise       ; SW[0]           ;
+; HEX6[*]   ; SW[0]      ; 9.070 ; 9.070 ; Rise       ; SW[0]           ;
+;  HEX6[0]  ; SW[0]      ; 8.525 ; 8.525 ; Rise       ; SW[0]           ;
+;  HEX6[3]  ; SW[0]      ; 9.070 ; 9.070 ; Rise       ; SW[0]           ;
+;  HEX6[4]  ; SW[0]      ; 9.070 ; 9.070 ; Rise       ; SW[0]           ;
+;  HEX6[5]  ; SW[0]      ; 9.050 ; 9.050 ; Rise       ; SW[0]           ;
+; LEDG[*]   ; SW[0]      ; 9.121 ; 9.121 ; Rise       ; SW[0]           ;
+;  LEDG[1]  ; SW[0]      ; 9.121 ; 9.121 ; Rise       ; SW[0]           ;
+;  LEDG[2]  ; SW[0]      ; 8.021 ; 8.021 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 5.668 ; 5.668 ; Rise       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 5.668 ; 5.668 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 5.668 ; 5.668 ; Fall       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 5.668 ; 5.668 ; Fall       ; SW[0]           ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------------------------------------+
+; Minimum Clock to Output Times                                         ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; HEX0[*]   ; SW[0]      ; 8.587 ; 8.587 ; Rise       ; SW[0]           ;
+;  HEX0[0]  ; SW[0]      ; 8.863 ; 8.863 ; Rise       ; SW[0]           ;
+;  HEX0[1]  ; SW[0]      ; 8.822 ; 8.822 ; Rise       ; SW[0]           ;
+;  HEX0[2]  ; SW[0]      ; 8.829 ; 8.829 ; Rise       ; SW[0]           ;
+;  HEX0[3]  ; SW[0]      ; 8.610 ; 8.610 ; Rise       ; SW[0]           ;
+;  HEX0[4]  ; SW[0]      ; 8.604 ; 8.604 ; Rise       ; SW[0]           ;
+;  HEX0[5]  ; SW[0]      ; 8.596 ; 8.596 ; Rise       ; SW[0]           ;
+;  HEX0[6]  ; SW[0]      ; 8.587 ; 8.587 ; Rise       ; SW[0]           ;
+; HEX6[*]   ; SW[0]      ; 8.525 ; 8.525 ; Rise       ; SW[0]           ;
+;  HEX6[0]  ; SW[0]      ; 8.525 ; 8.525 ; Rise       ; SW[0]           ;
+;  HEX6[3]  ; SW[0]      ; 9.070 ; 9.070 ; Rise       ; SW[0]           ;
+;  HEX6[4]  ; SW[0]      ; 9.070 ; 9.070 ; Rise       ; SW[0]           ;
+;  HEX6[5]  ; SW[0]      ; 9.050 ; 9.050 ; Rise       ; SW[0]           ;
+; LEDG[*]   ; SW[0]      ; 8.021 ; 8.021 ; Rise       ; SW[0]           ;
+;  LEDG[1]  ; SW[0]      ; 9.121 ; 9.121 ; Rise       ; SW[0]           ;
+;  LEDG[2]  ; SW[0]      ; 8.021 ; 8.021 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 5.668 ; 5.668 ; Rise       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 5.668 ; 5.668 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 5.668 ; 5.668 ; Fall       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 5.668 ; 5.668 ; Fall       ; SW[0]           ;
++-----------+------------+-------+-------+------------+-----------------+
 
 
 +----------------------------------------------------------+
@@ -126,34 +573,65 @@ No paths to report.
 +------------+-------------+-------+-------+-------+-------+
 ; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
 +------------+-------------+-------+-------+-------+-------+
-; SW[0]      ; HEX0[0]     ; 7.167 ; 7.167 ; 7.167 ; 7.167 ;
-; SW[0]      ; HEX0[1]     ; 7.134 ; 7.134 ; 7.134 ; 7.134 ;
-; SW[0]      ; HEX0[2]     ;       ; 7.115 ; 7.115 ;       ;
-; SW[0]      ; HEX0[3]     ; 6.917 ; 6.917 ; 6.917 ; 6.917 ;
-; SW[0]      ; HEX0[4]     ; 6.907 ;       ;       ; 6.907 ;
-; SW[0]      ; HEX0[5]     ; 6.922 ;       ;       ; 6.922 ;
-; SW[0]      ; HEX0[6]     ; 6.901 ; 6.901 ; 6.901 ; 6.901 ;
-; SW[1]      ; HEX0[0]     ; 7.303 ; 7.303 ; 7.303 ; 7.303 ;
-; SW[1]      ; HEX0[1]     ; 7.270 ; 7.270 ; 7.270 ; 7.270 ;
-; SW[1]      ; HEX0[2]     ; 7.276 ;       ;       ; 7.276 ;
-; SW[1]      ; HEX0[3]     ; 7.049 ; 7.049 ; 7.049 ; 7.049 ;
-; SW[1]      ; HEX0[4]     ;       ; 7.043 ; 7.043 ;       ;
-; SW[1]      ; HEX0[5]     ; 7.059 ; 7.059 ; 7.059 ; 7.059 ;
-; SW[1]      ; HEX0[6]     ; 7.037 ; 7.037 ; 7.037 ; 7.037 ;
-; SW[2]      ; HEX0[0]     ; 6.880 ; 6.880 ; 6.880 ; 6.880 ;
-; SW[2]      ; HEX0[1]     ; 6.848 ;       ;       ; 6.848 ;
-; SW[2]      ; HEX0[2]     ; 6.856 ; 6.856 ; 6.856 ; 6.856 ;
-; SW[2]      ; HEX0[3]     ; 6.630 ; 6.630 ; 6.630 ; 6.630 ;
-; SW[2]      ; HEX0[4]     ; 6.623 ; 6.623 ; 6.623 ; 6.623 ;
-; SW[2]      ; HEX0[5]     ; 6.635 ; 6.635 ; 6.635 ; 6.635 ;
-; SW[2]      ; HEX0[6]     ; 6.614 ; 6.614 ; 6.614 ; 6.614 ;
-; SW[3]      ; HEX0[0]     ; 6.268 ; 6.268 ; 6.268 ; 6.268 ;
-; SW[3]      ; HEX0[1]     ; 6.236 ; 6.236 ; 6.236 ; 6.236 ;
-; SW[3]      ; HEX0[2]     ; 6.243 ; 6.243 ; 6.243 ; 6.243 ;
-; SW[3]      ; HEX0[3]     ; 6.018 ; 6.018 ; 6.018 ; 6.018 ;
-; SW[3]      ; HEX0[4]     ;       ; 6.008 ; 6.008 ;       ;
-; SW[3]      ; HEX0[5]     ; 6.024 ; 6.024 ; 6.024 ; 6.024 ;
-; SW[3]      ; HEX0[6]     ; 6.003 ; 6.003 ; 6.003 ; 6.003 ;
+; SW[1]      ; HEX3[0]     ;       ; 4.945 ; 4.945 ;       ;
+; SW[1]      ; HEX3[6]     ;       ; 4.981 ; 4.981 ;       ;
+; SW[2]      ; HEX2[0]     ; 6.020 ; 6.020 ; 6.020 ; 6.020 ;
+; SW[2]      ; HEX2[1]     ; 5.974 ; 5.974 ; 5.974 ; 5.974 ;
+; SW[2]      ; HEX2[2]     ;       ; 6.060 ; 6.060 ;       ;
+; SW[2]      ; HEX2[3]     ; 6.022 ; 6.022 ; 6.022 ; 6.022 ;
+; SW[2]      ; HEX2[4]     ; 5.770 ;       ;       ; 5.770 ;
+; SW[2]      ; HEX2[5]     ; 5.726 ;       ;       ; 5.726 ;
+; SW[2]      ; HEX2[6]     ; 5.756 ; 5.756 ; 5.756 ; 5.756 ;
+; SW[3]      ; HEX2[0]     ; 6.402 ; 6.402 ; 6.402 ; 6.402 ;
+; SW[3]      ; HEX2[1]     ; 6.361 ; 6.361 ; 6.361 ; 6.361 ;
+; SW[3]      ; HEX2[2]     ; 6.441 ;       ;       ; 6.441 ;
+; SW[3]      ; HEX2[3]     ; 6.409 ; 6.409 ; 6.409 ; 6.409 ;
+; SW[3]      ; HEX2[4]     ;       ; 6.150 ; 6.150 ;       ;
+; SW[3]      ; HEX2[5]     ; 6.110 ; 6.110 ; 6.110 ; 6.110 ;
+; SW[3]      ; HEX2[6]     ; 6.143 ; 6.143 ; 6.143 ; 6.143 ;
+; SW[4]      ; HEX2[0]     ; 6.578 ; 6.578 ; 6.578 ; 6.578 ;
+; SW[4]      ; HEX2[1]     ; 6.541 ;       ;       ; 6.541 ;
+; SW[4]      ; HEX2[2]     ; 6.621 ; 6.621 ; 6.621 ; 6.621 ;
+; SW[4]      ; HEX2[3]     ; 6.585 ; 6.585 ; 6.585 ; 6.585 ;
+; SW[4]      ; HEX2[4]     ; 6.320 ; 6.320 ; 6.320 ; 6.320 ;
+; SW[4]      ; HEX2[5]     ; 6.288 ; 6.288 ; 6.288 ; 6.288 ;
+; SW[4]      ; HEX2[6]     ; 6.323 ; 6.323 ; 6.323 ; 6.323 ;
+; SW[5]      ; HEX2[0]     ; 6.609 ; 6.609 ; 6.609 ; 6.609 ;
+; SW[5]      ; HEX2[1]     ; 6.570 ; 6.570 ; 6.570 ; 6.570 ;
+; SW[5]      ; HEX2[2]     ; 6.650 ; 6.650 ; 6.650 ; 6.650 ;
+; SW[5]      ; HEX2[3]     ; 6.592 ; 6.592 ; 6.592 ; 6.592 ;
+; SW[5]      ; HEX2[4]     ;       ; 6.355 ; 6.355 ;       ;
+; SW[5]      ; HEX2[5]     ; 6.319 ; 6.319 ; 6.319 ; 6.319 ;
+; SW[5]      ; HEX2[6]     ; 6.355 ; 6.355 ; 6.355 ; 6.355 ;
+; SW[7]      ; HEX1[0]     ; 8.174 ; 8.174 ; 8.174 ; 8.174 ;
+; SW[7]      ; HEX1[1]     ; 8.017 ; 8.017 ; 8.017 ; 8.017 ;
+; SW[7]      ; HEX1[2]     ;       ; 8.438 ; 8.438 ;       ;
+; SW[7]      ; HEX1[3]     ; 8.096 ; 8.096 ; 8.096 ; 8.096 ;
+; SW[7]      ; HEX1[4]     ; 8.773 ;       ;       ; 8.773 ;
+; SW[7]      ; HEX1[5]     ; 9.096 ;       ;       ; 9.096 ;
+; SW[7]      ; HEX1[6]     ; 8.198 ; 8.198 ; 8.198 ; 8.198 ;
+; SW[8]      ; HEX1[0]     ; 8.469 ; 8.469 ; 8.469 ; 8.469 ;
+; SW[8]      ; HEX1[1]     ; 8.312 ; 8.312 ; 8.312 ; 8.312 ;
+; SW[8]      ; HEX1[2]     ; 8.554 ;       ;       ; 8.554 ;
+; SW[8]      ; HEX1[3]     ; 8.212 ; 8.212 ; 8.212 ; 8.212 ;
+; SW[8]      ; HEX1[4]     ;       ; 8.735 ; 8.735 ;       ;
+; SW[8]      ; HEX1[5]     ; 9.062 ; 9.062 ; 9.062 ; 9.062 ;
+; SW[8]      ; HEX1[6]     ; 8.163 ; 8.163 ; 8.163 ; 8.163 ;
+; SW[9]      ; HEX1[0]     ; 8.819 ; 8.819 ; 8.819 ; 8.819 ;
+; SW[9]      ; HEX1[1]     ; 8.657 ;       ;       ; 8.657 ;
+; SW[9]      ; HEX1[2]     ; 8.678 ; 8.678 ; 8.678 ; 8.678 ;
+; SW[9]      ; HEX1[3]     ; 8.330 ; 8.330 ; 8.330 ; 8.330 ;
+; SW[9]      ; HEX1[4]     ; 8.479 ; 8.479 ; 8.479 ; 8.479 ;
+; SW[9]      ; HEX1[5]     ; 8.803 ; 8.803 ; 8.803 ; 8.803 ;
+; SW[9]      ; HEX1[6]     ; 7.905 ; 7.905 ; 7.905 ; 7.905 ;
+; SW[10]     ; HEX1[0]     ; 8.201 ; 8.201 ; 8.201 ; 8.201 ;
+; SW[10]     ; HEX1[1]     ; 8.069 ; 8.069 ; 8.069 ; 8.069 ;
+; SW[10]     ; HEX1[2]     ; 8.117 ; 8.117 ; 8.117 ; 8.117 ;
+; SW[10]     ; HEX1[3]     ; 7.749 ; 7.749 ; 7.749 ; 7.749 ;
+; SW[10]     ; HEX1[4]     ;       ; 8.654 ; 8.654 ;       ;
+; SW[10]     ; HEX1[5]     ; 8.978 ; 8.978 ; 8.978 ; 8.978 ;
+; SW[10]     ; HEX1[6]     ; 8.080 ; 8.080 ; 8.080 ; 8.080 ;
+; SW[17]     ; LEDR[17]    ; 9.883 ;       ;       ; 9.883 ;
 +------------+-------------+-------+-------+-------+-------+
 
 
@@ -162,47 +640,84 @@ No paths to report.
 +------------+-------------+-------+-------+-------+-------+
 ; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
 +------------+-------------+-------+-------+-------+-------+
-; SW[0]      ; HEX0[0]     ; 7.167 ; 7.167 ; 7.167 ; 7.167 ;
-; SW[0]      ; HEX0[1]     ; 7.134 ; 7.134 ; 7.134 ; 7.134 ;
-; SW[0]      ; HEX0[2]     ;       ; 7.115 ; 7.115 ;       ;
-; SW[0]      ; HEX0[3]     ; 6.917 ; 6.917 ; 6.917 ; 6.917 ;
-; SW[0]      ; HEX0[4]     ; 6.907 ;       ;       ; 6.907 ;
-; SW[0]      ; HEX0[5]     ; 6.922 ;       ;       ; 6.922 ;
-; SW[0]      ; HEX0[6]     ; 6.901 ; 6.901 ; 6.901 ; 6.901 ;
-; SW[1]      ; HEX0[0]     ; 7.303 ; 7.303 ; 7.303 ; 7.303 ;
-; SW[1]      ; HEX0[1]     ; 7.270 ; 7.270 ; 7.270 ; 7.270 ;
-; SW[1]      ; HEX0[2]     ; 7.276 ;       ;       ; 7.276 ;
-; SW[1]      ; HEX0[3]     ; 7.049 ; 7.049 ; 7.049 ; 7.049 ;
-; SW[1]      ; HEX0[4]     ;       ; 7.043 ; 7.043 ;       ;
-; SW[1]      ; HEX0[5]     ; 7.059 ; 7.059 ; 7.059 ; 7.059 ;
-; SW[1]      ; HEX0[6]     ; 7.037 ; 7.037 ; 7.037 ; 7.037 ;
-; SW[2]      ; HEX0[0]     ; 6.880 ; 6.880 ; 6.880 ; 6.880 ;
-; SW[2]      ; HEX0[1]     ; 6.848 ;       ;       ; 6.848 ;
-; SW[2]      ; HEX0[2]     ; 6.856 ; 6.856 ; 6.856 ; 6.856 ;
-; SW[2]      ; HEX0[3]     ; 6.630 ; 6.630 ; 6.630 ; 6.630 ;
-; SW[2]      ; HEX0[4]     ; 6.623 ; 6.623 ; 6.623 ; 6.623 ;
-; SW[2]      ; HEX0[5]     ; 6.635 ; 6.635 ; 6.635 ; 6.635 ;
-; SW[2]      ; HEX0[6]     ; 6.614 ; 6.614 ; 6.614 ; 6.614 ;
-; SW[3]      ; HEX0[0]     ; 6.268 ; 6.268 ; 6.268 ; 6.268 ;
-; SW[3]      ; HEX0[1]     ; 6.236 ; 6.236 ; 6.236 ; 6.236 ;
-; SW[3]      ; HEX0[2]     ; 6.243 ; 6.243 ; 6.243 ; 6.243 ;
-; SW[3]      ; HEX0[3]     ; 6.018 ; 6.018 ; 6.018 ; 6.018 ;
-; SW[3]      ; HEX0[4]     ;       ; 6.008 ; 6.008 ;       ;
-; SW[3]      ; HEX0[5]     ; 6.024 ; 6.024 ; 6.024 ; 6.024 ;
-; SW[3]      ; HEX0[6]     ; 6.003 ; 6.003 ; 6.003 ; 6.003 ;
+; SW[1]      ; HEX3[0]     ;       ; 4.945 ; 4.945 ;       ;
+; SW[1]      ; HEX3[6]     ;       ; 4.981 ; 4.981 ;       ;
+; SW[2]      ; HEX2[0]     ; 6.020 ; 6.020 ; 6.020 ; 6.020 ;
+; SW[2]      ; HEX2[1]     ; 5.974 ; 5.974 ; 5.974 ; 5.974 ;
+; SW[2]      ; HEX2[2]     ;       ; 6.060 ; 6.060 ;       ;
+; SW[2]      ; HEX2[3]     ; 6.022 ; 6.022 ; 6.022 ; 6.022 ;
+; SW[2]      ; HEX2[4]     ; 5.770 ;       ;       ; 5.770 ;
+; SW[2]      ; HEX2[5]     ; 5.726 ;       ;       ; 5.726 ;
+; SW[2]      ; HEX2[6]     ; 5.756 ; 5.756 ; 5.756 ; 5.756 ;
+; SW[3]      ; HEX2[0]     ; 6.402 ; 6.402 ; 6.402 ; 6.402 ;
+; SW[3]      ; HEX2[1]     ; 6.361 ; 6.361 ; 6.361 ; 6.361 ;
+; SW[3]      ; HEX2[2]     ; 6.441 ;       ;       ; 6.441 ;
+; SW[3]      ; HEX2[3]     ; 6.409 ; 6.409 ; 6.409 ; 6.409 ;
+; SW[3]      ; HEX2[4]     ;       ; 6.150 ; 6.150 ;       ;
+; SW[3]      ; HEX2[5]     ; 6.110 ; 6.110 ; 6.110 ; 6.110 ;
+; SW[3]      ; HEX2[6]     ; 6.143 ; 6.143 ; 6.143 ; 6.143 ;
+; SW[4]      ; HEX2[0]     ; 6.578 ; 6.578 ; 6.578 ; 6.578 ;
+; SW[4]      ; HEX2[1]     ; 6.541 ;       ;       ; 6.541 ;
+; SW[4]      ; HEX2[2]     ; 6.621 ; 6.621 ; 6.621 ; 6.621 ;
+; SW[4]      ; HEX2[3]     ; 6.585 ; 6.585 ; 6.585 ; 6.585 ;
+; SW[4]      ; HEX2[4]     ; 6.320 ; 6.320 ; 6.320 ; 6.320 ;
+; SW[4]      ; HEX2[5]     ; 6.288 ; 6.288 ; 6.288 ; 6.288 ;
+; SW[4]      ; HEX2[6]     ; 6.323 ; 6.323 ; 6.323 ; 6.323 ;
+; SW[5]      ; HEX2[0]     ; 6.609 ; 6.609 ; 6.609 ; 6.609 ;
+; SW[5]      ; HEX2[1]     ; 6.570 ; 6.570 ; 6.570 ; 6.570 ;
+; SW[5]      ; HEX2[2]     ; 6.650 ; 6.650 ; 6.650 ; 6.650 ;
+; SW[5]      ; HEX2[3]     ; 6.592 ; 6.592 ; 6.592 ; 6.592 ;
+; SW[5]      ; HEX2[4]     ;       ; 6.355 ; 6.355 ;       ;
+; SW[5]      ; HEX2[5]     ; 6.319 ; 6.319 ; 6.319 ; 6.319 ;
+; SW[5]      ; HEX2[6]     ; 6.355 ; 6.355 ; 6.355 ; 6.355 ;
+; SW[7]      ; HEX1[0]     ; 8.174 ; 8.174 ; 8.174 ; 8.174 ;
+; SW[7]      ; HEX1[1]     ; 8.017 ; 8.017 ; 8.017 ; 8.017 ;
+; SW[7]      ; HEX1[2]     ;       ; 8.438 ; 8.438 ;       ;
+; SW[7]      ; HEX1[3]     ; 8.096 ; 8.096 ; 8.096 ; 8.096 ;
+; SW[7]      ; HEX1[4]     ; 8.773 ;       ;       ; 8.773 ;
+; SW[7]      ; HEX1[5]     ; 9.096 ;       ;       ; 9.096 ;
+; SW[7]      ; HEX1[6]     ; 8.198 ; 8.198 ; 8.198 ; 8.198 ;
+; SW[8]      ; HEX1[0]     ; 8.469 ; 8.469 ; 8.469 ; 8.469 ;
+; SW[8]      ; HEX1[1]     ; 8.312 ; 8.312 ; 8.312 ; 8.312 ;
+; SW[8]      ; HEX1[2]     ; 8.554 ;       ;       ; 8.554 ;
+; SW[8]      ; HEX1[3]     ; 8.212 ; 8.212 ; 8.212 ; 8.212 ;
+; SW[8]      ; HEX1[4]     ;       ; 8.735 ; 8.735 ;       ;
+; SW[8]      ; HEX1[5]     ; 9.062 ; 9.062 ; 9.062 ; 9.062 ;
+; SW[8]      ; HEX1[6]     ; 8.163 ; 8.163 ; 8.163 ; 8.163 ;
+; SW[9]      ; HEX1[0]     ; 8.819 ; 8.819 ; 8.819 ; 8.819 ;
+; SW[9]      ; HEX1[1]     ; 8.657 ;       ;       ; 8.657 ;
+; SW[9]      ; HEX1[2]     ; 8.678 ; 8.678 ; 8.678 ; 8.678 ;
+; SW[9]      ; HEX1[3]     ; 8.330 ; 8.330 ; 8.330 ; 8.330 ;
+; SW[9]      ; HEX1[4]     ; 8.479 ; 8.479 ; 8.479 ; 8.479 ;
+; SW[9]      ; HEX1[5]     ; 8.803 ; 8.803 ; 8.803 ; 8.803 ;
+; SW[9]      ; HEX1[6]     ; 7.905 ; 7.905 ; 7.905 ; 7.905 ;
+; SW[10]     ; HEX1[0]     ; 8.201 ; 8.201 ; 8.201 ; 8.201 ;
+; SW[10]     ; HEX1[1]     ; 8.069 ; 8.069 ; 8.069 ; 8.069 ;
+; SW[10]     ; HEX1[2]     ; 8.117 ; 8.117 ; 8.117 ; 8.117 ;
+; SW[10]     ; HEX1[3]     ; 7.749 ; 7.749 ; 7.749 ; 7.749 ;
+; SW[10]     ; HEX1[4]     ;       ; 8.654 ; 8.654 ;       ;
+; SW[10]     ; HEX1[5]     ; 8.978 ; 8.978 ; 8.978 ; 8.978 ;
+; SW[10]     ; HEX1[6]     ; 8.080 ; 8.080 ; 8.080 ; 8.080 ;
+; SW[17]     ; LEDR[17]    ; 9.883 ;       ;       ; 9.883 ;
 +------------+-------------+-------+-------+-------+-------+
 
 
-----------------------------
-; Fast Model Setup Summary ;
-----------------------------
-No paths to report.
++--------------------------------+
+; Fast Model Setup Summary       ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; SW[0] ; -7.513 ; -424.148      ;
++-------+--------+---------------+
 
 
----------------------------
-; Fast Model Hold Summary ;
----------------------------
-No paths to report.
++-------------------------------+
+; Fast Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; SW[0] ; 0.215 ; 0.000         ;
++-------+-------+---------------+
 
 
 -------------------------------
@@ -217,10 +732,425 @@ No paths to report.
 No paths to report.
 
 
-------------------------------------------
++----------------------------------------+
 ; Fast Model Minimum Pulse Width Summary ;
-------------------------------------------
-No paths to report.
++-------+--------+-----------------------+
+; Clock ; Slack  ; End Point TNS         ;
++-------+--------+-----------------------+
+; SW[0] ; -1.380 ; -111.380              ;
++-------+--------+-----------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Setup: 'SW[0]'                                                                                                                                ;
++--------+-------------------------------------+-------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                           ; To Node                             ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-------------------------------------+-------------------------------------+--------------+-------------+--------------+------------+------------+
+; -7.513 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.545      ;
+; -7.513 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.545      ;
+; -7.513 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.545      ;
+; -7.505 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 8.531      ;
+; -7.505 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 8.531      ;
+; -7.505 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 8.531      ;
+; -7.501 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.528      ;
+; -7.501 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.528      ;
+; -7.501 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.528      ;
+; -7.499 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.526      ;
+; -7.499 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.526      ;
+; -7.499 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.526      ;
+; -7.495 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.522      ;
+; -7.495 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.522      ;
+; -7.495 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.522      ;
+; -7.459 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.491      ;
+; -7.459 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.491      ;
+; -7.459 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.491      ;
+; -7.391 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 8.416      ;
+; -7.391 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 8.416      ;
+; -7.391 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 8.416      ;
+; -7.385 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 8.410      ;
+; -7.385 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 8.410      ;
+; -7.385 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 8.410      ;
+; -7.364 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 8.390      ;
+; -7.364 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 8.390      ;
+; -7.364 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.006     ; 8.390      ;
+; -7.354 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.386      ;
+; -7.354 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.386      ;
+; -7.354 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.386      ;
+; -7.335 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.372      ;
+; -7.333 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.370      ;
+; -7.327 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.358      ;
+; -7.325 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.356      ;
+; -7.323 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.355      ;
+; -7.321 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.353      ;
+; -7.321 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.353      ;
+; -7.319 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.351      ;
+; -7.317 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.349      ;
+; -7.315 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.347      ;
+; -7.281 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.318      ;
+; -7.279 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.316      ;
+; -7.228 ; hierarquia_memoria:mem|L2_lru[1][2] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.255      ;
+; -7.228 ; hierarquia_memoria:mem|L2_lru[1][2] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.255      ;
+; -7.228 ; hierarquia_memoria:mem|L2_lru[1][2] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.005     ; 8.255      ;
+; -7.213 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 8.243      ;
+; -7.211 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 8.241      ;
+; -7.207 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 8.237      ;
+; -7.205 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 8.235      ;
+; -7.202 ; hierarquia_memoria:mem|L2_lru[3][2] ; hierarquia_memoria:mem|L2_lru[0][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 8.227      ;
+; -7.202 ; hierarquia_memoria:mem|L2_lru[3][2] ; hierarquia_memoria:mem|L2_lru[0][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 8.227      ;
+; -7.202 ; hierarquia_memoria:mem|L2_lru[3][2] ; hierarquia_memoria:mem|L2_lru[0][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.007     ; 8.227      ;
+; -7.191 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 8.229      ;
+; -7.190 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 8.228      ;
+; -7.190 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.227      ;
+; -7.186 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.217      ;
+; -7.184 ; hierarquia_memoria:mem|L2_lru[2][2] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.215      ;
+; -7.183 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.215      ;
+; -7.182 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.214      ;
+; -7.182 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.213      ;
+; -7.179 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.001      ; 8.212      ;
+; -7.178 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.001      ; 8.211      ;
+; -7.178 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.210      ;
+; -7.177 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.001      ; 8.210      ;
+; -7.176 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[1][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.213      ;
+; -7.176 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.001      ; 8.209      ;
+; -7.176 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.208      ;
+; -7.174 ; hierarquia_memoria:mem|L2_lru[0][2] ; hierarquia_memoria:mem|L2_lru[1][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.211      ;
+; -7.173 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.001      ; 8.206      ;
+; -7.172 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.001      ; 8.205      ;
+; -7.172 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.204      ;
+; -7.160 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.197      ;
+; -7.152 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.183      ;
+; -7.148 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.180      ;
+; -7.146 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.178      ;
+; -7.142 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.000      ; 8.174      ;
+; -7.137 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 8.175      ;
+; -7.136 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.018      ; 8.186      ;
+; -7.136 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; 0.006      ; 8.174      ;
+; -7.136 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.173      ;
+; -7.128 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.012      ; 8.172      ;
+; -7.124 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.013      ; 8.169      ;
+; -7.122 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.013      ; 8.167      ;
+; -7.118 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.013      ; 8.163      ;
+; -7.106 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|L2_lru[1][0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.005      ; 8.143      ;
+; -7.096 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|read_data[0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.018      ; 8.146      ;
+; -7.088 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|read_data[0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.012      ; 8.132      ;
+; -7.084 ; hierarquia_memoria:mem|L2_lru[1][0] ; hierarquia_memoria:mem|read_data[0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.013      ; 8.129      ;
+; -7.082 ; hierarquia_memoria:mem|L2_lru[0][1] ; hierarquia_memoria:mem|read_data[1] ; SW[0]        ; SW[0]       ; 1.000        ; 0.018      ; 8.132      ;
+; -7.082 ; hierarquia_memoria:mem|L2_lru[2][1] ; hierarquia_memoria:mem|read_data[0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.013      ; 8.127      ;
+; -7.078 ; hierarquia_memoria:mem|L2_lru[1][1] ; hierarquia_memoria:mem|read_data[0] ; SW[0]        ; SW[0]       ; 1.000        ; 0.013      ; 8.123      ;
+; -7.072 ; hierarquia_memoria:mem|L2_tag[0][0] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.015     ; 8.089      ;
+; -7.072 ; hierarquia_memoria:mem|L2_lru[0][0] ; hierarquia_memoria:mem|read_data[3] ; SW[0]        ; SW[0]       ; 1.000        ; 0.019      ; 8.123      ;
+; -7.069 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.100      ;
+; -7.068 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.099      ;
+; -7.068 ; hierarquia_memoria:mem|L2_lru[3][0] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 8.098      ;
+; -7.064 ; hierarquia_memoria:mem|L2_lru[2][0] ; hierarquia_memoria:mem|read_data[3] ; SW[0]        ; SW[0]       ; 1.000        ; 0.013      ; 8.109      ;
+; -7.063 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[2][0] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.094      ;
+; -7.062 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[2][2] ; SW[0]        ; SW[0]       ; 1.000        ; -0.001     ; 8.093      ;
+; -7.062 ; hierarquia_memoria:mem|L2_lru[3][1] ; hierarquia_memoria:mem|L2_lru[2][1] ; SW[0]        ; SW[0]       ; 1.000        ; -0.002     ; 8.092      ;
++--------+-------------------------------------+-------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Hold: 'SW[0]'                                                                                                                                        ;
++-------+-----------------------------------------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                               ; To Node                                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------------------------------------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.215 ; hierarquia_memoria:mem|L2_tag[2][0]     ; hierarquia_memoria:mem|L2_tag[2][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_tag[6][0]     ; hierarquia_memoria:mem|L2_tag[6][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_tag[7][0]     ; hierarquia_memoria:mem|L2_tag[7][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_tag[1][0]     ; hierarquia_memoria:mem|L2_tag[1][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_valid[2]      ; hierarquia_memoria:mem|L2_valid[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L1_valid[1][1]   ; hierarquia_memoria:mem|L1_valid[1][1]   ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L1_lru[0][0]     ; hierarquia_memoria:mem|L1_lru[0][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L1_valid[0][0]   ; hierarquia_memoria:mem|L1_valid[0][0]   ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L1_valid[1][0]   ; hierarquia_memoria:mem|L1_valid[1][0]   ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L1_valid[0][1]   ; hierarquia_memoria:mem|L1_valid[0][1]   ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[4][0]     ; hierarquia_memoria:mem|L2_lru[4][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[4][1]     ; hierarquia_memoria:mem|L2_lru[4][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[5][2]     ; hierarquia_memoria:mem|L2_lru[5][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[5][1]     ; hierarquia_memoria:mem|L2_lru[5][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[3][0]     ; hierarquia_memoria:mem|L2_lru[3][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[3][1]     ; hierarquia_memoria:mem|L2_lru[3][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[1][0]     ; hierarquia_memoria:mem|L2_lru[1][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[1][1]     ; hierarquia_memoria:mem|L2_lru[1][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[0][2]     ; hierarquia_memoria:mem|L2_lru[0][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[2][0]     ; hierarquia_memoria:mem|L2_lru[2][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[2][2]     ; hierarquia_memoria:mem|L2_lru[2][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[6][0]     ; hierarquia_memoria:mem|L2_lru[6][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[7][1]     ; hierarquia_memoria:mem|L2_lru[7][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[2][1]     ; hierarquia_memoria:mem|L2_lru[2][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[1][2]     ; hierarquia_memoria:mem|L2_lru[1][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[5][0]     ; hierarquia_memoria:mem|L2_lru[5][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[4][2]     ; hierarquia_memoria:mem|L2_lru[4][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[0][0]     ; hierarquia_memoria:mem|L2_lru[0][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[6][1]     ; hierarquia_memoria:mem|L2_lru[6][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[6][2]     ; hierarquia_memoria:mem|L2_lru[6][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[3][2]     ; hierarquia_memoria:mem|L2_lru[3][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[7][2]     ; hierarquia_memoria:mem|L2_lru[7][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_lru[0][1]     ; hierarquia_memoria:mem|L2_lru[0][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_dirty[4]      ; hierarquia_memoria:mem|L2_dirty[4]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_dirty[5]      ; hierarquia_memoria:mem|L2_dirty[5]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_dirty[0]      ; hierarquia_memoria:mem|L2_dirty[0]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_dirty[1]      ; hierarquia_memoria:mem|L2_dirty[1]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_dirty[2]      ; hierarquia_memoria:mem|L2_dirty[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; hierarquia_memoria:mem|L2_dirty[3]      ; hierarquia_memoria:mem|L2_dirty[3]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.254 ; hierarquia_memoria:mem|L1_valid[1][0]   ; hierarquia_memoria:mem|L1_lru[1][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.406      ;
+; 0.330 ; hierarquia_memoria:mem|L2_lru[7][0]     ; hierarquia_memoria:mem|L2_lru[7][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.482      ;
+; 0.370 ; hierarquia_memoria:mem|L2_lru[7][0]     ; hierarquia_memoria:mem|L2_lru[7][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.522      ;
+; 0.373 ; hierarquia_memoria:mem|L2_lru[3][1]     ; hierarquia_memoria:mem|L2_lru[3][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.525      ;
+; 0.374 ; hierarquia_memoria:mem|L2_lru[2][0]     ; hierarquia_memoria:mem|L2_lru[2][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.526      ;
+; 0.380 ; hierarquia_memoria:mem|L2_lru[0][1]     ; hierarquia_memoria:mem|L2_lru[0][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.532      ;
+; 0.381 ; hierarquia_memoria:mem|L2_valid[5]      ; hierarquia_memoria:mem|L2_dirty[5]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.533      ;
+; 0.382 ; hierarquia_memoria:mem|L2_lru[5][1]     ; hierarquia_memoria:mem|L2_lru[5][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.534      ;
+; 0.383 ; hierarquia_memoria:mem|L2_lru[5][0]     ; hierarquia_memoria:mem|L2_lru[5][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.535      ;
+; 0.383 ; hierarquia_memoria:mem|L2_lru[5][0]     ; hierarquia_memoria:mem|L2_lru[5][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.535      ;
+; 0.383 ; hierarquia_memoria:mem|L2_lru[6][0]     ; hierarquia_memoria:mem|L2_lru[6][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.535      ;
+; 0.388 ; hierarquia_memoria:mem|L2_lru[3][0]     ; hierarquia_memoria:mem|L2_lru[3][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.540      ;
+; 0.389 ; hierarquia_memoria:mem|L2_lru[3][0]     ; hierarquia_memoria:mem|L2_lru[3][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.541      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[4][0]     ; hierarquia_memoria:mem|L2_lru[4][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.543      ;
+; 0.391 ; hierarquia_memoria:mem|L2_lru[6][0]     ; hierarquia_memoria:mem|L2_lru[6][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.543      ;
+; 0.395 ; hierarquia_memoria:mem|L2_lru[4][0]     ; hierarquia_memoria:mem|L2_lru[4][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.547      ;
+; 0.456 ; hierarquia_memoria:mem|L2_lru[7][1]     ; hierarquia_memoria:mem|L2_lru[7][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.608      ;
+; 0.465 ; hierarquia_memoria:mem|L2_dirty[7]      ; hierarquia_memoria:mem|L2_dirty[7]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.617      ;
+; 0.476 ; hierarquia_memoria:mem|L2_lru[1][1]     ; hierarquia_memoria:mem|L2_lru[1][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.628      ;
+; 0.492 ; hierarquia_memoria:mem|L2_lru[4][1]     ; hierarquia_memoria:mem|L2_lru[4][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.644      ;
+; 0.504 ; hierarquia_memoria:mem|L1_data[1][0][3] ; hierarquia_memoria:mem|read_data[3]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.002     ; 0.654      ;
+; 0.523 ; hierarquia_memoria:mem|L1_lru[0][1]     ; hierarquia_memoria:mem|L1_lru[0][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.675      ;
+; 0.528 ; hierarquia_memoria:mem|L2_valid[7]      ; hierarquia_memoria:mem|L2_dirty[7]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.680      ;
+; 0.530 ; hierarquia_memoria:mem|L2_dirty[6]      ; hierarquia_memoria:mem|L2_dirty[6]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.682      ;
+; 0.530 ; hierarquia_memoria:mem|L1_data[1][1][0] ; hierarquia_memoria:mem|read_data[0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.682      ;
+; 0.550 ; hierarquia_memoria:mem|L2_valid[0]      ; hierarquia_memoria:mem|L2_tag[0][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.702      ;
+; 0.552 ; hierarquia_memoria:mem|L2_lru[6][1]     ; hierarquia_memoria:mem|L2_lru[6][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.704      ;
+; 0.587 ; hierarquia_memoria:mem|L2_valid[6]      ; hierarquia_memoria:mem|L2_valid[6]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.739      ;
+; 0.587 ; hierarquia_memoria:mem|L1_valid[0][1]   ; hierarquia_memoria:mem|L1_lru[0][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.739      ;
+; 0.603 ; hierarquia_memoria:mem|L2_valid[4]      ; hierarquia_memoria:mem|L2_dirty[4]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.004      ; 0.759      ;
+; 0.604 ; hierarquia_memoria:mem|L2_valid[2]      ; hierarquia_memoria:mem|L2_dirty[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.004      ; 0.760      ;
+; 0.607 ; hierarquia_memoria:mem|L1_data[1][1][2] ; hierarquia_memoria:mem|read_data[2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.001      ; 0.760      ;
+; 0.608 ; hierarquia_memoria:mem|L2_data[3][2]    ; hierarquia_memoria:mem|L1_data[1][0][2] ; SW[0]        ; SW[0]       ; 0.000        ; 0.019      ; 0.779      ;
+; 0.619 ; hierarquia_memoria:mem|L2_data[3][1]    ; hierarquia_memoria:mem|L1_data[0][0][1] ; SW[0]        ; SW[0]       ; 0.000        ; 0.001      ; 0.772      ;
+; 0.628 ; hierarquia_memoria:mem|L2_valid[5]      ; hierarquia_memoria:mem|L2_dirty[6]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.001      ; 0.781      ;
+; 0.629 ; hierarquia_memoria:mem|L2_lru[2][0]     ; hierarquia_memoria:mem|L2_lru[2][1]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.001     ; 0.780      ;
+; 0.633 ; hierarquia_memoria:mem|L2_tag[1][0]     ; hierarquia_memoria:mem|L2_valid[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.785      ;
+; 0.659 ; hierarquia_memoria:mem|L2_data[3][2]    ; hierarquia_memoria:mem|L1_data[0][0][2] ; SW[0]        ; SW[0]       ; 0.000        ; 0.001      ; 0.812      ;
+; 0.661 ; hierarquia_memoria:mem|L1_data[1][0][1] ; hierarquia_memoria:mem|read_data[1]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.003     ; 0.810      ;
+; 0.662 ; hierarquia_memoria:mem|L2_lru[1][0]     ; hierarquia_memoria:mem|L2_lru[1][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.814      ;
+; 0.665 ; hierarquia_memoria:mem|L2_lru[1][0]     ; hierarquia_memoria:mem|L2_lru[1][2]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.817      ;
+; 0.670 ; hierarquia_memoria:mem|L1_data[0][0][3] ; hierarquia_memoria:mem|read_data[3]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.016      ; 0.838      ;
+; 0.675 ; hierarquia_memoria:mem|L1_lru[1][0]     ; hierarquia_memoria:mem|L1_lru[1][0]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.827      ;
+; 0.676 ; hierarquia_memoria:mem|L2_data[3][0]    ; hierarquia_memoria:mem|L1_data[0][0][0] ; SW[0]        ; SW[0]       ; 0.000        ; 0.001      ; 0.829      ;
+; 0.676 ; hierarquia_memoria:mem|L2_tag[2][0]     ; hierarquia_memoria:mem|L2_valid[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.828      ;
+; 0.678 ; hierarquia_memoria:mem|L1_lru[1][1]     ; hierarquia_memoria:mem|L1_lru[1][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.830      ;
+; 0.684 ; hierarquia_memoria:mem|L2_data[3][3]    ; hierarquia_memoria:mem|L1_data[0][0][3] ; SW[0]        ; SW[0]       ; 0.000        ; 0.001      ; 0.837      ;
+; 0.686 ; hierarquia_memoria:mem|L1_valid[0][1]   ; hierarquia_memoria:mem|L1_lru[1][1]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.018     ; 0.820      ;
+; 0.692 ; hierarquia_memoria:mem|L2_valid[1]      ; hierarquia_memoria:mem|L2_dirty[1]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.004      ; 0.848      ;
+; 0.695 ; hierarquia_memoria:mem|L1_data[1][1][1] ; hierarquia_memoria:mem|read_data[1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.847      ;
+; 0.707 ; hierarquia_memoria:mem|L2_valid[3]      ; hierarquia_memoria:mem|L2_valid[3]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.859      ;
+; 0.711 ; hierarquia_memoria:mem|L1_valid[1][1]   ; hierarquia_memoria:mem|L1_lru[0][1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.863      ;
+; 0.713 ; hierarquia_memoria:mem|L1_data[1][0][2] ; hierarquia_memoria:mem|read_data[2]     ; SW[0]        ; SW[0]       ; 0.000        ; -0.002     ; 0.863      ;
+; 0.738 ; hierarquia_memoria:mem|L2_data[3][1]    ; hierarquia_memoria:mem|L1_data[1][0][1] ; SW[0]        ; SW[0]       ; 0.000        ; 0.019      ; 0.909      ;
+; 0.747 ; hierarquia_memoria:mem|L2_tag[0][0]     ; hierarquia_memoria:mem|L2_valid[2]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.899      ;
+; 0.761 ; hierarquia_memoria:mem|L2_valid[0]      ; hierarquia_memoria:mem|L2_valid[1]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.913      ;
+; 0.765 ; hierarquia_memoria:mem|L2_data[3][0]    ; hierarquia_memoria:mem|L1_data[1][0][0] ; SW[0]        ; SW[0]       ; 0.000        ; 0.019      ; 0.936      ;
+; 0.770 ; hierarquia_memoria:mem|L2_valid[7]      ; hierarquia_memoria:mem|L2_valid[7]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.922      ;
+; 0.775 ; hierarquia_memoria:mem|L1_data[0][0][1] ; hierarquia_memoria:mem|read_data[1]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.015      ; 0.942      ;
+; 0.778 ; hierarquia_memoria:mem|L2_valid[5]      ; hierarquia_memoria:mem|L2_valid[5]      ; SW[0]        ; SW[0]       ; 0.000        ; 0.000      ; 0.930      ;
+; 0.786 ; hierarquia_memoria:mem|L1_data[1][1][3] ; hierarquia_memoria:mem|read_data[3]     ; SW[0]        ; SW[0]       ; 0.000        ; 0.001      ; 0.939      ;
++-------+-----------------------------------------+-----------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Minimum Pulse Width: 'SW[0]'                                                                                  ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                  ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; SW[0] ; Rise       ; SW[0]                                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][1] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][1] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][2] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][2] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][3] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][0][3] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][1] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][1] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][2] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][2] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][3] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[0][1][3] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][1] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][1] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][2] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][2] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][3] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][0][3] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][1] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][1] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][2] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][2] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][3] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_data[1][1][3] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[0][0]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[0][0]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[0][1]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[0][1]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[1][0]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[1][0]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[1][1]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_lru[1][1]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[0][0]   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[0][0]   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[0][1]   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[0][1]   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[1][0]   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[1][0]   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[1][1]   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L1_valid[1][1]   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[0][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[1][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[2][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[3][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[4][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][1]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][2]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[5][3]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[6][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[6][0]    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; SW[0] ; Rise       ; hierarquia_memoria:mem|L2_data[6][1]    ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Setup Times                                                           ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; SW[*]     ; SW[0]      ; 7.785 ; 7.785 ; Rise       ; SW[0]           ;
+;  SW[1]    ; SW[0]      ; 4.756 ; 4.756 ; Rise       ; SW[0]           ;
+;  SW[2]    ; SW[0]      ; 7.785 ; 7.785 ; Rise       ; SW[0]           ;
+;  SW[7]    ; SW[0]      ; 0.504 ; 0.504 ; Rise       ; SW[0]           ;
+;  SW[8]    ; SW[0]      ; 0.705 ; 0.705 ; Rise       ; SW[0]           ;
+;  SW[9]    ; SW[0]      ; 0.779 ; 0.779 ; Rise       ; SW[0]           ;
+;  SW[10]   ; SW[0]      ; 0.616 ; 0.616 ; Rise       ; SW[0]           ;
+;  SW[17]   ; SW[0]      ; 3.819 ; 3.819 ; Rise       ; SW[0]           ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; SW[*]     ; SW[0]      ; 0.402  ; 0.402  ; Rise       ; SW[0]           ;
+;  SW[1]    ; SW[0]      ; 0.402  ; 0.402  ; Rise       ; SW[0]           ;
+;  SW[2]    ; SW[0]      ; 0.320  ; 0.320  ; Rise       ; SW[0]           ;
+;  SW[7]    ; SW[0]      ; 0.324  ; 0.324  ; Rise       ; SW[0]           ;
+;  SW[8]    ; SW[0]      ; 0.126  ; 0.126  ; Rise       ; SW[0]           ;
+;  SW[9]    ; SW[0]      ; 0.140  ; 0.140  ; Rise       ; SW[0]           ;
+;  SW[10]   ; SW[0]      ; 0.322  ; 0.322  ; Rise       ; SW[0]           ;
+;  SW[17]   ; SW[0]      ; -2.538 ; -2.538 ; Rise       ; SW[0]           ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-----------------------------------------------------------------------+
+; Clock to Output Times                                                 ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; HEX0[*]   ; SW[0]      ; 5.030 ; 5.030 ; Rise       ; SW[0]           ;
+;  HEX0[0]  ; SW[0]      ; 5.030 ; 5.030 ; Rise       ; SW[0]           ;
+;  HEX0[1]  ; SW[0]      ; 4.998 ; 4.998 ; Rise       ; SW[0]           ;
+;  HEX0[2]  ; SW[0]      ; 5.007 ; 5.007 ; Rise       ; SW[0]           ;
+;  HEX0[3]  ; SW[0]      ; 4.904 ; 4.904 ; Rise       ; SW[0]           ;
+;  HEX0[4]  ; SW[0]      ; 4.913 ; 4.913 ; Rise       ; SW[0]           ;
+;  HEX0[5]  ; SW[0]      ; 4.899 ; 4.899 ; Rise       ; SW[0]           ;
+;  HEX0[6]  ; SW[0]      ; 4.896 ; 4.896 ; Rise       ; SW[0]           ;
+; HEX6[*]   ; SW[0]      ; 4.978 ; 4.978 ; Rise       ; SW[0]           ;
+;  HEX6[0]  ; SW[0]      ; 4.695 ; 4.695 ; Rise       ; SW[0]           ;
+;  HEX6[3]  ; SW[0]      ; 4.978 ; 4.978 ; Rise       ; SW[0]           ;
+;  HEX6[4]  ; SW[0]      ; 4.978 ; 4.978 ; Rise       ; SW[0]           ;
+;  HEX6[5]  ; SW[0]      ; 4.958 ; 4.958 ; Rise       ; SW[0]           ;
+; LEDG[*]   ; SW[0]      ; 5.033 ; 5.033 ; Rise       ; SW[0]           ;
+;  LEDG[1]  ; SW[0]      ; 5.033 ; 5.033 ; Rise       ; SW[0]           ;
+;  LEDG[2]  ; SW[0]      ; 4.436 ; 4.436 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 3.025 ; 3.025 ; Rise       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 3.025 ; 3.025 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 3.025 ; 3.025 ; Fall       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 3.025 ; 3.025 ; Fall       ; SW[0]           ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------------------------------------+
+; Minimum Clock to Output Times                                         ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; HEX0[*]   ; SW[0]      ; 4.675 ; 4.675 ; Rise       ; SW[0]           ;
+;  HEX0[0]  ; SW[0]      ; 4.812 ; 4.812 ; Rise       ; SW[0]           ;
+;  HEX0[1]  ; SW[0]      ; 4.770 ; 4.770 ; Rise       ; SW[0]           ;
+;  HEX0[2]  ; SW[0]      ; 4.781 ; 4.781 ; Rise       ; SW[0]           ;
+;  HEX0[3]  ; SW[0]      ; 4.690 ; 4.690 ; Rise       ; SW[0]           ;
+;  HEX0[4]  ; SW[0]      ; 4.685 ; 4.685 ; Rise       ; SW[0]           ;
+;  HEX0[5]  ; SW[0]      ; 4.683 ; 4.683 ; Rise       ; SW[0]           ;
+;  HEX0[6]  ; SW[0]      ; 4.675 ; 4.675 ; Rise       ; SW[0]           ;
+; HEX6[*]   ; SW[0]      ; 4.695 ; 4.695 ; Rise       ; SW[0]           ;
+;  HEX6[0]  ; SW[0]      ; 4.695 ; 4.695 ; Rise       ; SW[0]           ;
+;  HEX6[3]  ; SW[0]      ; 4.978 ; 4.978 ; Rise       ; SW[0]           ;
+;  HEX6[4]  ; SW[0]      ; 4.978 ; 4.978 ; Rise       ; SW[0]           ;
+;  HEX6[5]  ; SW[0]      ; 4.958 ; 4.958 ; Rise       ; SW[0]           ;
+; LEDG[*]   ; SW[0]      ; 4.436 ; 4.436 ; Rise       ; SW[0]           ;
+;  LEDG[1]  ; SW[0]      ; 5.033 ; 5.033 ; Rise       ; SW[0]           ;
+;  LEDG[2]  ; SW[0]      ; 4.436 ; 4.436 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 3.025 ; 3.025 ; Rise       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 3.025 ; 3.025 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 3.025 ; 3.025 ; Fall       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 3.025 ; 3.025 ; Fall       ; SW[0]           ;
++-----------+------------+-------+-------+------------+-----------------+
 
 
 +----------------------------------------------------------+
@@ -228,34 +1158,65 @@ No paths to report.
 +------------+-------------+-------+-------+-------+-------+
 ; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
 +------------+-------------+-------+-------+-------+-------+
-; SW[0]      ; HEX0[0]     ; 3.773 ; 3.773 ; 3.773 ; 3.773 ;
-; SW[0]      ; HEX0[1]     ; 3.738 ; 3.738 ; 3.738 ; 3.738 ;
-; SW[0]      ; HEX0[2]     ;       ; 3.750 ; 3.750 ;       ;
-; SW[0]      ; HEX0[3]     ; 3.652 ; 3.652 ; 3.652 ; 3.652 ;
-; SW[0]      ; HEX0[4]     ; 3.645 ;       ;       ; 3.645 ;
-; SW[0]      ; HEX0[5]     ; 3.659 ;       ;       ; 3.659 ;
-; SW[0]      ; HEX0[6]     ; 3.641 ; 3.641 ; 3.641 ; 3.641 ;
-; SW[1]      ; HEX0[0]     ; 3.819 ; 3.819 ; 3.819 ; 3.819 ;
-; SW[1]      ; HEX0[1]     ; 3.784 ; 3.784 ; 3.784 ; 3.784 ;
-; SW[1]      ; HEX0[2]     ; 3.794 ;       ;       ; 3.794 ;
-; SW[1]      ; HEX0[3]     ; 3.697 ; 3.697 ; 3.697 ; 3.697 ;
-; SW[1]      ; HEX0[4]     ;       ; 3.692 ; 3.692 ;       ;
-; SW[1]      ; HEX0[5]     ; 3.701 ; 3.701 ; 3.701 ; 3.701 ;
-; SW[1]      ; HEX0[6]     ; 3.687 ; 3.687 ; 3.687 ; 3.687 ;
-; SW[2]      ; HEX0[0]     ; 3.669 ; 3.669 ; 3.669 ; 3.669 ;
-; SW[2]      ; HEX0[1]     ; 3.634 ;       ;       ; 3.634 ;
-; SW[2]      ; HEX0[2]     ; 3.645 ; 3.645 ; 3.645 ; 3.645 ;
-; SW[2]      ; HEX0[3]     ; 3.547 ; 3.547 ; 3.547 ; 3.547 ;
-; SW[2]      ; HEX0[4]     ; 3.543 ; 3.543 ; 3.543 ; 3.543 ;
-; SW[2]      ; HEX0[5]     ; 3.548 ; 3.548 ; 3.548 ; 3.548 ;
-; SW[2]      ; HEX0[6]     ; 3.536 ; 3.536 ; 3.536 ; 3.536 ;
-; SW[3]      ; HEX0[0]     ; 3.284 ; 3.284 ; 3.284 ; 3.284 ;
-; SW[3]      ; HEX0[1]     ; 3.248 ; 3.248 ; 3.248 ; 3.248 ;
-; SW[3]      ; HEX0[2]     ; 3.262 ; 3.262 ; 3.262 ; 3.262 ;
-; SW[3]      ; HEX0[3]     ; 3.161 ; 3.161 ; 3.161 ; 3.161 ;
-; SW[3]      ; HEX0[4]     ;       ; 3.154 ; 3.154 ;       ;
-; SW[3]      ; HEX0[5]     ; 3.166 ; 3.166 ; 3.166 ; 3.166 ;
-; SW[3]      ; HEX0[6]     ; 3.151 ; 3.151 ; 3.151 ; 3.151 ;
+; SW[1]      ; HEX3[0]     ;       ; 2.613 ; 2.613 ;       ;
+; SW[1]      ; HEX3[6]     ;       ; 2.622 ; 2.622 ;       ;
+; SW[2]      ; HEX2[0]     ; 3.121 ; 3.121 ; 3.121 ; 3.121 ;
+; SW[2]      ; HEX2[1]     ; 3.070 ; 3.070 ; 3.070 ; 3.070 ;
+; SW[2]      ; HEX2[2]     ;       ; 3.138 ; 3.138 ;       ;
+; SW[2]      ; HEX2[3]     ; 3.120 ; 3.120 ; 3.120 ; 3.120 ;
+; SW[2]      ; HEX2[4]     ; 3.007 ;       ;       ; 3.007 ;
+; SW[2]      ; HEX2[5]     ; 2.979 ;       ;       ; 2.979 ;
+; SW[2]      ; HEX2[6]     ; 2.990 ; 2.990 ; 2.990 ; 2.990 ;
+; SW[3]      ; HEX2[0]     ; 3.344 ; 3.344 ; 3.344 ; 3.344 ;
+; SW[3]      ; HEX2[1]     ; 3.304 ; 3.304 ; 3.304 ; 3.304 ;
+; SW[3]      ; HEX2[2]     ; 3.365 ;       ;       ; 3.365 ;
+; SW[3]      ; HEX2[3]     ; 3.353 ; 3.353 ; 3.353 ; 3.353 ;
+; SW[3]      ; HEX2[4]     ;       ; 3.231 ; 3.231 ;       ;
+; SW[3]      ; HEX2[5]     ; 3.208 ; 3.208 ; 3.208 ; 3.208 ;
+; SW[3]      ; HEX2[6]     ; 3.224 ; 3.224 ; 3.224 ; 3.224 ;
+; SW[4]      ; HEX2[0]     ; 3.385 ; 3.385 ; 3.385 ; 3.385 ;
+; SW[4]      ; HEX2[1]     ; 3.347 ;       ;       ; 3.347 ;
+; SW[4]      ; HEX2[2]     ; 3.406 ; 3.406 ; 3.406 ; 3.406 ;
+; SW[4]      ; HEX2[3]     ; 3.397 ; 3.397 ; 3.397 ; 3.397 ;
+; SW[4]      ; HEX2[4]     ; 3.265 ; 3.265 ; 3.265 ; 3.265 ;
+; SW[4]      ; HEX2[5]     ; 3.248 ; 3.248 ; 3.248 ; 3.248 ;
+; SW[4]      ; HEX2[6]     ; 3.265 ; 3.265 ; 3.265 ; 3.265 ;
+; SW[5]      ; HEX2[0]     ; 3.394 ; 3.394 ; 3.394 ; 3.394 ;
+; SW[5]      ; HEX2[1]     ; 3.350 ; 3.350 ; 3.350 ; 3.350 ;
+; SW[5]      ; HEX2[2]     ; 3.411 ; 3.411 ; 3.411 ; 3.411 ;
+; SW[5]      ; HEX2[3]     ; 3.400 ; 3.400 ; 3.400 ; 3.400 ;
+; SW[5]      ; HEX2[4]     ;       ; 3.270 ; 3.270 ;       ;
+; SW[5]      ; HEX2[5]     ; 3.254 ; 3.254 ; 3.254 ; 3.254 ;
+; SW[5]      ; HEX2[6]     ; 3.270 ; 3.270 ; 3.270 ; 3.270 ;
+; SW[7]      ; HEX1[0]     ; 4.246 ; 4.246 ; 4.246 ; 4.246 ;
+; SW[7]      ; HEX1[1]     ; 4.187 ; 4.187 ; 4.187 ; 4.187 ;
+; SW[7]      ; HEX1[2]     ;       ; 4.304 ; 4.304 ;       ;
+; SW[7]      ; HEX1[3]     ; 4.149 ; 4.149 ; 4.149 ; 4.149 ;
+; SW[7]      ; HEX1[4]     ; 4.496 ;       ;       ; 4.496 ;
+; SW[7]      ; HEX1[5]     ; 4.713 ;       ;       ; 4.713 ;
+; SW[7]      ; HEX1[6]     ; 4.255 ; 4.255 ; 4.255 ; 4.255 ;
+; SW[8]      ; HEX1[0]     ; 4.430 ; 4.430 ; 4.430 ; 4.430 ;
+; SW[8]      ; HEX1[1]     ; 4.370 ; 4.370 ; 4.370 ; 4.370 ;
+; SW[8]      ; HEX1[2]     ; 4.415 ;       ;       ; 4.415 ;
+; SW[8]      ; HEX1[3]     ; 4.260 ; 4.260 ; 4.260 ; 4.260 ;
+; SW[8]      ; HEX1[4]     ;       ; 4.541 ; 4.541 ;       ;
+; SW[8]      ; HEX1[5]     ; 4.753 ; 4.753 ; 4.753 ; 4.753 ;
+; SW[8]      ; HEX1[6]     ; 4.301 ; 4.301 ; 4.301 ; 4.301 ;
+; SW[9]      ; HEX1[0]     ; 4.539 ; 4.539 ; 4.539 ; 4.539 ;
+; SW[9]      ; HEX1[1]     ; 4.474 ;       ;       ; 4.474 ;
+; SW[9]      ; HEX1[2]     ; 4.411 ; 4.411 ; 4.411 ; 4.411 ;
+; SW[9]      ; HEX1[3]     ; 4.259 ; 4.259 ; 4.259 ; 4.259 ;
+; SW[9]      ; HEX1[4]     ; 4.352 ; 4.352 ; 4.352 ; 4.352 ;
+; SW[9]      ; HEX1[5]     ; 4.564 ; 4.564 ; 4.564 ; 4.564 ;
+; SW[9]      ; HEX1[6]     ; 4.111 ; 4.111 ; 4.111 ; 4.111 ;
+; SW[10]     ; HEX1[0]     ; 4.250 ; 4.250 ; 4.250 ; 4.250 ;
+; SW[10]     ; HEX1[1]     ; 4.189 ; 4.189 ; 4.189 ; 4.189 ;
+; SW[10]     ; HEX1[2]     ; 4.148 ; 4.148 ; 4.148 ; 4.148 ;
+; SW[10]     ; HEX1[3]     ; 3.993 ; 3.993 ; 3.993 ; 3.993 ;
+; SW[10]     ; HEX1[4]     ;       ; 4.408 ; 4.408 ;       ;
+; SW[10]     ; HEX1[5]     ; 4.623 ; 4.623 ; 4.623 ; 4.623 ;
+; SW[10]     ; HEX1[6]     ; 4.168 ; 4.168 ; 4.168 ; 4.168 ;
+; SW[17]     ; LEDR[17]    ; 5.631 ;       ;       ; 5.631 ;
 +------------+-------------+-------+-------+-------+-------+
 
 
@@ -264,45 +1225,166 @@ No paths to report.
 +------------+-------------+-------+-------+-------+-------+
 ; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
 +------------+-------------+-------+-------+-------+-------+
-; SW[0]      ; HEX0[0]     ; 3.773 ; 3.773 ; 3.773 ; 3.773 ;
-; SW[0]      ; HEX0[1]     ; 3.738 ; 3.738 ; 3.738 ; 3.738 ;
-; SW[0]      ; HEX0[2]     ;       ; 3.750 ; 3.750 ;       ;
-; SW[0]      ; HEX0[3]     ; 3.652 ; 3.652 ; 3.652 ; 3.652 ;
-; SW[0]      ; HEX0[4]     ; 3.645 ;       ;       ; 3.645 ;
-; SW[0]      ; HEX0[5]     ; 3.659 ;       ;       ; 3.659 ;
-; SW[0]      ; HEX0[6]     ; 3.641 ; 3.641 ; 3.641 ; 3.641 ;
-; SW[1]      ; HEX0[0]     ; 3.819 ; 3.819 ; 3.819 ; 3.819 ;
-; SW[1]      ; HEX0[1]     ; 3.784 ; 3.784 ; 3.784 ; 3.784 ;
-; SW[1]      ; HEX0[2]     ; 3.794 ;       ;       ; 3.794 ;
-; SW[1]      ; HEX0[3]     ; 3.697 ; 3.697 ; 3.697 ; 3.697 ;
-; SW[1]      ; HEX0[4]     ;       ; 3.692 ; 3.692 ;       ;
-; SW[1]      ; HEX0[5]     ; 3.701 ; 3.701 ; 3.701 ; 3.701 ;
-; SW[1]      ; HEX0[6]     ; 3.687 ; 3.687 ; 3.687 ; 3.687 ;
-; SW[2]      ; HEX0[0]     ; 3.669 ; 3.669 ; 3.669 ; 3.669 ;
-; SW[2]      ; HEX0[1]     ; 3.634 ;       ;       ; 3.634 ;
-; SW[2]      ; HEX0[2]     ; 3.645 ; 3.645 ; 3.645 ; 3.645 ;
-; SW[2]      ; HEX0[3]     ; 3.547 ; 3.547 ; 3.547 ; 3.547 ;
-; SW[2]      ; HEX0[4]     ; 3.543 ; 3.543 ; 3.543 ; 3.543 ;
-; SW[2]      ; HEX0[5]     ; 3.548 ; 3.548 ; 3.548 ; 3.548 ;
-; SW[2]      ; HEX0[6]     ; 3.536 ; 3.536 ; 3.536 ; 3.536 ;
-; SW[3]      ; HEX0[0]     ; 3.284 ; 3.284 ; 3.284 ; 3.284 ;
-; SW[3]      ; HEX0[1]     ; 3.248 ; 3.248 ; 3.248 ; 3.248 ;
-; SW[3]      ; HEX0[2]     ; 3.262 ; 3.262 ; 3.262 ; 3.262 ;
-; SW[3]      ; HEX0[3]     ; 3.161 ; 3.161 ; 3.161 ; 3.161 ;
-; SW[3]      ; HEX0[4]     ;       ; 3.154 ; 3.154 ;       ;
-; SW[3]      ; HEX0[5]     ; 3.166 ; 3.166 ; 3.166 ; 3.166 ;
-; SW[3]      ; HEX0[6]     ; 3.151 ; 3.151 ; 3.151 ; 3.151 ;
+; SW[1]      ; HEX3[0]     ;       ; 2.613 ; 2.613 ;       ;
+; SW[1]      ; HEX3[6]     ;       ; 2.622 ; 2.622 ;       ;
+; SW[2]      ; HEX2[0]     ; 3.121 ; 3.121 ; 3.121 ; 3.121 ;
+; SW[2]      ; HEX2[1]     ; 3.070 ; 3.070 ; 3.070 ; 3.070 ;
+; SW[2]      ; HEX2[2]     ;       ; 3.138 ; 3.138 ;       ;
+; SW[2]      ; HEX2[3]     ; 3.120 ; 3.120 ; 3.120 ; 3.120 ;
+; SW[2]      ; HEX2[4]     ; 3.007 ;       ;       ; 3.007 ;
+; SW[2]      ; HEX2[5]     ; 2.979 ;       ;       ; 2.979 ;
+; SW[2]      ; HEX2[6]     ; 2.990 ; 2.990 ; 2.990 ; 2.990 ;
+; SW[3]      ; HEX2[0]     ; 3.344 ; 3.344 ; 3.344 ; 3.344 ;
+; SW[3]      ; HEX2[1]     ; 3.304 ; 3.304 ; 3.304 ; 3.304 ;
+; SW[3]      ; HEX2[2]     ; 3.365 ;       ;       ; 3.365 ;
+; SW[3]      ; HEX2[3]     ; 3.353 ; 3.353 ; 3.353 ; 3.353 ;
+; SW[3]      ; HEX2[4]     ;       ; 3.231 ; 3.231 ;       ;
+; SW[3]      ; HEX2[5]     ; 3.208 ; 3.208 ; 3.208 ; 3.208 ;
+; SW[3]      ; HEX2[6]     ; 3.224 ; 3.224 ; 3.224 ; 3.224 ;
+; SW[4]      ; HEX2[0]     ; 3.385 ; 3.385 ; 3.385 ; 3.385 ;
+; SW[4]      ; HEX2[1]     ; 3.347 ;       ;       ; 3.347 ;
+; SW[4]      ; HEX2[2]     ; 3.406 ; 3.406 ; 3.406 ; 3.406 ;
+; SW[4]      ; HEX2[3]     ; 3.397 ; 3.397 ; 3.397 ; 3.397 ;
+; SW[4]      ; HEX2[4]     ; 3.265 ; 3.265 ; 3.265 ; 3.265 ;
+; SW[4]      ; HEX2[5]     ; 3.248 ; 3.248 ; 3.248 ; 3.248 ;
+; SW[4]      ; HEX2[6]     ; 3.265 ; 3.265 ; 3.265 ; 3.265 ;
+; SW[5]      ; HEX2[0]     ; 3.394 ; 3.394 ; 3.394 ; 3.394 ;
+; SW[5]      ; HEX2[1]     ; 3.350 ; 3.350 ; 3.350 ; 3.350 ;
+; SW[5]      ; HEX2[2]     ; 3.411 ; 3.411 ; 3.411 ; 3.411 ;
+; SW[5]      ; HEX2[3]     ; 3.400 ; 3.400 ; 3.400 ; 3.400 ;
+; SW[5]      ; HEX2[4]     ;       ; 3.270 ; 3.270 ;       ;
+; SW[5]      ; HEX2[5]     ; 3.254 ; 3.254 ; 3.254 ; 3.254 ;
+; SW[5]      ; HEX2[6]     ; 3.270 ; 3.270 ; 3.270 ; 3.270 ;
+; SW[7]      ; HEX1[0]     ; 4.246 ; 4.246 ; 4.246 ; 4.246 ;
+; SW[7]      ; HEX1[1]     ; 4.187 ; 4.187 ; 4.187 ; 4.187 ;
+; SW[7]      ; HEX1[2]     ;       ; 4.304 ; 4.304 ;       ;
+; SW[7]      ; HEX1[3]     ; 4.149 ; 4.149 ; 4.149 ; 4.149 ;
+; SW[7]      ; HEX1[4]     ; 4.496 ;       ;       ; 4.496 ;
+; SW[7]      ; HEX1[5]     ; 4.713 ;       ;       ; 4.713 ;
+; SW[7]      ; HEX1[6]     ; 4.255 ; 4.255 ; 4.255 ; 4.255 ;
+; SW[8]      ; HEX1[0]     ; 4.430 ; 4.430 ; 4.430 ; 4.430 ;
+; SW[8]      ; HEX1[1]     ; 4.370 ; 4.370 ; 4.370 ; 4.370 ;
+; SW[8]      ; HEX1[2]     ; 4.415 ;       ;       ; 4.415 ;
+; SW[8]      ; HEX1[3]     ; 4.260 ; 4.260 ; 4.260 ; 4.260 ;
+; SW[8]      ; HEX1[4]     ;       ; 4.541 ; 4.541 ;       ;
+; SW[8]      ; HEX1[5]     ; 4.753 ; 4.753 ; 4.753 ; 4.753 ;
+; SW[8]      ; HEX1[6]     ; 4.301 ; 4.301 ; 4.301 ; 4.301 ;
+; SW[9]      ; HEX1[0]     ; 4.539 ; 4.539 ; 4.539 ; 4.539 ;
+; SW[9]      ; HEX1[1]     ; 4.474 ;       ;       ; 4.474 ;
+; SW[9]      ; HEX1[2]     ; 4.411 ; 4.411 ; 4.411 ; 4.411 ;
+; SW[9]      ; HEX1[3]     ; 4.259 ; 4.259 ; 4.259 ; 4.259 ;
+; SW[9]      ; HEX1[4]     ; 4.352 ; 4.352 ; 4.352 ; 4.352 ;
+; SW[9]      ; HEX1[5]     ; 4.564 ; 4.564 ; 4.564 ; 4.564 ;
+; SW[9]      ; HEX1[6]     ; 4.111 ; 4.111 ; 4.111 ; 4.111 ;
+; SW[10]     ; HEX1[0]     ; 4.250 ; 4.250 ; 4.250 ; 4.250 ;
+; SW[10]     ; HEX1[1]     ; 4.189 ; 4.189 ; 4.189 ; 4.189 ;
+; SW[10]     ; HEX1[2]     ; 4.148 ; 4.148 ; 4.148 ; 4.148 ;
+; SW[10]     ; HEX1[3]     ; 3.993 ; 3.993 ; 3.993 ; 3.993 ;
+; SW[10]     ; HEX1[4]     ;       ; 4.408 ; 4.408 ;       ;
+; SW[10]     ; HEX1[5]     ; 4.623 ; 4.623 ; 4.623 ; 4.623 ;
+; SW[10]     ; HEX1[6]     ; 4.168 ; 4.168 ; 4.168 ; 4.168 ;
+; SW[17]     ; LEDR[17]    ; 5.631 ;       ;       ; 5.631 ;
 +------------+-------------+-------+-------+-------+-------+
 
 
-+----------------------------------------------------------------------------+
-; Multicorner Timing Analysis Summary                                        ;
-+------------------+-------+------+----------+---------+---------------------+
-; Clock            ; Setup ; Hold ; Recovery ; Removal ; Minimum Pulse Width ;
-+------------------+-------+------+----------+---------+---------------------+
-; Worst-case Slack ; N/A   ; N/A  ; N/A      ; N/A     ; N/A                 ;
-; Design-wide TNS  ; 0.0   ; 0.0  ; 0.0      ; 0.0     ; 0.0                 ;
-+------------------+-------+------+----------+---------+---------------------+
++---------------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                             ;
++------------------+-----------+-------+----------+---------+---------------------+
+; Clock            ; Setup     ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
++------------------+-----------+-------+----------+---------+---------------------+
+; Worst-case Slack ; -18.745   ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+;  SW[0]           ; -18.745   ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+; Design-wide TNS  ; -1093.607 ; 0.0   ; 0.0      ; 0.0     ; -111.38             ;
+;  SW[0]           ; -1093.607 ; 0.000 ; N/A      ; N/A     ; -111.380            ;
++------------------+-----------+-------+----------+---------+---------------------+
+
+
++-------------------------------------------------------------------------+
+; Setup Times                                                             ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; SW[*]     ; SW[0]      ; 18.610 ; 18.610 ; Rise       ; SW[0]           ;
+;  SW[1]    ; SW[0]      ; 11.592 ; 11.592 ; Rise       ; SW[0]           ;
+;  SW[2]    ; SW[0]      ; 18.610 ; 18.610 ; Rise       ; SW[0]           ;
+;  SW[7]    ; SW[0]      ; 1.650  ; 1.650  ; Rise       ; SW[0]           ;
+;  SW[8]    ; SW[0]      ; 1.895  ; 1.895  ; Rise       ; SW[0]           ;
+;  SW[9]    ; SW[0]      ; 2.273  ; 2.273  ; Rise       ; SW[0]           ;
+;  SW[10]   ; SW[0]      ; 1.916  ; 1.916  ; Rise       ; SW[0]           ;
+;  SW[17]   ; SW[0]      ; 7.484  ; 7.484  ; Rise       ; SW[0]           ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; SW[*]     ; SW[0]      ; 0.402  ; 0.402  ; Rise       ; SW[0]           ;
+;  SW[1]    ; SW[0]      ; 0.402  ; 0.402  ; Rise       ; SW[0]           ;
+;  SW[2]    ; SW[0]      ; 0.320  ; 0.320  ; Rise       ; SW[0]           ;
+;  SW[7]    ; SW[0]      ; 0.324  ; 0.324  ; Rise       ; SW[0]           ;
+;  SW[8]    ; SW[0]      ; 0.126  ; 0.126  ; Rise       ; SW[0]           ;
+;  SW[9]    ; SW[0]      ; 0.140  ; 0.140  ; Rise       ; SW[0]           ;
+;  SW[10]   ; SW[0]      ; 0.322  ; 0.322  ; Rise       ; SW[0]           ;
+;  SW[17]   ; SW[0]      ; -2.538 ; -2.538 ; Rise       ; SW[0]           ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++-----------------------------------------------------------------------+
+; Clock to Output Times                                                 ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; HEX0[*]   ; SW[0]      ; 9.315 ; 9.315 ; Rise       ; SW[0]           ;
+;  HEX0[0]  ; SW[0]      ; 9.315 ; 9.315 ; Rise       ; SW[0]           ;
+;  HEX0[1]  ; SW[0]      ; 9.291 ; 9.291 ; Rise       ; SW[0]           ;
+;  HEX0[2]  ; SW[0]      ; 9.278 ; 9.278 ; Rise       ; SW[0]           ;
+;  HEX0[3]  ; SW[0]      ; 9.066 ; 9.066 ; Rise       ; SW[0]           ;
+;  HEX0[4]  ; SW[0]      ; 9.075 ; 9.075 ; Rise       ; SW[0]           ;
+;  HEX0[5]  ; SW[0]      ; 9.054 ; 9.054 ; Rise       ; SW[0]           ;
+;  HEX0[6]  ; SW[0]      ; 9.055 ; 9.055 ; Rise       ; SW[0]           ;
+; HEX6[*]   ; SW[0]      ; 9.070 ; 9.070 ; Rise       ; SW[0]           ;
+;  HEX6[0]  ; SW[0]      ; 8.525 ; 8.525 ; Rise       ; SW[0]           ;
+;  HEX6[3]  ; SW[0]      ; 9.070 ; 9.070 ; Rise       ; SW[0]           ;
+;  HEX6[4]  ; SW[0]      ; 9.070 ; 9.070 ; Rise       ; SW[0]           ;
+;  HEX6[5]  ; SW[0]      ; 9.050 ; 9.050 ; Rise       ; SW[0]           ;
+; LEDG[*]   ; SW[0]      ; 9.121 ; 9.121 ; Rise       ; SW[0]           ;
+;  LEDG[1]  ; SW[0]      ; 9.121 ; 9.121 ; Rise       ; SW[0]           ;
+;  LEDG[2]  ; SW[0]      ; 8.021 ; 8.021 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 5.668 ; 5.668 ; Rise       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 5.668 ; 5.668 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 5.668 ; 5.668 ; Fall       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 5.668 ; 5.668 ; Fall       ; SW[0]           ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------------------------------------+
+; Minimum Clock to Output Times                                         ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; HEX0[*]   ; SW[0]      ; 4.675 ; 4.675 ; Rise       ; SW[0]           ;
+;  HEX0[0]  ; SW[0]      ; 4.812 ; 4.812 ; Rise       ; SW[0]           ;
+;  HEX0[1]  ; SW[0]      ; 4.770 ; 4.770 ; Rise       ; SW[0]           ;
+;  HEX0[2]  ; SW[0]      ; 4.781 ; 4.781 ; Rise       ; SW[0]           ;
+;  HEX0[3]  ; SW[0]      ; 4.690 ; 4.690 ; Rise       ; SW[0]           ;
+;  HEX0[4]  ; SW[0]      ; 4.685 ; 4.685 ; Rise       ; SW[0]           ;
+;  HEX0[5]  ; SW[0]      ; 4.683 ; 4.683 ; Rise       ; SW[0]           ;
+;  HEX0[6]  ; SW[0]      ; 4.675 ; 4.675 ; Rise       ; SW[0]           ;
+; HEX6[*]   ; SW[0]      ; 4.695 ; 4.695 ; Rise       ; SW[0]           ;
+;  HEX6[0]  ; SW[0]      ; 4.695 ; 4.695 ; Rise       ; SW[0]           ;
+;  HEX6[3]  ; SW[0]      ; 4.978 ; 4.978 ; Rise       ; SW[0]           ;
+;  HEX6[4]  ; SW[0]      ; 4.978 ; 4.978 ; Rise       ; SW[0]           ;
+;  HEX6[5]  ; SW[0]      ; 4.958 ; 4.958 ; Rise       ; SW[0]           ;
+; LEDG[*]   ; SW[0]      ; 4.436 ; 4.436 ; Rise       ; SW[0]           ;
+;  LEDG[1]  ; SW[0]      ; 5.033 ; 5.033 ; Rise       ; SW[0]           ;
+;  LEDG[2]  ; SW[0]      ; 4.436 ; 4.436 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 3.025 ; 3.025 ; Rise       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 3.025 ; 3.025 ; Rise       ; SW[0]           ;
+; LEDR[*]   ; SW[0]      ; 3.025 ; 3.025 ; Fall       ; SW[0]           ;
+;  LEDR[0]  ; SW[0]      ; 3.025 ; 3.025 ; Fall       ; SW[0]           ;
++-----------+------------+-------+-------+------------+-----------------+
 
 
 +----------------------------------------------------------+
@@ -310,34 +1392,65 @@ No paths to report.
 +------------+-------------+-------+-------+-------+-------+
 ; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
 +------------+-------------+-------+-------+-------+-------+
-; SW[0]      ; HEX0[0]     ; 7.167 ; 7.167 ; 7.167 ; 7.167 ;
-; SW[0]      ; HEX0[1]     ; 7.134 ; 7.134 ; 7.134 ; 7.134 ;
-; SW[0]      ; HEX0[2]     ;       ; 7.115 ; 7.115 ;       ;
-; SW[0]      ; HEX0[3]     ; 6.917 ; 6.917 ; 6.917 ; 6.917 ;
-; SW[0]      ; HEX0[4]     ; 6.907 ;       ;       ; 6.907 ;
-; SW[0]      ; HEX0[5]     ; 6.922 ;       ;       ; 6.922 ;
-; SW[0]      ; HEX0[6]     ; 6.901 ; 6.901 ; 6.901 ; 6.901 ;
-; SW[1]      ; HEX0[0]     ; 7.303 ; 7.303 ; 7.303 ; 7.303 ;
-; SW[1]      ; HEX0[1]     ; 7.270 ; 7.270 ; 7.270 ; 7.270 ;
-; SW[1]      ; HEX0[2]     ; 7.276 ;       ;       ; 7.276 ;
-; SW[1]      ; HEX0[3]     ; 7.049 ; 7.049 ; 7.049 ; 7.049 ;
-; SW[1]      ; HEX0[4]     ;       ; 7.043 ; 7.043 ;       ;
-; SW[1]      ; HEX0[5]     ; 7.059 ; 7.059 ; 7.059 ; 7.059 ;
-; SW[1]      ; HEX0[6]     ; 7.037 ; 7.037 ; 7.037 ; 7.037 ;
-; SW[2]      ; HEX0[0]     ; 6.880 ; 6.880 ; 6.880 ; 6.880 ;
-; SW[2]      ; HEX0[1]     ; 6.848 ;       ;       ; 6.848 ;
-; SW[2]      ; HEX0[2]     ; 6.856 ; 6.856 ; 6.856 ; 6.856 ;
-; SW[2]      ; HEX0[3]     ; 6.630 ; 6.630 ; 6.630 ; 6.630 ;
-; SW[2]      ; HEX0[4]     ; 6.623 ; 6.623 ; 6.623 ; 6.623 ;
-; SW[2]      ; HEX0[5]     ; 6.635 ; 6.635 ; 6.635 ; 6.635 ;
-; SW[2]      ; HEX0[6]     ; 6.614 ; 6.614 ; 6.614 ; 6.614 ;
-; SW[3]      ; HEX0[0]     ; 6.268 ; 6.268 ; 6.268 ; 6.268 ;
-; SW[3]      ; HEX0[1]     ; 6.236 ; 6.236 ; 6.236 ; 6.236 ;
-; SW[3]      ; HEX0[2]     ; 6.243 ; 6.243 ; 6.243 ; 6.243 ;
-; SW[3]      ; HEX0[3]     ; 6.018 ; 6.018 ; 6.018 ; 6.018 ;
-; SW[3]      ; HEX0[4]     ;       ; 6.008 ; 6.008 ;       ;
-; SW[3]      ; HEX0[5]     ; 6.024 ; 6.024 ; 6.024 ; 6.024 ;
-; SW[3]      ; HEX0[6]     ; 6.003 ; 6.003 ; 6.003 ; 6.003 ;
+; SW[1]      ; HEX3[0]     ;       ; 4.945 ; 4.945 ;       ;
+; SW[1]      ; HEX3[6]     ;       ; 4.981 ; 4.981 ;       ;
+; SW[2]      ; HEX2[0]     ; 6.020 ; 6.020 ; 6.020 ; 6.020 ;
+; SW[2]      ; HEX2[1]     ; 5.974 ; 5.974 ; 5.974 ; 5.974 ;
+; SW[2]      ; HEX2[2]     ;       ; 6.060 ; 6.060 ;       ;
+; SW[2]      ; HEX2[3]     ; 6.022 ; 6.022 ; 6.022 ; 6.022 ;
+; SW[2]      ; HEX2[4]     ; 5.770 ;       ;       ; 5.770 ;
+; SW[2]      ; HEX2[5]     ; 5.726 ;       ;       ; 5.726 ;
+; SW[2]      ; HEX2[6]     ; 5.756 ; 5.756 ; 5.756 ; 5.756 ;
+; SW[3]      ; HEX2[0]     ; 6.402 ; 6.402 ; 6.402 ; 6.402 ;
+; SW[3]      ; HEX2[1]     ; 6.361 ; 6.361 ; 6.361 ; 6.361 ;
+; SW[3]      ; HEX2[2]     ; 6.441 ;       ;       ; 6.441 ;
+; SW[3]      ; HEX2[3]     ; 6.409 ; 6.409 ; 6.409 ; 6.409 ;
+; SW[3]      ; HEX2[4]     ;       ; 6.150 ; 6.150 ;       ;
+; SW[3]      ; HEX2[5]     ; 6.110 ; 6.110 ; 6.110 ; 6.110 ;
+; SW[3]      ; HEX2[6]     ; 6.143 ; 6.143 ; 6.143 ; 6.143 ;
+; SW[4]      ; HEX2[0]     ; 6.578 ; 6.578 ; 6.578 ; 6.578 ;
+; SW[4]      ; HEX2[1]     ; 6.541 ;       ;       ; 6.541 ;
+; SW[4]      ; HEX2[2]     ; 6.621 ; 6.621 ; 6.621 ; 6.621 ;
+; SW[4]      ; HEX2[3]     ; 6.585 ; 6.585 ; 6.585 ; 6.585 ;
+; SW[4]      ; HEX2[4]     ; 6.320 ; 6.320 ; 6.320 ; 6.320 ;
+; SW[4]      ; HEX2[5]     ; 6.288 ; 6.288 ; 6.288 ; 6.288 ;
+; SW[4]      ; HEX2[6]     ; 6.323 ; 6.323 ; 6.323 ; 6.323 ;
+; SW[5]      ; HEX2[0]     ; 6.609 ; 6.609 ; 6.609 ; 6.609 ;
+; SW[5]      ; HEX2[1]     ; 6.570 ; 6.570 ; 6.570 ; 6.570 ;
+; SW[5]      ; HEX2[2]     ; 6.650 ; 6.650 ; 6.650 ; 6.650 ;
+; SW[5]      ; HEX2[3]     ; 6.592 ; 6.592 ; 6.592 ; 6.592 ;
+; SW[5]      ; HEX2[4]     ;       ; 6.355 ; 6.355 ;       ;
+; SW[5]      ; HEX2[5]     ; 6.319 ; 6.319 ; 6.319 ; 6.319 ;
+; SW[5]      ; HEX2[6]     ; 6.355 ; 6.355 ; 6.355 ; 6.355 ;
+; SW[7]      ; HEX1[0]     ; 8.174 ; 8.174 ; 8.174 ; 8.174 ;
+; SW[7]      ; HEX1[1]     ; 8.017 ; 8.017 ; 8.017 ; 8.017 ;
+; SW[7]      ; HEX1[2]     ;       ; 8.438 ; 8.438 ;       ;
+; SW[7]      ; HEX1[3]     ; 8.096 ; 8.096 ; 8.096 ; 8.096 ;
+; SW[7]      ; HEX1[4]     ; 8.773 ;       ;       ; 8.773 ;
+; SW[7]      ; HEX1[5]     ; 9.096 ;       ;       ; 9.096 ;
+; SW[7]      ; HEX1[6]     ; 8.198 ; 8.198 ; 8.198 ; 8.198 ;
+; SW[8]      ; HEX1[0]     ; 8.469 ; 8.469 ; 8.469 ; 8.469 ;
+; SW[8]      ; HEX1[1]     ; 8.312 ; 8.312 ; 8.312 ; 8.312 ;
+; SW[8]      ; HEX1[2]     ; 8.554 ;       ;       ; 8.554 ;
+; SW[8]      ; HEX1[3]     ; 8.212 ; 8.212 ; 8.212 ; 8.212 ;
+; SW[8]      ; HEX1[4]     ;       ; 8.735 ; 8.735 ;       ;
+; SW[8]      ; HEX1[5]     ; 9.062 ; 9.062 ; 9.062 ; 9.062 ;
+; SW[8]      ; HEX1[6]     ; 8.163 ; 8.163 ; 8.163 ; 8.163 ;
+; SW[9]      ; HEX1[0]     ; 8.819 ; 8.819 ; 8.819 ; 8.819 ;
+; SW[9]      ; HEX1[1]     ; 8.657 ;       ;       ; 8.657 ;
+; SW[9]      ; HEX1[2]     ; 8.678 ; 8.678 ; 8.678 ; 8.678 ;
+; SW[9]      ; HEX1[3]     ; 8.330 ; 8.330 ; 8.330 ; 8.330 ;
+; SW[9]      ; HEX1[4]     ; 8.479 ; 8.479 ; 8.479 ; 8.479 ;
+; SW[9]      ; HEX1[5]     ; 8.803 ; 8.803 ; 8.803 ; 8.803 ;
+; SW[9]      ; HEX1[6]     ; 7.905 ; 7.905 ; 7.905 ; 7.905 ;
+; SW[10]     ; HEX1[0]     ; 8.201 ; 8.201 ; 8.201 ; 8.201 ;
+; SW[10]     ; HEX1[1]     ; 8.069 ; 8.069 ; 8.069 ; 8.069 ;
+; SW[10]     ; HEX1[2]     ; 8.117 ; 8.117 ; 8.117 ; 8.117 ;
+; SW[10]     ; HEX1[3]     ; 7.749 ; 7.749 ; 7.749 ; 7.749 ;
+; SW[10]     ; HEX1[4]     ;       ; 8.654 ; 8.654 ;       ;
+; SW[10]     ; HEX1[5]     ; 8.978 ; 8.978 ; 8.978 ; 8.978 ;
+; SW[10]     ; HEX1[6]     ; 8.080 ; 8.080 ; 8.080 ; 8.080 ;
+; SW[17]     ; LEDR[17]    ; 9.883 ;       ;       ; 9.883 ;
 +------------+-------------+-------+-------+-------+-------+
 
 
@@ -346,41 +1459,86 @@ No paths to report.
 +------------+-------------+-------+-------+-------+-------+
 ; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
 +------------+-------------+-------+-------+-------+-------+
-; SW[0]      ; HEX0[0]     ; 3.773 ; 3.773 ; 3.773 ; 3.773 ;
-; SW[0]      ; HEX0[1]     ; 3.738 ; 3.738 ; 3.738 ; 3.738 ;
-; SW[0]      ; HEX0[2]     ;       ; 3.750 ; 3.750 ;       ;
-; SW[0]      ; HEX0[3]     ; 3.652 ; 3.652 ; 3.652 ; 3.652 ;
-; SW[0]      ; HEX0[4]     ; 3.645 ;       ;       ; 3.645 ;
-; SW[0]      ; HEX0[5]     ; 3.659 ;       ;       ; 3.659 ;
-; SW[0]      ; HEX0[6]     ; 3.641 ; 3.641 ; 3.641 ; 3.641 ;
-; SW[1]      ; HEX0[0]     ; 3.819 ; 3.819 ; 3.819 ; 3.819 ;
-; SW[1]      ; HEX0[1]     ; 3.784 ; 3.784 ; 3.784 ; 3.784 ;
-; SW[1]      ; HEX0[2]     ; 3.794 ;       ;       ; 3.794 ;
-; SW[1]      ; HEX0[3]     ; 3.697 ; 3.697 ; 3.697 ; 3.697 ;
-; SW[1]      ; HEX0[4]     ;       ; 3.692 ; 3.692 ;       ;
-; SW[1]      ; HEX0[5]     ; 3.701 ; 3.701 ; 3.701 ; 3.701 ;
-; SW[1]      ; HEX0[6]     ; 3.687 ; 3.687 ; 3.687 ; 3.687 ;
-; SW[2]      ; HEX0[0]     ; 3.669 ; 3.669 ; 3.669 ; 3.669 ;
-; SW[2]      ; HEX0[1]     ; 3.634 ;       ;       ; 3.634 ;
-; SW[2]      ; HEX0[2]     ; 3.645 ; 3.645 ; 3.645 ; 3.645 ;
-; SW[2]      ; HEX0[3]     ; 3.547 ; 3.547 ; 3.547 ; 3.547 ;
-; SW[2]      ; HEX0[4]     ; 3.543 ; 3.543 ; 3.543 ; 3.543 ;
-; SW[2]      ; HEX0[5]     ; 3.548 ; 3.548 ; 3.548 ; 3.548 ;
-; SW[2]      ; HEX0[6]     ; 3.536 ; 3.536 ; 3.536 ; 3.536 ;
-; SW[3]      ; HEX0[0]     ; 3.284 ; 3.284 ; 3.284 ; 3.284 ;
-; SW[3]      ; HEX0[1]     ; 3.248 ; 3.248 ; 3.248 ; 3.248 ;
-; SW[3]      ; HEX0[2]     ; 3.262 ; 3.262 ; 3.262 ; 3.262 ;
-; SW[3]      ; HEX0[3]     ; 3.161 ; 3.161 ; 3.161 ; 3.161 ;
-; SW[3]      ; HEX0[4]     ;       ; 3.154 ; 3.154 ;       ;
-; SW[3]      ; HEX0[5]     ; 3.166 ; 3.166 ; 3.166 ; 3.166 ;
-; SW[3]      ; HEX0[6]     ; 3.151 ; 3.151 ; 3.151 ; 3.151 ;
+; SW[1]      ; HEX3[0]     ;       ; 2.613 ; 2.613 ;       ;
+; SW[1]      ; HEX3[6]     ;       ; 2.622 ; 2.622 ;       ;
+; SW[2]      ; HEX2[0]     ; 3.121 ; 3.121 ; 3.121 ; 3.121 ;
+; SW[2]      ; HEX2[1]     ; 3.070 ; 3.070 ; 3.070 ; 3.070 ;
+; SW[2]      ; HEX2[2]     ;       ; 3.138 ; 3.138 ;       ;
+; SW[2]      ; HEX2[3]     ; 3.120 ; 3.120 ; 3.120 ; 3.120 ;
+; SW[2]      ; HEX2[4]     ; 3.007 ;       ;       ; 3.007 ;
+; SW[2]      ; HEX2[5]     ; 2.979 ;       ;       ; 2.979 ;
+; SW[2]      ; HEX2[6]     ; 2.990 ; 2.990 ; 2.990 ; 2.990 ;
+; SW[3]      ; HEX2[0]     ; 3.344 ; 3.344 ; 3.344 ; 3.344 ;
+; SW[3]      ; HEX2[1]     ; 3.304 ; 3.304 ; 3.304 ; 3.304 ;
+; SW[3]      ; HEX2[2]     ; 3.365 ;       ;       ; 3.365 ;
+; SW[3]      ; HEX2[3]     ; 3.353 ; 3.353 ; 3.353 ; 3.353 ;
+; SW[3]      ; HEX2[4]     ;       ; 3.231 ; 3.231 ;       ;
+; SW[3]      ; HEX2[5]     ; 3.208 ; 3.208 ; 3.208 ; 3.208 ;
+; SW[3]      ; HEX2[6]     ; 3.224 ; 3.224 ; 3.224 ; 3.224 ;
+; SW[4]      ; HEX2[0]     ; 3.385 ; 3.385 ; 3.385 ; 3.385 ;
+; SW[4]      ; HEX2[1]     ; 3.347 ;       ;       ; 3.347 ;
+; SW[4]      ; HEX2[2]     ; 3.406 ; 3.406 ; 3.406 ; 3.406 ;
+; SW[4]      ; HEX2[3]     ; 3.397 ; 3.397 ; 3.397 ; 3.397 ;
+; SW[4]      ; HEX2[4]     ; 3.265 ; 3.265 ; 3.265 ; 3.265 ;
+; SW[4]      ; HEX2[5]     ; 3.248 ; 3.248 ; 3.248 ; 3.248 ;
+; SW[4]      ; HEX2[6]     ; 3.265 ; 3.265 ; 3.265 ; 3.265 ;
+; SW[5]      ; HEX2[0]     ; 3.394 ; 3.394 ; 3.394 ; 3.394 ;
+; SW[5]      ; HEX2[1]     ; 3.350 ; 3.350 ; 3.350 ; 3.350 ;
+; SW[5]      ; HEX2[2]     ; 3.411 ; 3.411 ; 3.411 ; 3.411 ;
+; SW[5]      ; HEX2[3]     ; 3.400 ; 3.400 ; 3.400 ; 3.400 ;
+; SW[5]      ; HEX2[4]     ;       ; 3.270 ; 3.270 ;       ;
+; SW[5]      ; HEX2[5]     ; 3.254 ; 3.254 ; 3.254 ; 3.254 ;
+; SW[5]      ; HEX2[6]     ; 3.270 ; 3.270 ; 3.270 ; 3.270 ;
+; SW[7]      ; HEX1[0]     ; 4.246 ; 4.246 ; 4.246 ; 4.246 ;
+; SW[7]      ; HEX1[1]     ; 4.187 ; 4.187 ; 4.187 ; 4.187 ;
+; SW[7]      ; HEX1[2]     ;       ; 4.304 ; 4.304 ;       ;
+; SW[7]      ; HEX1[3]     ; 4.149 ; 4.149 ; 4.149 ; 4.149 ;
+; SW[7]      ; HEX1[4]     ; 4.496 ;       ;       ; 4.496 ;
+; SW[7]      ; HEX1[5]     ; 4.713 ;       ;       ; 4.713 ;
+; SW[7]      ; HEX1[6]     ; 4.255 ; 4.255 ; 4.255 ; 4.255 ;
+; SW[8]      ; HEX1[0]     ; 4.430 ; 4.430 ; 4.430 ; 4.430 ;
+; SW[8]      ; HEX1[1]     ; 4.370 ; 4.370 ; 4.370 ; 4.370 ;
+; SW[8]      ; HEX1[2]     ; 4.415 ;       ;       ; 4.415 ;
+; SW[8]      ; HEX1[3]     ; 4.260 ; 4.260 ; 4.260 ; 4.260 ;
+; SW[8]      ; HEX1[4]     ;       ; 4.541 ; 4.541 ;       ;
+; SW[8]      ; HEX1[5]     ; 4.753 ; 4.753 ; 4.753 ; 4.753 ;
+; SW[8]      ; HEX1[6]     ; 4.301 ; 4.301 ; 4.301 ; 4.301 ;
+; SW[9]      ; HEX1[0]     ; 4.539 ; 4.539 ; 4.539 ; 4.539 ;
+; SW[9]      ; HEX1[1]     ; 4.474 ;       ;       ; 4.474 ;
+; SW[9]      ; HEX1[2]     ; 4.411 ; 4.411 ; 4.411 ; 4.411 ;
+; SW[9]      ; HEX1[3]     ; 4.259 ; 4.259 ; 4.259 ; 4.259 ;
+; SW[9]      ; HEX1[4]     ; 4.352 ; 4.352 ; 4.352 ; 4.352 ;
+; SW[9]      ; HEX1[5]     ; 4.564 ; 4.564 ; 4.564 ; 4.564 ;
+; SW[9]      ; HEX1[6]     ; 4.111 ; 4.111 ; 4.111 ; 4.111 ;
+; SW[10]     ; HEX1[0]     ; 4.250 ; 4.250 ; 4.250 ; 4.250 ;
+; SW[10]     ; HEX1[1]     ; 4.189 ; 4.189 ; 4.189 ; 4.189 ;
+; SW[10]     ; HEX1[2]     ; 4.148 ; 4.148 ; 4.148 ; 4.148 ;
+; SW[10]     ; HEX1[3]     ; 3.993 ; 3.993 ; 3.993 ; 3.993 ;
+; SW[10]     ; HEX1[4]     ;       ; 4.408 ; 4.408 ;       ;
+; SW[10]     ; HEX1[5]     ; 4.623 ; 4.623 ; 4.623 ; 4.623 ;
+; SW[10]     ; HEX1[6]     ; 4.168 ; 4.168 ; 4.168 ; 4.168 ;
+; SW[17]     ; LEDR[17]    ; 5.631 ;       ;       ; 5.631 ;
 +------------+-------------+-------+-------+-------+-------+
 
 
--------------------
-; Clock Transfers ;
--------------------
-Nothing to report.
++-----------------------------------------------------------------------+
+; Setup Transfers                                                       ;
++------------+----------+--------------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths     ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+--------------+----------+----------+----------+
+; SW[0]      ; SW[0]    ; > 2147483647 ; 0        ; 0        ; 0        ;
++------------+----------+--------------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-----------------------------------------------------------------------+
+; Hold Transfers                                                        ;
++------------+----------+--------------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths     ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+--------------+----------+----------+----------+
+; SW[0]      ; SW[0]    ; > 2147483647 ; 0        ; 0        ; 0        ;
++------------+----------+--------------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
 
 ---------------
@@ -402,10 +1560,10 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 4     ; 4    ;
-; Unconstrained Input Port Paths  ; 28    ; 28   ;
-; Unconstrained Output Ports      ; 7     ; 7    ;
-; Unconstrained Output Port Paths ; 28    ; 28   ;
+; Unconstrained Input Ports       ; 11    ; 11   ;
+; Unconstrained Input Port Paths  ; 446   ; 446  ;
+; Unconstrained Output Ports      ; 31    ; 31   ;
+; Unconstrained Output Port Paths ; 94    ; 94   ;
 +---------------------------------+-------+------+
 
 
@@ -415,7 +1573,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu May 08 21:59:51 2025
+    Info: Processing started: Fri May 16 12:43:14 2025
 Info: Command: quartus_sta pratica1_2 -c pratica1_2
 Info: qsta_default_script.tcl version: #1
 Warning (20028): Parallel compilation is not licensed and has been disabled
@@ -423,34 +1581,49 @@ Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'pratica1_2.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
-Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
-Warning (332068): No clocks defined in design.
+Info (332105): Deriving Clocks
+    Info (332105): create_clock -period 1.000 -name SW[0] SW[0]
 Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
-Info (332159): No clocks to report
 Info: Analyzing Slow Model
-Info (332140): No fmax paths to report
-Info (332140): No Setup paths to report
-Info (332140): No Hold paths to report
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -18.745
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):   -18.745     -1093.607 SW[0] 
+Info (332146): Worst-case hold slack is 0.391
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.391         0.000 SW[0] 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332140): No Minimum Pulse Width paths to report
+Info (332146): Worst-case minimum pulse width slack is -1.380
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -1.380      -111.380 SW[0] 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info: Analyzing Fast Model
-Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
-Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
-Warning (332068): No clocks defined in design.
-Info (332140): No Setup paths to report
-Info (332140): No Hold paths to report
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -7.513
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -7.513      -424.148 SW[0] 
+Info (332146): Worst-case hold slack is 0.215
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.215         0.000 SW[0] 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332140): No Minimum Pulse Width paths to report
+Info (332146): Worst-case minimum pulse width slack is -1.380
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -1.380      -111.380 SW[0] 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 4538 megabytes
-    Info: Processing ended: Thu May 08 21:59:52 2025
-    Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:00
+    Info: Peak virtual memory: 4566 megabytes
+    Info: Processing ended: Fri May 16 12:43:16 2025
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:01
 
 

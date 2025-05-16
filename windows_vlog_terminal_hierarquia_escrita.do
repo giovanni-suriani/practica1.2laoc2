@@ -7,7 +7,7 @@ vlib altera
 
 # Compila os arquivos Verilog necessários
 #vlog hierarquia_memoria.v memoram.v tb_hierarquia_memoria.v 
-vlog hierarquia_memoria.v tb_hierarquia_memoria.v 
+vlog hierarquia_memoria.v tb_hierarquia_memoria_escrita.v 
 vsim -L altera work.tb_hierarquia_memoria -c -do "run 1000ps; quit"
 
 # para rodar:  vsim -c -do windows_vlog_terminal_hierarquia.do
