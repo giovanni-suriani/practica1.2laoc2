@@ -124,6 +124,7 @@ module hierarquia_memoria(input clock,
                     end
                 end
             end
+          
           else if (L1_valid[index_L1][1] == 1 && L1_tag[index_L1][1] == tag)
             begin
               hit_L1 = 1;
@@ -199,7 +200,6 @@ module hierarquia_memoria(input clock,
               // Retorna o dado escrito
               read_data   <= write_data;
             end
-
           // Se o bit eh invalido, verificar se foi feita escrita nas duas vias e se ja foi escrito
           else if(L1_valid[index_L1][1] == 0 && write)
             begin
@@ -271,9 +271,7 @@ module hierarquia_memoria(input clock,
                         end
                       if (write)
                         begin
-                          $display("To te fedendo na linha 247");
-                          L2_data[i]  = write_data;
-                          L2_dirty[i] = 1;
+                          $display("Caso Impossivel na pratica Nao tem na L1 entao nao tem na L2");
                         end
                       // break;
                     end

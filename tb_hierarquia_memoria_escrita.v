@@ -94,6 +94,19 @@ module tb_hierarquia_memoria_escrita;
       $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("[%0t] Esperado do .mif = 4 | hit_L1 = 0 | hit_L2 = 0", $time);
       situacao_L1;
+
+      // Teste 4: Preenchendo a cache L1 e L2 com escritas  -> verifica a L2, pega do arquivo.mif
+      //  L1[0][0]
+      #100;
+      address = 6'b0100_10; // 18
+      write = 1;
+      write_data = 16'b0000_0000_0000_0100; // Escreve 4 na posicao 3 da L1 e L2
+      $display("[%0t] ---- Teste 4: Preenchendo L1, write_miss na posicao 3, deve escrever na L2  ----", $time);
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 4 | hit_L1 = 0 | hit_L2 = 0", $time);
+      situacao_L1;
       // situacao_L2;
 
 
