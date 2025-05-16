@@ -108,8 +108,8 @@ module tb_hierarquia_memoria_escrita;
       // Teste 5: Write Back
       teste5;
 
-
-      // Teste 6: Aproveitando para fazer read
+      // Teste 6: Write Back
+      teste6;
 
       $finish; // Finaliza a simulação
 
@@ -213,6 +213,25 @@ module tb_hierarquia_memoria_escrita;
       situacao_L2;
     end
   endtask
+
+  task teste6;
+    begin
+      #100;
+      address = 6'b0011_00; // 12
+      write = 1;
+      write_data = 16'b0000_0000_0000_1101; // Escreve 13 no endereco 11 da L1 e L2
+      $display("[%0t] ---- Teste 5: Escrita da L1, write_miss no endereco 11, deve escrever na L2 e nao escrever na principal ----", $time);
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 13 | hit_L1 = 0 | hit_L2 = 0", $time);
+      situacao_L1;
+      situacao_L2;
+    end
+  endtask
+
+
+
 
   task teste4 ;
     begin

@@ -693,6 +693,7 @@ module hierarquia_memoria(input clock,
       need_update_new_bit = needs_to_update_l2(0);
       valid_bits_on_l2 = valids_on_l2(0);
       // Verifica se todos os bits validos foram preenchidos
+      $display("valid_bits_on_l2 = %d", valid_bits_on_l2);
       if (need_update_new_bit) //|| L2_lru[biggest_lru_l2_idx] == 7)
         begin
           for (i_index = 0; i_index < valid_bits_on_l2 ; i_index = i_index + 1)
@@ -713,8 +714,9 @@ module hierarquia_memoria(input clock,
             end
         end
       // Com todos os bits validos preenchidos
-      else if(valid_bits_on_l2 == 8)
+      else if(valid_bits_on_l2 == 7)
         begin
+          $display("linha 718 mudar LRU por aqui, valid_bits_on_l2 = %1d, most_recent_used %1d", valid_bits_on_l2, most_recent_index);
           // Atualiza com base no MRU
           // Copia os valores atuais
           for (i_index = 0; i_index < 8; i_index = i_index + 1)
