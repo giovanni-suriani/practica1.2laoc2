@@ -86,13 +86,6 @@ module hierarquia_memoria(input clock,
           hit_L1 = 0;
           hit_L2 = 0;
 
-          // Depuracao
-          if (write == 1'b1 && read == 1'b1) 
-            begin
-              $display("%1t ERRO: Sinais de leitura e escrita ativos ao mesmo tempo", $time);
-            end
-
-
           // Verifica a cache L1, HITS
           if (L1_valid[index_L1][0] == 1 && L1_tag[index_L1][0] == tag)
             begin
@@ -251,15 +244,15 @@ module hierarquia_memoria(input clock,
               read_data   <= write_data;
             end
 
-          else if (write && write_made == 0)
+          /* else if (write && write_made == 0)
             begin
-              if (L1_lru[index_L1][0] == 1) // Se a via 0 eh a LRU (mais velha)
+              if (L1_lru[index_L1][0] == 1)
                 begin
                   L1_data[index_L1][0]  <= write_data;
                   L1_tag[index_L1][0]   <= tag;
                   L1_valid[index_L1][0] <= 1;
                   L1_lru[index_L1][0]   <= 0; // Atualiza LRU
-                  if (L1_valid[index_L1][1] == 1) // Checagem opcional pois eh condicao impossivel
+                  if (L1_valid[index_L1][1] == 1) // Checagem opcional
                     begin
                       L1_lru[index_L1][1] <= 1; // Atualiza LRU
                     end
@@ -275,117 +268,35 @@ module hierarquia_memoria(input clock,
                           L2_valid[i] <= 1;
                           L2_dirty[i] <= 1; // Marca como dirty
                           read_data   <= write_data; // Retorna o dado escrito
-                          new_bit_valid = 1; // Marca que foi feita a escrita em posicao invalida
                           atualiza_lru_l2(i);
                           write_made = 1; // Marca que foi feita a escrita no mesmo delta_cycle
                         end
                     end
                   // Checa se eh Write Back (cache cheia)
                   biggest_lru_l2_idx = biggest_lru_l2_index(0); // Pega o maior LRU da L2
-                  if (L2_lru[biggest_lru_l2_idx] == 7 && L2_dirty[biggest_lru_l2_idx] == 0) // Se o maior LRU for 7, condicao nao necessaria, significa que L2 esta cheia
+                  if (L2_lru[biggest_lru_l2_idx] == 7) // Se o maior LRU for 7, significa que L2 esta cheia
                     begin
+                      // Write Back
+                    end
+                  else
+                    begin
+                      $display("to aqui",write_made, i, L2_valid[i]);
+                      // Se nao esta cheia, coloca na posicao mais antiga
                       L2_data[biggest_lru_l2_idx]  <= write_data;
                       L2_tag[biggest_lru_l2_idx]   <= address;
                       L2_valid[biggest_lru_l2_idx] <= 1;
                       L2_dirty[biggest_lru_l2_idx] <= 1; // Marca como dirty
                       read_data   <= write_data; // Retorna o dado escrito
-                      atualiza_lru_l2(biggest_lru_l2_idx);
-                      write_made = 1; // Marca que foi feita a escrita no mesmo delta_cycle
-                      // Write Back
-                    end 
-                  else if (L2_lru[biggest_lru_l2_idx] == 7 && L2_dirty[biggest_lru_l2_idx] == 1)
-                    begin
-                      $display("HORA DE WRITE BACK CARA");
-                      // Se nao esta cheia, coloca na posicao mais antiga
-                      L2_data[biggest_lru_l2_idx]  <= write_data;
-                      L2_tag[biggest_lru_l2_idx]   <= address;
-                      L2_valid[biggest_lru_l2_idx] <= 1;
-                      L2_dirty[biggest_lru_l2_idx] <= 0; // Marca como dirty
-                      // Escrevendo na memoria principal
-                      wren = 1'b1; // escrever da memoria mem_clock = 1'b1; // Ativa o clock da memoria
-                      // dois ciclos para ler
-                      mem_clock      = 1'b0; // Desativa o clock da memoria
-                      #12 mem_clock  = 1'b1; // Ativa o clock da memoria
-                      #12 mem_clock  = 1'b0; // Desativa o clock da memoria
-                      #12 mem_clock  = 1'b1; // Ativa o clock da memoria
-                      //#1 mem_clock = 1'b1; // Ativa o clock da memoria
-                      #1 read_data <= wire_read_data;
-                      // read_data   <= write_data; // Retorna o dado escrito
-                      atualiza_lru_l2(biggest_lru_l2_idx);
-                      write_made = 1; // Marca que foi feita a escrita no mesmo delta_cycle
-                    end
-                
-                end
-              else if (L1_lru[index_L1][1] == 1)
-                begin
-                  L1_data[index_L1][1]  <= write_data;
-                  L1_tag[index_L1][1]   <= tag;
-                  L1_valid[index_L1][1] <= 1;
-                  L1_lru[index_L1][1]   <= 0; // Atualiza LRU
-                  if (L1_valid[index_L1][0] == 1) // Checagem opcional pois eh condicao impossivel
-                    begin
-                      L1_lru[index_L1][0] <= 1; // Atualiza LRU
-                    end
-                  // escrevendo na L2
-                  // Checa se ainda existe posicao invalida na L2
-                  for (i = 0; i < 8; i = i + 1)
-                    begin
-                      if (!write_made && L2_valid[i] == 0) // Checa se a linha esta livre
-                        begin
-                          // Coloca na primeira linha livre da L2
-                          L2_data[i]  <= write_data;
-                          L2_tag[i]   <= address;
-                          L2_valid[i] <= 1;
-                          L2_dirty[i] <= 1; // Marca como dirty
-                          read_data   <= write_data; // Retorna o dado escrito
-                          new_bit_valid = 1; // Marca que foi feita a escrita em posicao invalida
-                          atualiza_lru_l2(i);
-                          write_made = 1; // Marca que foi feita a escrita no mesmo delta_cycle
-                        end
-                    end
-                  // Checa se eh Write Back (cache cheia)
-                  // Checa se eh Write Back (cache cheia)
-                  biggest_lru_l2_idx = biggest_lru_l2_index(0); // Pega o maior LRU da L2
-                  if (L2_lru[biggest_lru_l2_idx] == 7 && L2_dirty[biggest_lru_l2_idx] == 0) // Se o maior LRU for 7, condicao nao necessaria, significa que L2 esta cheia
-                    begin
-                      L2_data[biggest_lru_l2_idx]  <= write_data;
-                      L2_tag[biggest_lru_l2_idx]   <= address;
-                      L2_valid[biggest_lru_l2_idx] <= 1;
-                      L2_dirty[biggest_lru_l2_idx] <= 1; // Marca como dirty
-                      read_data   <= write_data; // Retorna o dado escrito
-                      atualiza_lru_l2(biggest_lru_l2_idx);
-                      write_made = 1; // Marca que foi feita a escrita no mesmo delta_cycle
-                      // Write Back
-                    end 
-                  else if (L2_lru[biggest_lru_l2_idx] == 7 && L2_dirty[biggest_lru_l2_idx] == 1)
-                    begin
-                      $display("HORA DE WRITE BACK CARA");
-                      // Se nao esta cheia, coloca na posicao mais antiga
-                      L2_data[biggest_lru_l2_idx]  <= write_data;
-                      L2_tag[biggest_lru_l2_idx]   <= address;
-                      L2_valid[biggest_lru_l2_idx] <= 1;
-                      L2_dirty[biggest_lru_l2_idx] <= 0; // Marca como dirty
-                      // Escrevendo na memoria principal
-                      wren = 1'b1; // escrever da memoria mem_clock = 1'b1; // Ativa o clock da memoria
-                      // dois ciclos para ler
-                      mem_clock      = 1'b0; // Desativa o clock da memoria
-                      #12 mem_clock  = 1'b1; // Ativa o clock da memoria
-                      #12 mem_clock  = 1'b0; // Desativa o clock da memoria
-                      #12 mem_clock  = 1'b1; // Ativa o clock da memoria
-                      //#1 mem_clock = 1'b1; // Ativa o clock da memoria
-                      #1 read_data <= wire_read_data;
-                      // read_data   <= write_data; // Retorna o dado escrito
                       atualiza_lru_l2(biggest_lru_l2_idx);
                       write_made = 1; // Marca que foi feita a escrita no mesmo delta_cycle
                     end
                 end
             end
-         
-          // Bits validos deprecated
-         /*  else if (L1_valid[index_L1][0] == 1 && write && !write_made)
+          */
+          // Bits validos
+          else if (L1_valid[index_L1][0] == 1 && write && !write_made)
             begin
               $display("linha 298 Write Miss na L1, bit valido na via 0");
-              if (L1_lru[index_L1][0] == 1) // Se a via 0 eh a LRU
               L1_data[index_L1][0]  <= write_data;
               L1_tag[index_L1][0]   <= tag;
               L1_valid[index_L1][0] <= 1;
@@ -430,8 +341,8 @@ module hierarquia_memoria(input clock,
               //     // Write Back
               //   end
             end
- */
-         /*  else if (L1_valid[index_L1][1] == 1 && write && !write_made)
+
+          else if (L1_valid[index_L1][1] == 1 && write && !write_made)
             begin
               $display("linha 346 Write Miss na L1, bit valido na via 1");
               L1_data[index_L1][1]  <= write_data;
@@ -478,7 +389,7 @@ module hierarquia_memoria(input clock,
                   write_made = 1; // Marca que foi feita a escrita no mesmo delta_cycle
                 end
             end
- */
+
 
           else
             begin
@@ -570,7 +481,7 @@ module hierarquia_memoria(input clock,
                       // Colocando na L2
                       for (i = 0; i < 8; i = i + 1)
                         begin
-                          if (L2_valid[i] == 0) // Checa se a linha esta livre ou se e a LRU remove
+                          if (L2_valid[i] == 0 || L2_lru[i] == 7) // Checa se a linha esta livre ou se e a LRU remove
                             begin
                               // Coloca na primeira linha livre da L2
                               L2_data[i]  <= wire_read_data;
@@ -585,7 +496,7 @@ module hierarquia_memoria(input clock,
                   if (write && write_made == 0)
                     begin
                       // Fazer WB
-                      $display("entrei em !hit_L2 que nao deve ser possivel");
+                      $display("entrei em !hit_L2");
                       // wren = 1'b1; // Escreve na memoria
                       // // dois ciclos para escrever
                       // mem_clock = 1'b0; // Desativa o clock da memoria
@@ -687,7 +598,6 @@ module hierarquia_memoria(input clock,
     integer need_update_new_bit; // Variavel para verificar se foi feita escrita em posicao invalida
     integer biggest_lru_l2_idx;
     integer valid_bits_on_l2;
-    integer lru_temp [0:7];
     begin
       biggest_lru_l2_idx = biggest_lru_l2_index(0); // Pega o maior LRU da L2
       need_update_new_bit = needs_to_update_l2(0);
@@ -715,28 +625,20 @@ module hierarquia_memoria(input clock,
       // Com todos os bits validos preenchidos
       else if(valid_bits_on_l2 == 8)
         begin
-          // Atualiza com base no MRU
-          // Copia os valores atuais
-          for (i_index = 0; i_index < 8; i_index = i_index + 1)
-              lru_temp[i_index] = L2_lru[i_index];
-
-          for (i_index = 0; i_index < 8; i_index = i_index + 1)
+            for (i_index = 0; i_index < 8 ; i_index = i_index + 1)
             begin
-              if (L2_valid[i_index])
+              
+              if (most_recent_index == i_index)
                 begin
-                  if (i_index == most_recent_index)
+                  // $display("%1t Posicao resetada LRU da L2, most_recent_index = %1d i = %1d, L2_lru[i] = %d, L2_valid[i] = %d",$time,most_recent_index, i_index, L2_lru[i_index], L2_valid[i_index]);
+                  L2_lru[i_index] <= 0;
+                end
+              else
+                begin
+                  if (L2_valid[i_index] == 1 && L2_lru[i_index] < valid_bits_on_l2)
                     begin
-                      L2_lru[i_index] <= 0; // so no final do ciclo da update
-                    end
-                  else if (lru_temp[i_index] < lru_temp[most_recent_index])
-                    begin
-                      // Elementos menos recentemente usados incrementam
-                      L2_lru[i_index] <= lru_temp[i_index] + 1;
-                    end
-                  else
-                    begin
-                      // Quem era mais novo que o atual MRU mantém seu valor
-                      L2_lru[i_index] <= lru_temp[i_index];
+                      // $display("%1t Posicao incrementada LRU da L2, most_recent_index = %1d i = %1d, L2_lru[i] = %d, L2_valid[i] = %d",$time, most_recent_index, i_index, L2_lru[i_index], L2_valid[i_index]);
+                      L2_lru[i_index] <= L2_lru[i_index] + 1;
                     end
                 end
             end

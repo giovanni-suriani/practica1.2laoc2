@@ -27,6 +27,13 @@ add wave -label "hit_L2" hit_L2
 # Sinal interno do módulo hierarquia_memoria
 add wave -label "mem_clock" sim:/tb_hierarquia_memoria_escrita/uut/mem_clock
 
+# Memoria principal
+add wave -label "main_memory_data" sim:/tb_hierarquia_memoria_escrita/uut/main_memory/data
+add wave -label "main_memory_address" sim:/tb_hierarquia_memoria_escrita/uut/main_memory/address
+add wave -label "main_memory_wren" sim:/tb_hierarquia_memoria_escrita/uut/main_memory/wren
+add wave -label "main_memory_q" sim:/tb_hierarquia_memoria_escrita/uut/main_memory/q
+add wave -label "main_memory_hierarquia_wire_read_data" sim:/tb_hierarquia_memoria_escrita/uut/wire_read_data
+
 #L1
 add wave -label "L1_data" sim:/tb_hierarquia_memoria_escrita/uut/L1_data
 add wave -label "L1_tag" sim:/tb_hierarquia_memoria_escrita/uut/L1_tag
@@ -41,13 +48,15 @@ add wave -label "L2_valid" sim:/tb_hierarquia_memoria_escrita/uut/L2_valid
 add wave -label "L2_lru" sim:/tb_hierarquia_memoria_escrita/uut/L2_lru
 add wave -label "L2_dirty" sim:/tb_hierarquia_memoria_escrita/uut/L2_dirty
 
+
+
 # Executa a simulacao
 run 10000ps
 
 # Abre o waveform e ajusta exibição
 radix -unsigned
 view wave
-WaveRestoreZoom 0ps 600ps
+WaveRestoreZoom 2000ps 2600ps
 configure wave -timelineunits ps
 
 

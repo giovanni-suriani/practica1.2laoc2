@@ -84,6 +84,7 @@ module tb_hierarquia_memoria_escrita;
       $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("[%0t] Esperado do .mif = 2 | hit_L1 = 1| hit_L2 = 0", $time);
       $display("");
+      write = 0;
       situacao_L2;
 
       // Teste 3: Escrita da L1 no endereco 3  -> verifica a L2, pega do arquivo.mif
@@ -98,56 +99,19 @@ module tb_hierarquia_memoria_escrita;
       $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("[%0t] Esperado do .mif = 4 | hit_L1 = 0 | hit_L2 = 0", $time);
       // situacao_L1;
+      write = 0;
       situacao_L2;
-
-      /* // FAKETeste 3: Escrita da L1 no endereco 3  -> verifica a L2, pega do arquivo.mif
-      #400;
-      address = 6'b0000_11;
-      write = 1;
-      write_data = 16'b0000_0000_0000_0100;
-      // Escreve 4 no endereco 3 da L1 e L2
-      $display("[%0t] ---- Teste 3: Escrita da L1, write_miss no endereco 3, deve escrever na L2 e nao escrever na principal ----", $time);
-      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
-      #100;
-      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
-      $display("[%0t] Esperado do .mif = 4 | hit_L1 = 0 | hit_L2 = 0", $time);
-      // situacao_L1;
-      situacao_L2;
- */
-
-
 
       // Teste 4: Preenchendo a cache L1 e L2 com escritas  -> verifica a L2, pega do arquivo.mif
-      //  L1[0][0]
-      #100;
-      address = 6'b0100_10; // 18
-      write = 1;
-      write_data = 16'b0000_0000_0001_0011;
-      // Escreve 19 no endereco 18 da L1 e L2
-      //  L1[0][0]
-      $display("[%0t] ---- Teste 4: Preenchendo L1, write_miss no endereco 18, deve escrever na L2  ----", $time);
-      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
-      #100;
-      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
-      $display("[%0t] Esperado do .mif = 19 | hit_L1 = 0 | hit_L2 = 0", $time);
-      situacao_L2;
-     
+      teste4;
 
-      /* 
-      address = 6'b0110_10; // 26
-      write = 1;
-      write_data = 16'b0000_0000_0001_1011;
-      // Escreve 27 no endereco 26 da L1 e L2
-      //  L1[0][1]
-      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
-      #100;
-      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
-      $display("[%0t] Esperado do .mif = 27 | hit_L1 = 0 | hit_L2 = 0", $time);
-      // situacao_L1;
-      situacao_L2; */
-    $finish;
+      // Teste 5: Write Back
+      teste5;
 
 
+      // Teste 6: Aproveitando para fazer read
+
+      $finish; // Finaliza a simulação
 
 
 
@@ -234,8 +198,101 @@ module tb_hierarquia_memoria_escrita;
     end
   endtask
 
+  task teste5;
+    begin
+      #100;
+      address = 6'b0010_11; // 11
+      write = 1;
+      write_data = 16'b0000_0000_0000_1100; // Escreve 12 no endereco 11 da L1 e L2
+      $display("[%0t] ---- Teste 5: Escrita da L1, write_miss no endereco 11, deve escrever na L2 e nao escrever na principal ----", $time);
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 12 | hit_L1 = 0 | hit_L2 = 0", $time);
+      situacao_L1;
+      situacao_L2;
+    end
+  endtask
+
   task teste4 ;
     begin
+      // Escreve 19 no endereco 18 da L1 e L2
+      //  L1[0][0]
+      #300;
+      address = 6'b0100_10; // 18
+      write = 1;
+      write_data = 16'b0000_0000_0001_0011;
+      $display("[%0t] ---- Teste 4: Preenchendo L1, write_miss no endereco 18, deve escrever na L2  ----", $time);
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 19 | hit_L1 = 0 | hit_L2 = 0", $time);
+      situacao_L1;
+      // situacao_L2;
+
+      // situacao_L2;
+      // Escreve 27 no endereco 26 da L1 e L2
+      //  L1[0][1]
+      #100;
+      address = 6'b0110_10; // 26
+      write_data = 16'b0000_0000_0001_1011;
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 27 | hit_L1 = 0 | hit_L2 = 0", $time);
+      situacao_L1;
+      // situacao_L2;
+
+
+      // Escreve 28 no endereco 27
+      // Nao sei ainda L1[0][1]
+      #100;
+      address = 6'b0001_11; // 3
+      write_data = 16'b0000_0000_0000_1000;
+      // situacao_L2;
+      // Escreve 8 no endereco 7 da L1 e L2
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 3 | hit_L1 = 0 | hit_L2 = 0", $time);
+      situacao_L1;
+      // situacao_L2;
+
+      // Escreve 10 no endereco 9 da L1 e L2
+      #100;
+      address = 6'b0010_01; // 9
+      write_data = 16'b0000_0000_0000_1010;
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 10 | hit_L1 = 0 | hit_L2 = 0", $time);
+
+      #100;
+      address = 6'b0110_11; // 27
+      write_data = 16'b0000_0000_0001_1100;
+      // situacao_L2;
+      // Escreve 27 no endereco 26 da L1 e L2
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 27 | hit_L1 = 0 | hit_L2 = 0", $time);
+      situacao_L1;
+      // situacao_L2;
+
+      // Escreve 22 no endereco 31 da L1 e L2
+      #100;
+      address = 6'b0111_11; // 31
+      write_data = 16'b0000_0000_0010_0000;
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      #100;
+      $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("[%0t] Esperado do .mif = 32 | hit_L1 = 0 | hit_L2 = 0", $time);
+      write = 0;
+
+
+      situacao_L1;
+      situacao_L2;
+      $display("[%0t] ---- Fim do Teste 4 ----", $time);
     end
   endtask
 
