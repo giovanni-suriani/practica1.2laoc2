@@ -1,14 +1,15 @@
 # Cria um script para compilar e simular o testbench de hierarquia de memória
 
 # Cria a biblioteca de trabalho
-# vlib work
-# vlib altera
-# vlog -work altera /home/gi/altera/13.0sp1/modelsim_ase/altera/verilog/src/altera_mf.v
+#vlib work
+#vlib altera
+#vlog -work altera /home/gi/altera/13.0sp1/modelsim_ase/altera/verilog/src/altera_mf.v
 
 
 # Compila os arquivos Verilog necessários vlog hierarquia_memoria.v memoram.v tb_hierarquia_memoria.v 
 vlog hierarquia_memoria.v tb_hierarquia_memoria_leitura.v 
-vsim -L altera work.tb_hierarquia_memoria_leitura 
+#vsim -t 1ps work.tb_hierarquia_memoria
+vsim -L altera work.tb_hierarquia_memoria 
 
 
 # Adiciona os sinais do testbench ao waveform
@@ -25,12 +26,12 @@ add wave -label "hit_L1" hit_L1
 add wave -label "hit_L2" hit_L2
 
 # Sinal interno do módulo hierarquia_memoria
-add wave -label "mem_clock" sim:/tb_hierarquia_memoria_leitura/uut/mem_clock
-add wave -label "L1_data" sim:/tb_hierarquia_memoria_leitura/uut/L1_data
-add wave -label "L1_tag" sim:/tb_hierarquia_memoria_leitura/uut/L1_tag
-add wave -label "L1_valid" sim:/tb_hierarquia_memoria_leitura/uut/L1_valid  
-add wave -label "L1_lru" sim:/tb_hierarquia_memoria_leitura/uut/L1_lru
-add wave -label "index_L1" sim:/tb_hierarquia_memoria_leitura/uut/index_L1
+add wave -label "mem_clock" sim:/tb_hierarquia_memoria/uut/mem_clock
+add wave -label "L1_data" sim:/tb_hierarquia_memoria/uut/L1_data
+add wave -label "L1_tag" sim:/tb_hierarquia_memoria/uut/L1_tag
+add wave -label "L1_valid" sim:/tb_hierarquia_memoria/uut/L1_valid  
+add wave -label "L1_lru" sim:/tb_hierarquia_memoria/uut/L1_lru
+add wave -label "index_L1" sim:/tb_hierarquia_memoria/uut/index_L1
 
 # Executa a simulacao
 run 10000ps
