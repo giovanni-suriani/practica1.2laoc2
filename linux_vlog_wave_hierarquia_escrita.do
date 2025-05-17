@@ -25,6 +25,7 @@ add wave -label "hit_L1" hit_L1
 add wave -label "hit_L2" hit_L2
 
 # Sinal interno do módulo hierarquia_memoria
+add wave -label "wire_write_data" sim:/tb_hierarquia_memoria_escrita/uut/wire_write_data
 add wave -label "mem_clock" sim:/tb_hierarquia_memoria_escrita/uut/mem_clock
 
 # Memoria principal
@@ -56,7 +57,7 @@ run 10000ps
 # Abre o waveform e ajusta exibição
 radix -unsigned
 view wave
-WaveRestoreZoom 2000ps 2600ps
+WaveRestoreZoom 2900ps 3200ps
 configure wave -timelineunits ps
 
 

@@ -111,14 +111,62 @@ module tb_hierarquia_memoria_escrita;
       // Teste 6: Write Back
       teste6;
 
+
+      // Teste 7: Leitura da L1 Read_Hit (agora com os dados)
+      $display("[%0t] ---- Teste 7: Leitura da L1, deve dar hit em L1----", $time);
+      #100;
+      address = 6'b0011_00; // 12
+      read = 1;
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
+      #100;
+      $display("**[%0t] Read_Data = %1d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("**[%0t] Esperado do .mif = 13 | hit_L1 = 1| hit_L2 = 0", $time);
+      $display("**[%0t] Tag = %b = %d, indice = %b", $time, address[5:1], address[5:1], address[0]);
+      read = 0; // Reseta o sinal de leitura
+      $display("");
+      // situacao_L1;
+      // situacao_L2;
+
+
+      // Teste 8: Leitura da L1 Read_Miss (agora com os dados) na L2
+      /* $display("[%0t] ---- Teste 8: Leitura da L1, deve dar hit em L2 ----", $time);
+      #100;
+      address = 6'b0100_10; // 18 
+      read = 1;
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
+      #100;
+      $display("**[%0t] Read_Data = %1d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("**[%0t] Esperado do .mif = 19 | hit_L1 = 0| hit_L2 = 1", $time);
+      $display("**[%0t] Tag = %b = %d, indice = %b", $time, address[5:1], address[5:1], address[0]);
+      read = 0; // Reseta o sinal de leitura
+      $display("");
+      situacao_L1;
+      situacao_L2; */
+
+      // Teste 9: Leitura da L2 Read Miss, write back deve ser ativado
+      $display("[%0t] ---- Teste 9: Leitura da L2, deve dar miss em L2 ----", $time);
+      #100;
+      address = 6'b0100_11; // 19
+      read = 1;
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
+      #100;
+      $display("**[%0t] Read_Data = %1d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("**[%0t] Esperado do .mif = 19 | hit_L1 = 0| hit_L2 = 1", $time);
+      $display("**[%0t] Tag = %b = %d, indice = %b", $time, address[5:1], address[5:1], address[0]);
+      read = 0; // Reseta o sinal de leitura
+      $display("");
+      situacao_L1;
+      situacao_L2;
+
+
       $finish; // Finaliza a simulação
 
-
-
-
-
-
       // Teste 2: Leitura da L1 (agora com os dados),
+
+
+
+
+
     end
 
   task preencher_L1_L2;
@@ -126,25 +174,25 @@ module tb_hierarquia_memoria_escrita;
       #100;
       address = 6'b0000_10;
       read = 1;
-      $display("**[%0t] Lendo da L1, Addr = %h, read = %b", $time, address, read);
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
       #100;
-      $display("**[%0t] Read_Data = %h | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("**[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       // $display("**[%0t] Esperado do .mif = 0002 | hit_L1 = 0 | hit_L2 = 0", $time);
       $display("**[%0t] Tag = %b = %d, indice = %b", $time, address[5:1], address[5:1], address[0]);
 
       #100;
       address = 6'b0000_11;
       read = 1;
-      $display("**[%0t] Lendo da L1, Addr = %h, read = %b", $time, address, read);
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
       #100;
-      $display("**[%0t] Read_Data = %h | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("**[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("**[%0t] Esperado do .mif = 0003 | hit_L1 = 0 | hit_L2 = 0", $time);
       // $display("**[%0t] Tag = %b = %d, indice = %b", $time, address[5:1], address[5:1], address[0]);
 
       #100;
       address = 6'b0001_00;
       read = 1;
-      $display("**[%0t] Lendo da L1, Addr = %h, read = %b", $time, address, read);
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
       #100;
       $display("**[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("**[%0t] Esperado do .mif = 0004 | hit_L1 = 0 | hit_L2 = 0", $time);
@@ -156,7 +204,7 @@ module tb_hierarquia_memoria_escrita;
       read = 1;
 
       // L1[0][0]
-      $display("**[%0t] Lendo da L1, Addr = %h, read = %b", $time, address, read);
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
       #100;
       $display("**[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("**[%0t] Esperado do .mif = 21 | hit_L1 = 0 | hit_L2 = 0", $time);
@@ -167,7 +215,7 @@ module tb_hierarquia_memoria_escrita;
       address = 6'b0100_11; // 19
       read = 1;
       // L1[1][0]
-      $display("**[%0t] Lendo da L1, Addr = %h, read = %b", $time, address, read);
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
       #100;
       $display("**[%0t] Read_Data = %d| hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("**[%0t] Esperado do .mif = 19 | hit_L1 = 0 | hit_L2 = 0", $time);
@@ -178,7 +226,7 @@ module tb_hierarquia_memoria_escrita;
       address = 6'b0101_10; // 22
       read = 1;
       // L1[0][1]
-      $display("**[%0t] Lendo da L1, Addr = %h, read = %b", $time, address, read);
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
       #100;
       $display("**[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("**[%0t] Esperado do .mif = 22 | hit_L1 = 0 | hit_L2 = 0", $time);
@@ -189,9 +237,9 @@ module tb_hierarquia_memoria_escrita;
       address = 6'b0111_11; // 31
       read = 1;
       // L1[1][1]
-      $display("**[%0t] Lendo da L1, Addr = %h, read = %b", $time, address, read);
+      $display("**[%0t] Lendo da L1, Addr = %d, read = %b", $time, address, read);
       #100;
-      $display("**[%0t] Read_Data = %h | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
+      $display("**[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("**[%0t] Esperado do .mif = 31 | hit_L1 = 0 | hit_L2 = 0", $time);
       $display("**[%0t] Tag = %b = %d, indice = %b", $time, address[5:1], address[5:1], address[0]);
       $display("");
@@ -220,18 +268,16 @@ module tb_hierarquia_memoria_escrita;
       address = 6'b0011_00; // 12
       write = 1;
       write_data = 16'b0000_0000_0000_1101; // Escreve 13 no endereco 11 da L1 e L2
-      $display("[%0t] ---- Teste 5: Escrita da L1, write_miss no endereco 11, deve escrever na L2 e nao escrever na principal ----", $time);
-      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b", $time, address, write);
+      $display("[%0t] ---- Teste 6: Escrita da L1, write_miss no endereco 11, deve escrever na L2 e nao escrever na principal ----", $time);
+      $display("[%0t] Escrevendo na L1: Addr = %d, write = %b, valor =%d", $time, address, write, write_data);
       #100;
       $display("[%0t] Read_Data = %d | hit_L1 = %b | hit_L2 = %b", $time, read_data, hit_L1, hit_L2);
       $display("[%0t] Esperado do .mif = 13 | hit_L1 = 0 | hit_L2 = 0", $time);
+      write = 0;
       situacao_L1;
       situacao_L2;
     end
   endtask
-
-
-
 
   task teste4 ;
     begin
