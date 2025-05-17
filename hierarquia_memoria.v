@@ -51,9 +51,6 @@ module hierarquia_memoria(input clock,
   // Controle de leitura/escrita
   integer i;
 
-
-  // 
-
   // Variaveis auxiliares para L2
   reg[15:0] write_back_l2;
   integer new_bit_valid;
@@ -598,32 +595,6 @@ module hierarquia_memoria(input clock,
     end
   endfunction
 
-  /* task atualiza_lru_l2_valid_bit;
-    //  Atualiza a lru do conjunto
-    input integer most_recent_index;
-    integer i_index, need_update, biggest_lru_l2_idx, valid_bits_on_l2;
-    begin
-      valid_bits_on_l2 = valids_on_l2(0);
-      biggest_lru_l2_idx = biggest_lru_l2_index(0); // Pega o maior LRU da L2
-          for (i_index = 0; i_index < valid_bits_on_l2 ; i_index = i_index + 1)
-            begin
-              if (most_recent_index == i_index)
-                begin
-                  // $display("%1t Posicao resetada LRU da L2, most_recent_index = %1d i = %1d, L2_lru[i] = %d, L2_valid[i] = %d",$time,most_recent_index, i_index, L2_lru[i_index], L2_valid[i_index]);
-                  L2_lru[i_index] <= 0;
-                end
-              else
-                begin
-                  if (L2_valid[i_index] == 1)
-                    begin
-                      // $display("%1t Posicao incrementada LRU da L2, most_recent_index = %1d i = %1d, L2_lru[i] = %d, L2_valid[i] = %d",$time, most_recent_index, i_index, L2_lru[i_index], L2_valid[i_index]);
-                      L2_lru[i_index] <= L2_lru[i_index] + 1;
-                    end
-                end
-            end
-    end
-  endtask
-  */
   task atualiza_lru_l2;
     //  Atualiza a lru do conjunto
     input integer most_recent_index;
@@ -711,6 +682,7 @@ module hierarquia_memoria(input clock,
 endmodule
 
 /*
+ Rodando no vscode
  vlib work
  vlib altera
  

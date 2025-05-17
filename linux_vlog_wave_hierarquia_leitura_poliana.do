@@ -1,0 +1,46 @@
+# Cria um script para compilar e simular o testbench de hierarquia de memória
+
+# Cria a biblioteca de trabalho
+# vlib work
+# vlib altera
+# vlog -work altera /home/gi/altera/13.0sp1/modelsim_ase/altera/verilog/src/altera_mf.v
+
+
+# Compila os arquivos Verilog necessários vlog hierarquia_memoria.v memoram.v tb_hierarquia_memoria.v 
+vlog hierarquia_memoria.v tb_hierarquia_memoria_leitura.v 
+vsim -L altera work.tb_hierarquia_memoria_leitura 
+
+
+# Adiciona os sinais do testbench ao waveform
+
+add wave -label "clock" clock
+add wave -label "reset" reset
+add wave -label "address" address
+add wave -label "write_data" write_data
+add wave -label "read" read
+add wave -label "write" write
+
+add wave -label "read_data" read_data
+add wave -label "hit_L1" hit_L1
+add wave -label "hit_L2" hit_L2
+
+# Sinal interno do módulo hierarquia_memoria
+add wave sim:/tb_hierarquia_memoria_leitura/uut/mem_clock
+add wave sim:/tb_hierarquia_memoria_leitura/uut/L1_data
+add wave sim:/tb_hierarquia_memoria_leitura/uut/L1_tag
+add wave sim:/tb_hierarquia_memoria_leitura/uut/L1_valid  
+add wave sim:/tb_hierarquia_memoria_leitura/uut/L1_lru
+add wave sim:/tb_hierarquia_memoria_leitura/uut/index_L1
+
+# Executa a simulacao
+run 10000ps
+
+# Abre o waveform e ajusta exibição
+radix -unsigned
+view wave
+WaveRestoreZoom 1000ps 1800ps
+configure wave -timelineunits ps
+
+
+
+# Para rodar killmodelsim;vsim -do linux_vlog_wave_hierarquia_leitura.do 
