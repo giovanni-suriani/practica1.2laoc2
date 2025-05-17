@@ -104,12 +104,18 @@ module tb_hierarquia_memoria_escrita;
 
       // Teste 4: Preenchendo a cache L1 e L2 com escritas  -> verifica a L2, pega do arquivo.mif
       teste4;
+      situacao_L1;
+      situacao_L2;
 
       // Teste 5: Write Back
       teste5;
+      situacao_L1;
+      situacao_L2;
 
       // Teste 6: Write Back
       teste6;
+      situacao_L1;
+      situacao_L2;
 
 
       // Teste 7: Leitura da L1 Read_Hit (agora com os dados)
@@ -124,12 +130,12 @@ module tb_hierarquia_memoria_escrita;
       $display("**[%0t] Tag = %b = %d, indice = %b", $time, address[5:1], address[5:1], address[0]);
       read = 0; // Reseta o sinal de leitura
       $display("");
-      // situacao_L1;
-      // situacao_L2;
+      situacao_L1;
+      situacao_L2;
 
 
       // Teste 8: Leitura da L1 Read_Miss (agora com os dados) na L2
-      /* $display("[%0t] ---- Teste 8: Leitura da L1, deve dar hit em L2 ----", $time);
+      $display("[%0t] ---- Teste 8: Leitura da L1, deve dar hit em L2 ----", $time);
       #100;
       address = 6'b0100_10; // 18 
       read = 1;
@@ -141,7 +147,7 @@ module tb_hierarquia_memoria_escrita;
       read = 0; // Reseta o sinal de leitura
       $display("");
       situacao_L1;
-      situacao_L2; */
+      situacao_L2;
 
       // Teste 9: Leitura da L2 Read Miss, write back deve ser ativado
       $display("[%0t] ---- Teste 9: Leitura da L2, deve dar miss em L2 ----", $time);

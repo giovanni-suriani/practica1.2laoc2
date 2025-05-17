@@ -1,7 +1,7 @@
 {
   "files.exclude": {
-    "**/linux_vlog_terminal_hierarquia_leitura.do": true,
-    "**/linux_vlog_wave_hierarquia_leitura.do": true,
+    "**/linux_vlog_terminal_hierarquia_leitura.do": false,
+    "**/linux_vlog_wave_hierarquia_leitura.do": false,
     "**/pratica1_2.asm.rpt": true,
     "**/pratica1_2.done": true,
     "**/pratica1_2.fit.rpt": true,
