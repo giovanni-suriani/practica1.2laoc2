@@ -5,14 +5,6 @@
 # [200] ---- Teste 1: Leitura da L1, deve verificar L2 que falha e pegar dados do .mif ----
 # [200] Lendo da L1 sem dados: Addr =  1, read = 1
 # 287,linha 451 faltou eu dar esse read data =     x, wire_read_data = 0001
-# valid_bits_on_l2 =          -1
-# valid_bits_on_l2 =          -1
-# valid_bits_on_l2 =          -1
-# valid_bits_on_l2 =          -1
-# valid_bits_on_l2 =          -1
-# valid_bits_on_l2 =          -1
-# valid_bits_on_l2 =          -1
-# valid_bits_on_l2 =          -1
 # [300] Read_Data =     1 | hit_L1 = 0 | hit_L2 = 0
 # [300] Esperado do .mif = 0001 | hit_L1 = 0 | hit_L2 = 0
 # 

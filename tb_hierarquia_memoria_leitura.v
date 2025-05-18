@@ -53,6 +53,7 @@ module tb_hierarquia_memoria_leitura;
         $display("[%0t] Reset desativado", $time);
         $display("");
 
+        situacao_L1;
         situacao_L2;
 
         // Teste 1: Leitura da L1 (sem dados) -> verifica a L2, pega do arquivo.mif
